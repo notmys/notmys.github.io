@@ -19,38 +19,19 @@
             height: 100%;
             z-index: -1;
         }
-        .header {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            justify-content: space-around;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
-        }
-        .header .label {
-            padding: 10px 20px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease-in-out;
-        }
-        .header .label:hover {
-            transform: scale(1.1);
-        }
         .content {
             position: relative;
             z-index: 1;
             padding: 50px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            min-height: 200vh;
         }
         .box {
             background: rgba(255, 255, 255, 0.2);
             padding: 20px;
-            margin: 20px;
             border-radius: 15px;
             width: 300px;
             height: 200px;
@@ -66,7 +47,7 @@
             position: relative;
             z-index: 1;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0);
             text-align: center;
             color: rgba(255, 255, 255, 0.7);
             font-size: 14px;
@@ -75,11 +56,6 @@
 </head>
 <body>
     <canvas id="starsCanvas"></canvas>
-    <div class="header">
-        <div class="label">Modern Label 1</div>
-        <div class="label">Modern Label 2</div>
-        <div class="label">Modern Label 3</div>
-    </div>
     <div class="content">
         <div class="box">Modern Rectangular Box 1</div>
         <div class="box">Modern Rectangular Box 2</div>
