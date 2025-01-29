@@ -28,12 +28,13 @@
             position: relative;
             z-index: 1;
             text-align: center;
-            animation: fadeIn 2s ease-in-out;
+            animation: fadeInUp 2s ease-out;
         }
         .header h1 {
             font-size: 48px;
             color: white;
-            text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8);
+            text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8), 0px 0px 25px rgba(0, 255, 255, 0.8);
+            animation: titleGlow 2s ease-out infinite alternate;
         }
         .buttons {
             position: relative;
@@ -42,21 +43,23 @@
             justify-content: center;
             gap: 40px;
             margin-top: 20px;
+            animation: fadeInUp 2s ease-out;
         }
         .button {
             padding: 20px 60px;
-            border: 2px solid rgba(255, 255, 255, 0.7);
-            color: white;
+            border: 2px solid rgba(0, 255, 255, 0.7);
+            color: rgba(0, 255, 255, 0.7);
             font-size: 20px;
             text-transform: uppercase;
             background: transparent;
             cursor: pointer;
             border-radius: 10px;
             transition: all 0.3s ease-in-out;
-            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.7);
+            box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.7);
         }
         .button:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0px 0px 25px rgba(0, 255, 255, 1);
         }
         .content {
             position: relative;
@@ -94,9 +97,24 @@
             font-size: 14px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes titleGlow {
+            0% {
+                text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8), 0px 0px 25px rgba(0, 255, 255, 0.8);
+            }
+            100% {
+                text-shadow: 0px 0px 25px rgba(255, 255, 255, 0.8), 0px 0px 40px rgba(0, 255, 255, 1);
+            }
         }
     </style>
 </head>
