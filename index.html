@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moving Stars Background with Scrolling Content</title>
+    <title>Federal WTF</title>
     <style>
         body {
             margin: 0;
             background: black;
             color: white;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
         }
         canvas {
             position: fixed;
@@ -19,118 +25,113 @@
             height: 100%;
             z-index: -1;
         }
-        .buttons {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 50px;
+        h1 {
+            font-size: 50px;
+            color: white;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: bold;
+            text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.7), 0px 0px 20px rgba(0, 255, 255, 0.7), 0px 0px 30px rgba(0, 255, 255, 0.7);
         }
         .button {
-            padding: 10px 30px;
-            border: 2px solid rgba(255, 255, 255, 0.7);
-            color: white;
-            font-size: 16px;
-            text-transform: uppercase;
+            padding: 15px 30px;
+            margin-top: 30px;
+            border: 2px solid rgba(0, 255, 255, 0.5);
             background: transparent;
+            color: rgba(0, 255, 255, 0.7);
+            text-transform: uppercase;
+            font-size: 20px;
+            letter-spacing: 2px;
             cursor: pointer;
             border-radius: 5px;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+            text-shadow: 0px 0px 5px rgba(0, 255, 255, 0.7);
         }
         .button:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 255, 255, 0.1);
+            border-color: rgba(0, 255, 255, 1);
+            box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.5);
         }
-        .content {
-            position: relative;
-            z-index: 1;
-            padding: 50px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            min-height: 300vh;
-            align-items: flex-end;
-        }
-        .box {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 20px;
-            border-radius: 15px;
-            width: 300px;
-            height: 200px;
-            text-align: center;
-            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease-in-out;
-        }
-        .box:hover {
-            transform: scale(1.05);
-        }
-        .footer {
-            position: relative;
-            z-index: 1;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0);
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
+    <h1>Federal WTF</h1>
+    <button class="button">Explore</button>
     <canvas id="starsCanvas"></canvas>
-    <div class="buttons">
-        <button class="button">Button 1</button>
-        <button class="button">Button 2</button>
-    </div>
-    <div class="content">
-        <div class="box">Modern Rectangular Box 1</div>
-        <div class="box">Modern Rectangular Box 2</div>
-        <div class="box">Modern Rectangular Box 3</div>
-        <div class="box">Modern Rectangular Box 4</div>
-    </div>
-    <div class="footer">
-        <p>Credits: Created by [Your Name]</p>
-        <p>Background design inspired by the universe</p>
-    </div>
-    <script>
-        const canvas = document.getElementById("starsCanvas");
-        const ctx = canvas.getContext("2d");
 
+    <script>
+        const canvas = document.getElementById('starsCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        // Resize canvas
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
+
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        const stars = [];
-        const numStars = 100;
-
-        for (let i = 0; i < numStars; i++) {
-            stars.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                size: Math.random() * 2,
-                speed: Math.random() * 2 + 1
-            });
+        // Particle system
+        function Particle(x, y) {
+            this.x = x;
+            this.y = y;
+            this.size = Math.random() * 3 + 1;
+            this.speedX = Math.random() * 2 - 1;
+            this.speedY = Math.random() * 2 - 1;
+            this.opacity = Math.random() * 0.5 + 0.5;
         }
 
-        function updateStars() {
+        Particle.prototype.update = function() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.size > 0.2) this.size -= 0.1;
+            this.opacity -= 0.005;
+        };
+
+        Particle.prototype.draw = function() {
+            ctx.fillStyle = `rgba(0, 255, 255, ${this.opacity})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        };
+
+        function createParticles(event) {
+            const xPos = event.x;
+            const yPos = event.y;
+            for (let i = 0; i < 5; i++) {
+                particles.push(new Particle(xPos, yPos));
+            }
+        }
+
+        // Animation loop
+        function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "white";
-            stars.forEach(star => {
-                star.y -= star.speed;
-                if (star.y < 0) star.y = canvas.height;
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-                ctx.fill();
-            });
-            requestAnimationFrame(updateStars);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                if (particles[i].opacity <= 0) {
+                    particles.splice(i, 1);
+                    i--;
+                }
+            }
+            requestAnimationFrame(animate);
         }
 
-        updateStars();
+        canvas.addEventListener('mousemove', createParticles);
+        animate();
     </script>
 </body>
 </html>
