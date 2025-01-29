@@ -130,10 +130,10 @@
         <button class="button">Button 2</button>
     </div>
     <div class="content">
-        <div class="box">Modern Rectangular Box 1</div>
-        <div class="box">Modern Rectangular Box 2</div>
-        <div class="box">Modern Rectangular Box 3</div>
-        <div class="box">Modern Rectangular Box 4</div>
+        <div class="box" id="box1">Modern Rectangular Box 1</div>
+        <div class="box" id="box2">Modern Rectangular Box 2</div>
+        <div class="box" id="box3">Modern Rectangular Box 3</div>
+        <div class="box" id="box4">Modern Rectangular Box 4</div>
     </div>
     <div class="footer">
         <p>Credits: Created by [Your Name]</p>
@@ -176,6 +176,33 @@
         }
 
         updateStars();
+
+        // Track mouse position
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener("mousemove", (e) => {
+            mouseX = e.pageX;
+            mouseY = e.pageY;
+        });
+
+        // Apply rotation to boxes based on mouse position
+        const boxes = document.querySelectorAll('.box');
+        boxes.forEach(box => {
+            box.addEventListener('mousemove', (e) => {
+                const boxRect = box.getBoundingClientRect();
+                const boxCenterX = boxRect.left + boxRect.width / 2;
+                const boxCenterY = boxRect.top + boxRect.height / 2;
+
+                const angle = Math.atan2(mouseY - boxCenterY, mouseX - boxCenterX);
+                box.style.transform = `rotate(${angle}rad)`;
+            });
+
+            // Reset the rotation when the mouse leaves the box
+            box.addEventListener('mouseleave', () => {
+                box.style.transform = 'rotate(0deg)';
+            });
+        });
     </script>
 </body>
 </html>
