@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Federal WTF</title>
+    <title>MYS.CLIENT</title>
     <style>
         body {
             margin: 0;
             background: black;
             color: white;
             font-family: 'Arial', sans-serif;
-            height: 100vh;
+            height: 200vh; /* Increased height for scrolling */
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            overflow: hidden;
+            overflow-x: hidden;
         }
         canvas {
             position: fixed;
@@ -53,6 +53,22 @@
             border-color: rgba(0, 255, 255, 1);
             box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.5);
         }
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+        }
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -66,8 +82,19 @@
     </style>
 </head>
 <body>
-    <h1>Federal WTF</h1>
+    <h1>MYS.CLIENT</h1>
     <button class="button">Explore</button>
+
+    <div class="content">
+        <h2>Welcome to the page</h2>
+        <p>This is a simple example of a scrolling page with moving stars in the background. Scroll down to explore more.</p>
+    </div>
+
+    <div class="footer">
+        <p>Credits: Created by [Your Name]</p>
+        <p>Background design inspired by the universe</p>
+    </div>
+
     <canvas id="starsCanvas"></canvas>
 
     <script>
@@ -84,21 +111,20 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        // Particle system
+        // Particle system (stars moving upward)
         function Particle(x, y) {
             this.x = x;
             this.y = y;
             this.size = Math.random() * 3 + 1;
-            this.speedX = Math.random() * 2 - 1;
-            this.speedY = Math.random() * 2 - 1;
+            this.speedY = Math.random() * 1 + 0.5;  // Make stars move upwards
             this.opacity = Math.random() * 0.5 + 0.5;
         }
 
         Particle.prototype.update = function() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            if (this.size > 0.2) this.size -= 0.1;
-            this.opacity -= 0.005;
+            this.y -= this.speedY;  // Move particles upward
+            if (this.y < 0) {
+                this.y = canvas.height;  // Reset particles when they go off-screen
+            }
         };
 
         Particle.prototype.draw = function() {
