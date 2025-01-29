@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moving Stars Background with Scrolling Content</title>
+    <title>Mys.Client</title>
     <style>
         body {
             margin: 0;
@@ -15,6 +15,7 @@
             align-items: center;
             min-height: 200vh;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
         canvas {
             position: fixed;
@@ -49,19 +50,19 @@
             -webkit-text-fill-color: transparent;
             animation: blueTintFlow 3s infinite alternate ease-in-out;
         }
-            .buttons {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px;
-                margin: 30px 0;
-                animation: fadeInUp 1.8s ease-out;
-            }
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+            margin: 30px 0;
+            animation: fadeInUp 1.5s ease-out;
+        }
         .button {
-            padding: 15px 100px;
+            padding: 12px 80px;
             border: 2px solid rgb(126, 87, 194);
             color: rgb(126, 87, 194);
-            font-size: 24px;
+            font-size: 22px;
             background: transparent;
             cursor: pointer;
             border-radius: 10px;
@@ -70,28 +71,6 @@
         }
         .button:hover {
             background: rgba(126, 87, 194, 0.2);
-        }
-        .content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 120vh;
-            padding: 20px;
-        }
-        .box {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            width: 280px;
-            height: 180px;
-            text-align: center;
-            backdrop-filter: blur(8px);
-            transition: transform 0.7s ease-in-out;
-            perspective: 500px;
-        }
-        .box:hover {
-            transform: scale(1.1);
         }
         @keyframes fadeInUp {
             from {
@@ -112,28 +91,13 @@
 <body>
     <canvas id="starsCanvas"></canvas>
     <div class="header">
-        <h1 data-text="MYS.CLIENT">MYS.CLIENT</h1>
+        <h1 data-text="Mys.Client">Mys.Client</h1>
     </div>
     <div class="buttons">
         <button class="button">Purchase [COMING SOON]</button>
         <button class="button">Discord</button>
     </div>
-    <div class="content">
-        <div class="box">Modern Rectangular Box 1</div>
-        <div class="box">Modern Rectangular Box 2</div>
-        <div class="box">Modern Rectangular Box 3</div>
-        <div class="box">Modern Rectangular Box 4</div>
-    </div>
-    <div class="footer">
-        <p>Created by 01xMYS</p>
-    </div>
     <script>
-        if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-        }
-        
-        window.scrollTo(0, 0);
-
         const canvas = document.getElementById("starsCanvas");
         const ctx = canvas.getContext("2d");
 
@@ -164,6 +128,10 @@
             requestAnimationFrame(updateStars);
         }
         updateStars();
+
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        };
     </script>
 </body>
 </html>
