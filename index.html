@@ -19,25 +19,38 @@
             height: 100%;
             z-index: -1;
         }
+        .header {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            margin-top: 50px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .header h1 {
+            font-size: 48px;
+            color: white;
+            text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8);
+        }
         .buttons {
             position: relative;
             z-index: 1;
             display: flex;
             justify-content: center;
             gap: 40px;
-            padding: 100px 50px 50px;
+            margin-top: 20px;
+            padding: 50px 50px 50px;
         }
         .button {
-            padding: 10px 30px;
+            padding: 15px 50px;
             border: 2px solid rgba(255, 255, 255, 0.7);
             color: white;
-            font-size: 16px;
+            font-size: 18px;
             text-transform: uppercase;
             background: transparent;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 10px;
             transition: all 0.3s ease-in-out;
-            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.7);
         }
         .button:hover {
             background: rgba(255, 255, 255, 0.2);
@@ -77,10 +90,18 @@
             color: rgba(255, 255, 255, 0.7);
             font-size: 14px;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body>
     <canvas id="starsCanvas"></canvas>
+    <div class="header">
+        <h1>MYS.CLIENT</h1>
+    </div>
     <div class="buttons">
         <button class="button">Button 1</button>
         <button class="button">Button 2</button>
