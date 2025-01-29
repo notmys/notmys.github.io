@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moving Stars Background with Scrolling Content</title>
+    <title>Moving Stars Background with Custom Cursor</title>
     <style>
         body {
             margin: 0;
@@ -15,7 +15,23 @@
             align-items: center;
             min-height: 200vh;
             overflow-x: hidden;
+            cursor: none;
         }
+        
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            background: rgba(126, 87, 194, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s linear;
+            z-index: 9999;
+            box-shadow: 0 0 10px rgba(126, 87, 194, 0.8);
+        }
+        
         canvas {
             position: fixed;
             top: 0;
@@ -24,231 +40,68 @@
             height: 100%;
             z-index: -1;
         }
+        
         .header {
             text-align: center;
             margin-top: 100px;
             animation: fadeInUp 1s ease-out;
             position: relative;
         }
-            .header h1 {
-                font-size: 80px;
-                color: rgb(126, 87, 194);
-                position: relative;
-                display: inline-block;
-            }
-            
-            .header h1::before {
-                content: attr(data-text);
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(120deg, rgba(126, 87, 194, 1), rgbargba(95, 74, 255, 0.8), rgba(126, 87, 194, 1));
-                background-size: 250% 250%;
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                animation: blueFlow 3s infinite linear;
-            }
-            
-            @keyframes blueFlow {
-                0% { background-position: 0% 50%; }
-                100% { background-position: 100% 50%; }
-            }
-                .buttons {
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: center;
-                    gap: 30px;
-                    margin: 30px 0;
-                    animation: fadeInUp 1.8s ease-out;
-                }
-
-            .button {
-                padding: 15px 100px;
-                border: 2px solid rgb(126, 87, 194);
-                color: rgb(126, 87, 194);
-                font-size: 24px;
-                background: transparent;
-                cursor: pointer;
-                border-radius: 10px;
-                transition: all 0.3s ease-in-out;
-                box-shadow: 0px 0px 15px rgba(126, 87, 194, 0.8);
-            }
-            
-            .button:hover {
-                background: rgba(126, 87, 194, 0.2);
-                transform: translateY(-5px);
-                box-shadow: 0px 0px 20px rgba(126, 87, 194, 1);
-            }
-            .content {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 30px;
-                margin-top: auto;
-                padding: 20px;
-                max-width: 900px;
-                margin-bottom: 100px;
-                opacity: 0;
-                transform: translateY(50px);
-                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            }
-            
-            .content.show {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            
-                .box {
-                    background: rgba(255, 255, 255, 0.1);
-                    padding: 20px;
-                    border-radius: 10px;
-                    width: 280px;
-                    height: 180px;
-                    text-align: center;
-                    backdrop-filter: blur(8px);
-                    transition: transform 0.4s ease-in-out, box-shadow 0.3s ease-in-out, background 0.3s ease-in-out;
-                    perspective: 500px;
-                    box-shadow: 0px 0px 15px rgba(126, 87, 194, 0.8);
-                    opacity: 0;
-                    transform: translateY(50px);
-                    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-                }
-                
-                .box.show {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-                
-                .box:hover {
-                    transform: scale(1.05);
-                    background: rgba(255, 255, 255, 0.2);
-                    box-shadow: 0px 0px 25px rgba(126, 87, 194, 1);
-                }
-            
-            @media (max-width: 900px) {
-                .content {
-                    grid-template-columns: repeat(2, 1fr);
-                }
-            }
-            
-            @media (max-width: 600px) {
-                .content {
-                    grid-template-columns: repeat(1, 1fr);
-                }
-            }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .header h1 {
+            font-size: 80px;
+            color: rgb(126, 87, 194);
         }
-        @keyframes blueTintFlow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+        
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            animation: fadeInUp 1.8s ease-out;
+        }
+
+        .button {
+            padding: 15px 100px;
+            border: 2px solid rgb(126, 87, 194);
+            color: rgb(126, 87, 194);
+            font-size: 24px;
+            background: transparent;
+            cursor: none;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 0px 15px rgba(126, 87, 194, 0.8);
+        }
+        
+        .button:hover {
+            background: rgba(126, 87, 194, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0px 0px 20px rgba(126, 87, 194, 1);
         }
     </style>
 </head>
 <body>
     <canvas id="starsCanvas"></canvas>
+    <div class="custom-cursor" id="cursor"></div>
+    
     <div class="header">
-        <h1 data-text="MYS.CLIENT">MYS.CLIENT</h1>
+        <h1>MYS.CLIENT</h1>
     </div>
+    
     <div class="buttons">
         <button class="button">Purchase {Coming Soon}</button>
         <a href="https://discord.gg/djMQRCNAAZ" target="_blank">
             <button class="button">Join Discord</button>
         </a>
     </div>
-<div class="content">
-    <div class="box">
-        <h3>Force Join Voice Chat!</h3>
-        <p>Automatically connects users to Voice Chat for seamless communication.</p>
-    </div>
-    <div class="box">
-        <h3>Customizable Mic Up Map!</h3>
-        <p>Personalize your mic-up experience with various Mic Up🔊 Map settings.</p>
-    </div>
-    <div class="box">
-        <h3>Clean Minimalistic UI!</h3>
-        <p>Enjoy a sleek and user-friendly interface designed for simplicity.</p>
-    </div>
-    <div class="box">
-        <h3>Fast And Simple Script!</h3>
-        <p>Lightweight and efficient script for a smooth user experience.</p>
-    </div>
-    <div class="box">
-        <h3>Best Mic Up🔊 Script Of 2025!</h3>
-        <p>The ultimate script for high-quality, uninterrupted Customizability.</p>
-    </div>
-    <div class="box">
-        <h3>Customizable Saving Settings!</h3>
-        <p>Save and load personalized settings for a Tailored experience.</p>
-    </div>
-</div>
-        
-        <div class="footer">
-            <p>Created by 01xMYS</p>
-        </div>
-            <script>
-                if ('scrollRestoration' in history) {
-                    history.scrollRestoration = 'manual';
-                }
-            
-                window.scrollTo(0, 0);
-            
-                const canvas = document.getElementById("starsCanvas");
-                const ctx = canvas.getContext("2d");
-            
-                function resizeCanvas() {
-                    canvas.width = window.innerWidth;
-                    canvas.height = window.innerHeight;
-                }
-                resizeCanvas();
-                window.addEventListener('resize', resizeCanvas);
-            
-                const stars = Array.from({ length: 100 }, () => ({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 2,
-                    speed: Math.random() * 2 + 1
-                }));
-            
-                function updateStars() {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.fillStyle = "white";
-                    stars.forEach(star => {
-                        star.y -= star.speed;
-                        if (star.y < 0) star.y = canvas.height;
-                        ctx.beginPath();
-                        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-                        ctx.fill();
-                    });
-                    requestAnimationFrame(updateStars);
-                }
-                updateStars();
-            
+    
+    <script>
 
-                document.addEventListener("DOMContentLoaded", function () {
-                    const observer = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                entry.target.classList.add("show");
-                            } else {
-                                entry.target.classList.remove("show");
-                            }
-                        });
-                    }, { threshold: 0.2 });
-            
-                    document.querySelectorAll(".content, .box").forEach(element => {
-                        observer.observe(element);
-                    });
-                });
-            </script>
+        const cursor = document.getElementById("cursor");
+        document.addEventListener("mousemove", (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
+    </script>
 </body>
 </html>
