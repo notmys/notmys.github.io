@@ -71,14 +71,10 @@
             text-align: center;
             backdrop-filter: blur(8px);
             transition: transform 0.2s ease-in-out;
+            perspective: 500px;
         }
         .box:hover {
             transform: scale(1.05);
-        }
-        .footer {
-            margin: 50px 0;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
         }
     </style>
 </head>
@@ -131,6 +127,19 @@
             requestAnimationFrame(updateStars);
         }
         updateStars();
+
+        // Add 3D tilt effect on hover
+        document.querySelectorAll('.box').forEach(box => {
+            box.addEventListener('mousemove', (e) => {
+                const rect = box.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                box.style.transform = `rotateY(${x * 30}deg) rotateX(${y * -30}deg) scale(1.05)`;
+            });
+            box.addEventListener('mouseleave', () => {
+                box.style.transform = 'rotateY(0deg) rotateX(0deg) scale(1)';
+            });
+        });
     </script>
 </body>
 </html>
