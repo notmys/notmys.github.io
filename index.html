@@ -81,53 +81,56 @@
                 transform: translateY(-5px);
                 box-shadow: 0px 0px 20px rgba(126, 87, 194, 1);
             }
+            .content {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+                margin-top: auto;
+                padding: 20px;
+                max-width: 900px;
+                margin-bottom: 100px;
+                opacity: 0;
+                transform: translateY(50px);
+                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            }
+            
+            .content.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            .box {
+                background: rgba(255, 255, 255, 0.1);
+                padding: 20px;
+                border-radius: 10px;
+                width: 280px;
+                height: 180px;
+                text-align: center;
+                backdrop-filter: blur(8px);
+                transition: transform 0.7s ease-in-out, box-shadow 0.3s ease-in-out;
+                perspective: 500px;
+                box-shadow: 0px 0px 15px rgba(126, 87, 194, 0.8);
+                opacity: 0;
+                transform: translateY(50px);
+                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            }
+            
+            .box.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            @media (max-width: 900px) {
                 .content {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 30px;
-                    margin-top: auto;
-                    padding: 20px;
-                    max-width: 900px;
-                    margin-bottom: 100px;
+                    grid-template-columns: repeat(2, 1fr);
                 }
+            }
             
-                .box {
-                    background: rgba(255, 255, 255, 0.1);
-                    padding: 20px;
-                    border-radius: 10px;
-                    width: 280px;
-                    height: 180px;
-                    text-align: center;
-                    backdrop-filter: blur(8px);
-                    transition: transform 0.7s ease-in-out, box-shadow 0.3s ease-in-out;
-                    perspective: 500px;
-                    box-shadow: 0px 0px 15px rgba(126, 87, 194, 0.8);
+            @media (max-width: 600px) {
+                .content {
+                    grid-template-columns: repeat(1, 1fr);
                 }
-            
-                .box:hover {
-                    transform: scale(1.1);
-                    box-shadow: 0px 0px 25px rgba(126, 87, 194, 1);
-                }
-            
-                .footer {
-                    position: relative;
-                    bottom: 0;
-                    width: 100%;
-                    text-align: center;
-                    padding: 20px 0;
-                }
-            
-                @media (max-width: 900px) {
-                    .content {
-                        grid-template-columns: repeat(2, 1fr);
-                    }
-                }
-            
-                @media (max-width: 600px) {
-                    .content {
-                        grid-template-columns: repeat(1, 1fr);
-                    }
-                }
+            }
 
         @keyframes fadeInUp {
             from {
@@ -168,40 +171,58 @@
         <div class="footer">
             <p>Created by 01xMYS</p>
         </div>
-    <script>
-        if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-        }
-        
-        window.scrollTo(0, 0);
-
-        const canvas = document.getElementById("starsCanvas");
-        const ctx = canvas.getContext("2d");
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        const stars = Array.from({ length: 100 }, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            size: Math.random() * 2,
-            speed: Math.random() * 2 + 1
-        }));
-
-        function updateStars() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "white";
-            stars.forEach(star => {
-                star.y -= star.speed;
-                if (star.y < 0) star.y = canvas.height;
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-                ctx.fill();
-            });
+            <script>
+                if ('scrollRestoration' in history) {
+                    history.scrollRestoration = 'manual';
+                }
+            
+                window.scrollTo(0, 0);
+            
+                const canvas = document.getElementById("starsCanvas");
+                const ctx = canvas.getContext("2d");
+            
+                function resizeCanvas() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+            
+                const stars = Array.from({ length: 100 }, () => ({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2,
+                    speed: Math.random() * 2 + 1
+                }));
+            
+                function updateStars() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = "white";
+                    stars.forEach(star => {
+                        star.y -= star.speed;
+                        if (star.y < 0) star.y = canvas.height;
+                        ctx.beginPath();
+                        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                    requestAnimationFrame(updateStars);
+                }
+                updateStars();
+            
+                document.addEventListener("DOMContentLoaded", function () {
+                    const observer = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add("show");
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.2 });
+            
+                    document.querySelectorAll(".content, .box").forEach(element => {
+                        observer.observe(element);
+                    });
+                });
             requestAnimationFrame(updateStars);
         }
         updateStars();
