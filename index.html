@@ -81,28 +81,46 @@
                 transform: translateY(-5px);
                 box-shadow: 0px 0px 20px rgba(126, 87, 194, 1);
             }
-        .content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 120vh;
-            padding: 20px;
-        }
-        .box {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            width: 280px;
-            height: 180px;
-            text-align: center;
-            backdrop-filter: blur(8px);
-            transition: transform 0.7s ease-in-out;
-            perspective: 500px;
-        }
-        .box:hover {
-            transform: scale(1.1);
-        }
+            <style>
+                .content {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 30px;
+                    margin-top: 50vh;
+                    padding: 20px;
+                    max-width: 900px;
+                }
+            
+                .box {
+                    background: rgba(255, 255, 255, 0.1);
+                    padding: 20px;
+                    border-radius: 10px;
+                    width: 280px;
+                    height: 180px;
+                    text-align: center;
+                    backdrop-filter: blur(8px);
+                    transition: transform 0.7s ease-in-out, box-shadow 0.3s ease-in-out;
+                    perspective: 500px;
+                    box-shadow: 0px 0px 15px rgba(126, 87, 194, 0.8);
+                }
+            
+                .box:hover {
+                    transform: scale(1.1);
+                    box-shadow: 0px 0px 25px rgba(126, 87, 194, 1);
+                }
+            
+                @media (max-width: 900px) {
+                    .content {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                }
+            
+                @media (max-width: 600px) {
+                    .content {
+                        grid-template-columns: repeat(1, 1fr);
+                    }
+                }
+            </style>
         @keyframes fadeInUp {
             from {
                 opacity: 0;
