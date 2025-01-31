@@ -153,29 +153,30 @@
             100% { background-position: 100% 50%; }
         }
 
-            .custom-image {
-                display: block;
-                margin: 30px auto;
-                width: 80%;
-                max-width: 400px;
-                border-radius: 10px;
-                box-shadow: 0px 0px 20px rgba(126, 87, 194, 0.8);
-                transition: transform 0.6s ease-in-out, box-shadow 0.6s ease-in-out;
-            }
+        .custom-image, .responsive-image {
+            display: block;
+            margin: 30px auto;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(126, 87, 194, 0.8);
+            transition: transform 0.6s ease-in-out, box-shadow 0.6s ease-in-out, opacity 1s ease-out;
         
-            .custom-image:hover {
-                transform: scale(1.05);
-                box-shadow: 0px 0px 35px rgba(126, 87, 194, 1);
-            }
+            opacity: 0;
+            transform: translateY(20px);
+        }
         
-            .responsive-image {
-                display: block;
-                width: 100%;
-                max-width: 400px;
-                margin: 20px auto;
-                border-radius: 10px;
-                object-fit: contain;
-            }
+        .custom-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 0px 35px rgba(126, 87, 194, 1);
+        }
+        
+        .loaded .custom-image, 
+        .loaded .responsive-image {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         
     </style>
 </head>
@@ -194,7 +195,7 @@
 <img src="https://github.com/notmys/websiteimage/blob/main/Screenshot%202025-01-30%20194257.png?raw=true" 
      alt="Mys.Client Image" 
      class="custom-image"
-     style="display: block; width: 100%; max-width: 400px; height: 400px; margin: 0 auto; background: none;">
+     style="display: block; width: 100%; max-width: 400px; height: 400px; margin: 50px auto 0 auto; background: none;">
 
 <img decoding="async" 
      srcset="../images/ZcuuVmilcebEnChOsuR2BUkeLE.png?scale-down-to=512 512w,
@@ -203,7 +204,7 @@
      src="../images/ZcuuVmilcebEnChOsuR2BUkeLE.png" 
      alt="" 
      class="responsive-image"
-     style="display: block; width: 100%; max-width: 400px; height: 400px; margin: 0 auto; border-radius: 10px; object-fit: contain; background: none;">
+     style="display: block; width: 100%; max-width: 400px; height: 400px; margin: 50px auto 0 auto; border-radius: 10px; object-fit: contain; background: none;">
 
 <div class="content">
     <div class="box">
