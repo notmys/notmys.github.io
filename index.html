@@ -15,7 +15,7 @@
             align-items: center;
             min-height: 200vh;
             overflow-x: hidden;
-            transition: margin-right 0.3s ease;
+            transition: margin-right 0.3s ease; /* Smooth transition when scrollbar is hidden */
         }
 
         canvas {
@@ -163,10 +163,11 @@
             transform: translateY(0);
         }
 
+        /* Modal Styles */
         .modal {
-            display: none;
+            display: none; /* Hidden by default */
             position: fixed;
-            z-index: 9999;
+            z-index: 9999; /* Ensure it is on top */
             left: 0;
             top: 0;
             width: 100%;
@@ -205,6 +206,7 @@
             cursor: pointer;
         }
 
+        /* Modal fade-in animation */
         @keyframes fadeInModal {
             0% {
                 opacity: 0;
@@ -214,6 +216,7 @@
             }
         }
 
+        /* Modal content slide-in animation */
         @keyframes modalSlideIn {
             0% {
                 transform: translateY(-50px);
@@ -223,6 +226,7 @@
             }
         }
 
+        /* Hide scrollbar when modal is active */
         body.modal-active {
             overflow: hidden;
         }
@@ -254,85 +258,87 @@
     <div class="content">
         <div class="box"><h3>Force Join Voice Chat!</h3><p>Automatically connects users to Voice Chat.</p></div>
         <div class="box"><h3>Customizable Mic Up Map!</h3><p>Personalize your mic-up experience.</p></div>
-        <div class="box"><h3>Clean Minimalistic UI!</h3><p>Enjoy a sleek user interface.</p></div>
+        <div class="box"><h3>Clean Minimalistic UI!</h3><p>Enjoy a sleek and user-friendly interface.</p></div>
+        <div class="box"><h3>Fast And Simple Script!</h3><p>Lightweight and efficient.</p></div>
+        <div class="box"><h3>Best Mic Up🔊 Script Of 2025!</h3><p>The ultimate script for Customizability.</p></div>
+        <div class="box"><h3>Customizable Saving Settings!</h3><p>Save and load personalized settings.</p></div>
     </div>
 
+    <!-- Modal Structure -->
     <div id="purchaseModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Coming Soon</h2>
+            <h2>Coming Soon!</h2>
+            <p>This feature will be available soon. Stay tuned!</p>
         </div>
     </div>
 
     <script>
-        var purchaseButton = document.getElementById('purchaseButton');
-        var modal = document.getElementById('purchaseModal');
-        var closeButton = document.getElementsByClassName('close')[0];
+        const canvas = document.getElementById("starsCanvas");
+        const ctx = canvas.getContext("2d");
 
-        purchaseButton.onclick = function() {
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+
+        const stars = Array.from({ length: 150 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2,
+            speed: Math.random() * 2 + 0.5
+        }));
+
+        function updateStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "white";
+            stars.forEach(star => {
+                star.y += star.speed;
+                if (star.y > canvas.height) star.y = 0;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(updateStars);
+        }
+        updateStars();
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.body.classList.add("loaded");
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            document.querySelectorAll(".content, .box").forEach(el => observer.observe(el));
+        });
+
+        const modal = document.getElementById("purchaseModal");
+        const btn = document.getElementById("purchaseButton");
+        const closeBtn = document.querySelector(".modal .close");
+
+        btn.onclick = function() {
             modal.style.display = "block";
-            document.body.classList.add('modal-active');
+            document.body.classList.add("modal-active");  // Hide scrollbar when modal is visible
         }
 
-        closeButton.onclick = function() {
+        closeBtn.onclick = function() {
             modal.style.display = "none";
-            document.body.classList.remove('modal-active');
+            document.body.classList.remove("modal-active");  // Show scrollbar back when modal is closed
         }
 
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
-                document.body.classList.remove('modal-active');
+                document.body.classList.remove("modal-active");  // Show scrollbar back when clicking outside modal
             }
         }
-
-        // Canvas background animation
-        var canvas = document.getElementById('starsCanvas');
-        var ctx = canvas.getContext('2d');
-        var stars = [];
-        
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
-        function createStar() {
-            var star = {
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 1.5,
-                speed: Math.random() * 0.5,
-                opacity: Math.random() * 0.8
-            };
-            stars.push(star);
-        }
-
-        function drawStars() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (var i = 0; i < stars.length; i++) {
-                var star = stars[i];
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
-                ctx.fill();
-                star.y += star.speed;
-                if (star.y > canvas.height) star.y = 0;
-            }
-        }
-
-        function animate() {
-            drawStars();
-            requestAnimationFrame(animate);
-        }
-
-        resizeCanvas();
-        for (var i = 0; i < 200; i++) {
-            createStar();
-        }
-        animate();
-        
-        // Handle window resize
-        window.onresize = resizeCanvas;
     </script>
 </body>
 </html>
