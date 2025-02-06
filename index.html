@@ -325,7 +325,7 @@
         const closeBtn = document.querySelector(".modal .close");
 
         btn.onclick = function() {
-            modal.style.display = "block";
+            modal.style.display = "flex"; // Changed to 'flex' to show the modal
             document.body.classList.add("modal-active");  // Hide scrollbar when modal is visible
         }
 
