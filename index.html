@@ -163,75 +163,74 @@
             transform: translateY(0);
         }
 
-        /* Modal Styles */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            z-index: 9999; /* Ensure it is on top */
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding-top: 100px;
-            text-align: center;
-            animation: fadeInModal 0.5s ease-out;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            border-radius: 10px;
-            color: #333;
-            animation: modalSlideIn 0.5s ease-out;
-        }
-
-        .modal .close {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-
-        .modal .close:hover,
-        .modal .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Modal fade-in animation */
-        @keyframes fadeInModal {
-            0% {
-                opacity: 0;
+<style>
+            /* Modal Styles */
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed;
+                z-index: 9999; /* Ensure it is on top */
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                padding-top: 0; /* Adjusted to center vertically */
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                animation: fadeInModal 0.5s ease-out;
             }
-            100% {
-                opacity: 1;
+        
+            .modal-content {
+                background-color: #333; /* Dark gray */
+                margin: 0;
+                padding: 40px 20px; /* More vertical space */
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 600px; /* Wider modal */
+                min-height: 300px; /* Taller modal */
+                border-radius: 10px;
+                color: #fff;
+                animation: modalSlideIn 0.5s ease-out;
             }
-        }
-
-        /* Modal content slide-in animation */
-        @keyframes modalSlideIn {
-            0% {
-                transform: translateY(-50px);
+        
+            .modal .close {
+                color: #aaa;
+                font-size: 28px;
+                font-weight: bold;
+                position: absolute;
+                top: 10px;
+                right: 10px;
             }
-            100% {
-                transform: translateY(0);
+        
+            .modal .close:hover,
+            .modal .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
             }
-        }
-
-        /* Hide scrollbar when modal is active */
-        body.modal-active {
-            overflow: hidden;
-        }
-
-    </style>
+        
+            /* Modal fade-in animation */
+            @keyframes fadeInModal {
+                0% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
+        
+            /* Modal content slide-in animation */
+            @keyframes modalSlideIn {
+                0% {
+                    transform: translateY(-50px);
+                }
+                100% {
+                    transform: translateY(0);
+                }
+            }
+        </style>
 </head>
 <body>
     <canvas id="starsCanvas"></canvas>
