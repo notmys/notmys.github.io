@@ -170,8 +170,18 @@
         <h1 data-text="MYS.CLIENT">MYS.CLIENT</h1>
     </div>
 
-    <div class="buttons">
-        <button class="button">Purchase {Coming Soon}</button>
+<button id="buyNow">Buy now</button>
+
+<div id="customModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black;">
+    <iframe src="mys-client.html" style="width:100%; height:100%; border:none;"></iframe>
+    <button onclick="document.getElementById('customModal').style.display='none';">Close</button>
+</div>
+
+<script>
+    document.getElementById("buyNow").addEventListener("click", function () {
+        document.getElementById("customModal").style.display = "block";
+    });
+</script>
         <a href="https://discord.gg/djMQRCNAAZ" target="_blank">
             <button class="button">Join Discord</button>
         </a>
