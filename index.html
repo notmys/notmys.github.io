@@ -17,6 +17,74 @@
             overflow-x: hidden;
         }
 
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background-color: #111;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 900px;
+            position: relative;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #popupFrame {
+            width: 100%;
+            height: 80vh;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 data-text="MYS.CLIENT">MYS.CLIENT</h1>
+    </div>
+
+    <div class="buttons">
+        <button class="button" onclick="openPopup()">Buy now</button>
+        <a href="https://discord.gg/djMQRCNAAZ" target="_blank">
+            <button class="button">Join Discord</button>
+        </a>
+    </div>
+
+    <div id="popupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <iframe id="popupFrame"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function openPopup() {
+            document.getElementById("popupModal").style.display = "block";
+            document.getElementById("popupFrame").src = "data:text/html;charset=utf-8," + encodeURIComponent(`<h1>Purchase Page</h1><p>Details about purchasing...</p>`);
+        }
+
+        function closePopup() {
+            document.getElementById("popupModal").style.display = "none";
+        }
+
         canvas {
             position: fixed;
             top: 0;
@@ -168,13 +236,6 @@
     <canvas id="starsCanvas"></canvas>
     <div class="header">
         <h1 data-text="MYS.CLIENT">MYS.CLIENT</h1>
-    </div>
-
-    <div class="buttons">
-        <button class="button">Purchase {Coming Soon}</button>
-        <a href="https://discord.gg/djMQRCNAAZ" target="_blank">
-            <button class="button">Join Discord</button>
-        </a>
     </div>
 
     <img src="https://github.com/notmys/websiteimage/blob/main/Screenshot%202025-01-30%20194257.png?raw=true" 
