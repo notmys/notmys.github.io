@@ -324,6 +324,9 @@
         const btn = document.getElementById("purchaseButton");
         const closeBtn = document.querySelector(".modal .close");
 
+        // Make sure modal is hidden on page load
+        modal.style.display = "none"; 
+
         btn.onclick = function() {
             modal.style.display = "block";  // Show the modal when button is clicked
             document.body.classList.add("modal-active");  // Hide scrollbar when modal is visible
