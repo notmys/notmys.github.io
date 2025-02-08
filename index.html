@@ -12,13 +12,17 @@
             text-align: center;
             padding: 20px;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
         }
         .copy-container {
             background: #222;
             padding: 15px;
             border-radius: 8px;
             display: inline-block;
-            cursor: pointer;
         }
         .stars {
             position: fixed;
@@ -48,16 +52,9 @@
     </style>
 </head>
 <body>
-    <div class="copy-container" onclick="copyText()">Click To Copy MYS.CLIENT!</div>
+    <div class="copy-container">loadstring(game:HttpGet('https://raw.githubusercontent.com/notmys/MicUp/refs/heads/main/lua.txt'))()</div>
     <div class="stars"></div>
     <script>
-        function copyText() {
-            const text = "loadstring(game:HttpGet('https://raw.githubusercontent.com/notmys/MicUp/refs/heads/main/lua.txt'))()";
-            navigator.clipboard.writeText(text).then(() => {
-                alert("Text copied to clipboard!");
-            });
-        }
-        
         function createStars() {
             const starContainer = document.querySelector(".stars");
             for (let i = 0; i < 100; i++) {
