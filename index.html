@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Copyable Text with Star Background</title>
+    <title>MYS.CLIENT</title>
     <style>
         body {
             background-color: black;
@@ -48,11 +48,11 @@
     </style>
 </head>
 <body>
-    <div class="copy-container" onclick="copyText()">Click to copy this text!</div>
+    <div class="copy-container" onclick="copyText()">loadstring(game:HttpGet('https://raw.githubusercontent.com/notmys/MicUp/refs/heads/main/lua.txt'))()</div>
     <div class="stars"></div>
     <script>
         function copyText() {
-            const text = "Click to copy this text!";
+            const text = "loadstring(game:HttpGet('https://raw.githubusercontent.com/notmys/MicUp/refs/heads/main/lua.txt'))()";
             navigator.clipboard.writeText(text).then(() => {
                 alert("Text copied to clipboard!");
             });
