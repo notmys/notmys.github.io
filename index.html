@@ -7,22 +7,8 @@
     <style>
         body {
             background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-        }
-        .copy-container {
-            background: #222;
-            padding: 15px;
-            border-radius: 8px;
-            display: inline-block;
+            margin: 0;
         }
         .stars {
             position: fixed;
@@ -46,13 +32,12 @@
             }
             to {
                 transform: translateY(100vh);
-                opacity: 0;
+                opacity: 0.5;
             }
         }
     </style>
 </head>
 <body>
-    <div class="copy-container">loadstring(game:HttpGet('https://raw.githubusercontent.com/notmys/MicUp/refs/heads/main/lua.txt'))()</div>
     <div class="stars"></div>
     <script>
         function createStars() {
@@ -62,7 +47,7 @@
                 star.classList.add("star");
                 star.style.left = Math.random() * 100 + "vw";
                 star.style.top = Math.random() * -100 + "vh";
-                star.style.animationDuration = Math.random() * 3 + 2 + "s";
+                star.style.animationDuration = Math.random() * 5 + 4 + "s"; // Slower animation
                 starContainer.appendChild(star);
             }
         }
