@@ -8,7 +8,7 @@
     html, body {
       margin: 0;
       padding: 0;
-      background-color: #121212;
+      background-color: #000000;
       overflow: hidden;
       height: 100vh;
       cursor: none;
@@ -93,37 +93,46 @@
   <div class="custom-cursor" id="cursor"></div>
 
   <script>
-    // Floating stars
     function createStar() {
       const star = document.createElement('div');
       star.classList.add('star');
+
+      // Random position
       star.style.left = Math.random() * window.innerWidth + 'px';
       star.style.top = window.innerHeight + Math.random() * 100 + 'px';
 
+      // Random size between 2px and 5px
+      const size = 2 + Math.random() * 3;
+      star.style.width = size + 'px';
+      star.style.height = size + 'px';
+
+      // Random animation duration between 3s and 8s
+      const speed = 3 + Math.random() * 5;
+      star.style.animation = `floatUp ${speed}s linear forwards`;
+
+      // Optional random delay to stagger appearance
       const delay = Math.random() * 2;
       star.style.animationDelay = `${delay}s`;
 
       document.body.appendChild(star);
-      setTimeout(() => star.remove(), 7000);
+      setTimeout(() => star.remove(), (speed + delay) * 1000);
     }
+
     setInterval(createStar, 150);
 
+    // Cursor trail setup
     const cursor = document.getElementById('cursor');
     let mouseX = 0, mouseY = 0;
     let lastMoveTime = Date.now();
+    let lastTrailTime = 0;
+    const trailDelay = 100; // Time in ms between trail star spawns
 
     document.addEventListener('mousemove', e => {
       mouseX = e.clientX;
       mouseY = e.clientY;
       cursor.style.left = mouseX + 'px';
       cursor.style.top = mouseY + 'px';
-
       lastMoveTime = Date.now();
-
-      // Delay the trail stars themselves
-      setTimeout(() => {
-        createTrailStar(mouseX, mouseY);
-      }, 300); // adjust this delay (ms) for more lag
     });
 
     function createTrailStar(x, y) {
@@ -138,9 +147,16 @@
       setTimeout(() => star.remove(), 1500);
     }
 
+    // Only emit trail stars at intervals while moving
     setInterval(() => {
-      if (Date.now() - lastMoveTime > 100) return;
-    }, 100);
+      if (Date.now() - lastMoveTime < 100) {
+        const now = Date.now();
+        if (now - lastTrailTime >= trailDelay) {
+          createTrailStar(mouseX, mouseY);
+          lastTrailTime = now;
+        }
+      }
+    }, 16); // runs ~60fps
   </script>
 </body>
 </html>
