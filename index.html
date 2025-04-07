@@ -132,20 +132,15 @@
 
     // ASCII Art Text to "Mys.Fr" with random letters
     const asciiArt = [
-
- ▄▀▀▄ ▄▀▄  ▄▀▀▄ ▀▀▄  ▄▀▀▀▀▄    ▄▀▀▄▀▀▀▄  ▄▀▀█▄   ▄▀▀▀▀▄    ▄▀▀█▄▄▄▄ 
-█  █ ▀  █ █   ▀▄ ▄▀ █ █   ▐   █   █   █ ▐ ▄▀ ▀▄ █         ▐  ▄▀   ▐ 
-▐  █    █ ▐     █      ▀▄     ▐  █▀▀▀▀    █▄▄▄█ █    ▀▄▄    █▄▄▄▄▄  
-  █    █        █   ▀▄   █       █       ▄▀   █ █     █ █   █    ▌  
-▄▀   ▄▀       ▄▀     █▀▀▀   ▄  ▄▀       █   ▄▀  ▐▀▄▄▄▄▀ ▐  ▄▀▄▄▄▄   
-█    █        █      ▐        █         ▐   ▐   ▐          █    ▐   
-▐    ▐        ▐               ▐                            ▐        
-
+      "M  M  Y   Y  SSSS  .F   RRRR ",
+      "MM MM   Y Y  S     .F   R   R",
+      "M M M    Y   SSS   .F   RRRR ",
+      "M   M    Y      S  .F   R  R ",
+      "M   M    Y   SSSS  .F   R   R"
     ];
 
     let artIndex = 0;
     let charIndex = 0;
-    let finalText = asciiArt.join("\n");
     let animatedText = "";
     
     function animateText() {
