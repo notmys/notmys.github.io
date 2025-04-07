@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cosmic Cursor Trail</title>
+  <title>Star Trail with Delay</title>
   <style>
     html, body {
       margin: 0;
@@ -120,14 +120,10 @@
 
       lastMoveTime = Date.now();
 
-      // Create trail with staggered delay
-      for (let i = 0; i < 3; i++) {
-        setTimeout(() => {
-          const offsetX = (Math.random() - 0.5) * 20;
-          const offsetY = (Math.random() - 0.5) * 20;
-          createTrailStar(mouseX + offsetX, mouseY + offsetY);
-        }, i * 80); // Delay each trail dot
-      }
+      // Delay the trail stars themselves
+      setTimeout(() => {
+        createTrailStar(mouseX, mouseY);
+      }, 80); // adjust this delay (ms) for more lag
     });
 
     function createTrailStar(x, y) {
@@ -135,8 +131,8 @@
       star.classList.add('trail-star');
       star.style.left = `${x}px`;
       star.style.top = `${y}px`;
-      star.style.width = (5 + Math.random() * 4) + 'px';
-      star.style.height = star.style.width;
+      star.style.width = '6px';
+      star.style.height = '6px';
 
       document.body.appendChild(star);
       setTimeout(() => star.remove(), 1500);
