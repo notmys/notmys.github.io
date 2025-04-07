@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dark Starfield</title>
+  <title>Dark Starfield with Cursor Trail</title>
   <style>
     html, body {
       margin: 0;
@@ -11,16 +11,39 @@
       background-color: #121212;
       overflow: hidden;
       height: 100vh;
+      cursor: none; /* Hide default cursor */
     }
 
-    .star {
+    .star, .trail-star {
       position: absolute;
       width: 2px;
       height: 2px;
       background: white;
       border-radius: 50%;
-      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .star {
       animation: floatUp 4s linear forwards;
+      opacity: 0.8;
+    }
+
+    .trail-star {
+      opacity: 0.9;
+      animation: fadeOut 1s ease-out forwards;
+    }
+
+    .custom-cursor {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background-color: white;
+      border-radius: 50%;
+      pointer-events: none;
+      mix-blend-mode: difference;
+      transform: translate(-50%, -50%);
+      transition: transform 0.05s linear;
+      z-index: 9999;
     }
 
     @keyframes floatUp {
@@ -33,10 +56,24 @@
         opacity: 0;
       }
     }
+
+    @keyframes fadeOut {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="custom-cursor" id="cursor"></div>
+
   <script>
+    // Floating stars
     function createStar() {
       const star = document.createElement('div');
       star.classList.add('star');
@@ -46,15 +83,49 @@
       star.style.width = size + 'px';
       star.style.height = size + 'px';
       star.style.animationDuration = (3 + Math.random() * 2) + 's';
+      document.body.appendChild(star);
+      setTimeout(() => star.remove(), 5000);
+    }
+    setInterval(createStar, 100);
+
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    let mouseX = 0, mouseY = 0;
+    let isMoving = false;
+    let lastMoveTime = Date.now();
+
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+
+      isMoving = true;
+      lastMoveTime = Date.now();
+
+      createTrailStar(mouseX, mouseY);
+    });
+
+    function createTrailStar(x, y) {
+      const star = document.createElement('div');
+      star.classList.add('trail-star');
+      star.style.left = x + 'px';
+      star.style.top = y + 'px';
+
+      const size = Math.random() * 2 + 1;
+      star.style.width = size + 'px';
+      star.style.height = size + 'px';
 
       document.body.appendChild(star);
-
-      setTimeout(() => {
-        star.remove();
-      }, 5000);
+      setTimeout(() => star.remove(), 1000);
     }
 
-    setInterval(createStar, 100);
+    // Stop trail when not moving
+    setInterval(() => {
+      if (Date.now() - lastMoveTime > 100) {
+        isMoving = false;
+      }
+    }, 100);
   </script>
 </body>
 </html>
