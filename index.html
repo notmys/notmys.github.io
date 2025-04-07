@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dark Starfield with Cursor Trail</title>
+  <title>Dark Starfield with Cursor Cross</title>
   <style>
     html, body {
       margin: 0;
@@ -16,34 +16,54 @@
 
     .star, .trail-star {
       position: absolute;
-      width: 2px;
-      height: 2px;
       background: white;
       border-radius: 50%;
       pointer-events: none;
     }
 
     .star {
-      animation: floatUp 4s linear forwards;
+      width: 6px;
+      height: 6px;
+      animation: floatUp 5s linear forwards;
       opacity: 0.8;
     }
 
     .trail-star {
+      width: 4px;
+      height: 4px;
       opacity: 0.9;
-      animation: fadeOut 1s ease-out forwards;
+      animation: fadeOut 1.2s ease-out forwards;
     }
 
     .custom-cursor {
       position: absolute;
-      width: 12px;
-      height: 12px;
-      background-color: white;
-      border-radius: 50%;
+      width: 20px;
+      height: 20px;
       pointer-events: none;
-      mix-blend-mode: difference;
-      transform: translate(-50%, -50%);
-      transition: transform 0.05s linear;
       z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
+
+    .custom-cursor::before, .custom-cursor::after {
+      content: '';
+      position: absolute;
+      background-color: white;
+    }
+
+    .custom-cursor::before {
+      width: 2px;
+      height: 100%;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+    }
+
+    .custom-cursor::after {
+      height: 2px;
+      width: 100%;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
     }
 
     @keyframes floatUp {
@@ -73,25 +93,26 @@
   <div class="custom-cursor" id="cursor"></div>
 
   <script>
-    // Floating stars
+    // Floating stars with random delay
     function createStar() {
       const star = document.createElement('div');
       star.classList.add('star');
       star.style.left = Math.random() * window.innerWidth + 'px';
       star.style.top = window.innerHeight + Math.random() * 100 + 'px';
-      const size = Math.random() * 2 + 1;
-      star.style.width = size + 'px';
-      star.style.height = size + 'px';
-      star.style.animationDuration = (3 + Math.random() * 2) + 's';
-      document.body.appendChild(star);
-      setTimeout(() => star.remove(), 5000);
-    }
-    setInterval(createStar, 100);
 
-    // Custom cursor
+      // Random delay before animation starts
+      const delay = Math.random() * 2;
+      star.style.animationDelay = `${delay}s`;
+
+      document.body.appendChild(star);
+      setTimeout(() => star.remove(), 7000); // Keep long enough to see delay + animation
+    }
+
+    setInterval(createStar, 150);
+
+    // Cursor movement + trail
     const cursor = document.getElementById('cursor');
     let mouseX = 0, mouseY = 0;
-    let isMoving = false;
     let lastMoveTime = Date.now();
 
     document.addEventListener('mousemove', e => {
@@ -100,9 +121,7 @@
       cursor.style.left = mouseX + 'px';
       cursor.style.top = mouseY + 'px';
 
-      isMoving = true;
       lastMoveTime = Date.now();
-
       createTrailStar(mouseX, mouseY);
     });
 
@@ -111,20 +130,13 @@
       star.classList.add('trail-star');
       star.style.left = x + 'px';
       star.style.top = y + 'px';
-
-      const size = Math.random() * 2 + 1;
-      star.style.width = size + 'px';
-      star.style.height = size + 'px';
-
       document.body.appendChild(star);
-      setTimeout(() => star.remove(), 1000);
+      setTimeout(() => star.remove(), 1200);
     }
 
-    // Stop trail when not moving
+    // Stop trail after inactivity
     setInterval(() => {
-      if (Date.now() - lastMoveTime > 100) {
-        isMoving = false;
-      }
+      if (Date.now() - lastMoveTime > 100) return;
     }, 100);
   </script>
 </body>
