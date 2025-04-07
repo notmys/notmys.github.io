@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Star Trail with Delay</title>
+  <title></title> <!-- Will be animated via JS -->
+  <link rel="icon" href="https://i.pinimg.com/736x/b2/6e/32/b26e329d350e272452357d9cde02631c.jpg" type="image/jpeg" />
+
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      background-color: #000000;
+      background-color: #0f0f0f;
       overflow: hidden;
       height: 100vh;
       cursor: none;
@@ -93,39 +95,41 @@
   <div class="custom-cursor" id="cursor"></div>
 
   <script>
+    // Typing animation for the <title>
+    const titleText = "Mys.fr";
+    let titleIndex = 0;
+    function typeTitle() {
+      if (titleIndex <= titleText.length) {
+        document.title = titleText.slice(0, titleIndex);
+        titleIndex++;
+        setTimeout(typeTitle, 200); // speed of typing
+      }
+    }
+    typeTitle();
+
     function createStar() {
       const star = document.createElement('div');
       star.classList.add('star');
-
-      // Random position
       star.style.left = Math.random() * window.innerWidth + 'px';
       star.style.top = window.innerHeight + Math.random() * 100 + 'px';
-
-      // Random size between 2px and 5px
       const size = 2 + Math.random() * 3;
       star.style.width = size + 'px';
       star.style.height = size + 'px';
-
-      // Random animation duration between 3s and 8s
       const speed = 3 + Math.random() * 5;
       star.style.animation = `floatUp ${speed}s linear forwards`;
-
-      // Optional random delay to stagger appearance
       const delay = Math.random() * 2;
       star.style.animationDelay = `${delay}s`;
-
       document.body.appendChild(star);
       setTimeout(() => star.remove(), (speed + delay) * 1000);
     }
 
     setInterval(createStar, 150);
 
-    // Cursor trail setup
     const cursor = document.getElementById('cursor');
     let mouseX = 0, mouseY = 0;
     let lastMoveTime = Date.now();
     let lastTrailTime = 0;
-    const trailDelay = 100; // Time in ms between trail star spawns
+    const trailDelay = 80;
 
     document.addEventListener('mousemove', e => {
       mouseX = e.clientX;
@@ -142,12 +146,10 @@
       star.style.top = `${y}px`;
       star.style.width = '6px';
       star.style.height = '6px';
-
       document.body.appendChild(star);
       setTimeout(() => star.remove(), 1500);
     }
 
-    // Only emit trail stars at intervals while moving
     setInterval(() => {
       if (Date.now() - lastMoveTime < 100) {
         const now = Date.now();
@@ -156,7 +158,7 @@
           lastTrailTime = now;
         }
       }
-    }, 16); // runs ~60fps
+    }, 16);
   </script>
 </body>
 </html>
