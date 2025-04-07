@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dark Starfield with Cursor Cross</title>
+  <title>Cosmic Cursor Trail</title>
   <style>
     html, body {
       margin: 0;
@@ -11,7 +11,7 @@
       background-color: #121212;
       overflow: hidden;
       height: 100vh;
-      cursor: none; /* Hide default cursor */
+      cursor: none;
     }
 
     .star, .trail-star {
@@ -29,10 +29,10 @@
     }
 
     .trail-star {
-      width: 4px;
-      height: 4px;
+      width: 6px;
+      height: 6px;
       opacity: 0.9;
-      animation: fadeOut 1.2s ease-out forwards;
+      animation: fadeOut 1.5s ease-out forwards;
     }
 
     .custom-cursor {
@@ -93,24 +93,21 @@
   <div class="custom-cursor" id="cursor"></div>
 
   <script>
-    // Floating stars with random delay
+    // Floating stars
     function createStar() {
       const star = document.createElement('div');
       star.classList.add('star');
       star.style.left = Math.random() * window.innerWidth + 'px';
       star.style.top = window.innerHeight + Math.random() * 100 + 'px';
 
-      // Random delay before animation starts
       const delay = Math.random() * 2;
       star.style.animationDelay = `${delay}s`;
 
       document.body.appendChild(star);
-      setTimeout(() => star.remove(), 7000); // Keep long enough to see delay + animation
+      setTimeout(() => star.remove(), 7000);
     }
-
     setInterval(createStar, 150);
 
-    // Cursor movement + trail
     const cursor = document.getElementById('cursor');
     let mouseX = 0, mouseY = 0;
     let lastMoveTime = Date.now();
@@ -122,19 +119,29 @@
       cursor.style.top = mouseY + 'px';
 
       lastMoveTime = Date.now();
-      createTrailStar(mouseX, mouseY);
+
+      // Create trail with staggered delay
+      for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+          const offsetX = (Math.random() - 0.5) * 20;
+          const offsetY = (Math.random() - 0.5) * 20;
+          createTrailStar(mouseX + offsetX, mouseY + offsetY);
+        }, i * 80); // Delay each trail dot
+      }
     });
 
     function createTrailStar(x, y) {
       const star = document.createElement('div');
       star.classList.add('trail-star');
-      star.style.left = x + 'px';
-      star.style.top = y + 'px';
+      star.style.left = `${x}px`;
+      star.style.top = `${y}px`;
+      star.style.width = (5 + Math.random() * 4) + 'px';
+      star.style.height = star.style.width;
+
       document.body.appendChild(star);
-      setTimeout(() => star.remove(), 1200);
+      setTimeout(() => star.remove(), 1500);
     }
 
-    // Stop trail after inactivity
     setInterval(() => {
       if (Date.now() - lastMoveTime > 100) return;
     }, 100);
