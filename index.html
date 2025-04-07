@@ -41,30 +41,17 @@
       box-shadow: 0 0 5px 3px rgba(255, 255, 255, 0.8);
     }
 
+    /* Custom cursor using the provided image */
     .custom-cursor {
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 40px; /* Adjust size of the cursor image */
+      height: 40px; /* Adjust size of the cursor image */
       pointer-events: none;
       z-index: 9999;
       transform: translate(-50%, -50%);
-      /* Cross cursor: Horizontal and vertical lines */
-      border-top: 2px solid white;
-      border-left: 2px solid white;
-      width: 20px;
-      height: 20px;
-      display: block;
-    }
-
-    .custom-cursor::after {
-      content: '';
-      position: absolute;
-      width: 2px;
-      height: 20px;
-      background: white;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      background-image: url('https://raw.githubusercontent.com/notmys/websiteimage/refs/heads/main/ff6ca543242aca690b109ae725e1c5c4-removebg-preview.png');
+      background-size: cover;
+      background-repeat: no-repeat;
     }
 
     @keyframes floatUp {
@@ -106,41 +93,35 @@
   </style>
 </head>
 <body>
+  <!-- Custom cursor div that will follow the mouse -->
   <div class="custom-cursor" id="cursor"></div>
 
   <!-- ASCII Art Text will be inserted here -->
   <div class="center-text" id="asciiText">
-    █████   ██    ██                                           █████ ██                                    <br>
-    ██████  █████ █████                                        ██████  ████                                  <br>
-    ██   █  █  █████ █████                                     ██   █  █  ███                                 <br>
-    █    █  █   █ ██  █ ██                                     █    █  █    ███                                 <br>
-        █  █    █     █    ██   ████        ████                   █  █      ██                                 <br>
-       ██ ██    █     █     ██    ███  █   █ ████ █               ██ ██      ██   ████       ████        ███   <br>
-       ██ ██    █     █     ██     ████   ██  ████                ██ ██      ██  █ ███  █   █  ███  █   █ ███  <br>
-       ██ ██    █     █     ██      ██   ████                   ████ ██      █  █   ████   █    ████   █   ███ <br>
-       ██ ██    █     █     ██      ██     ███                 █ ███ ██     █  ██    ██   ██     ██   ██    ███<br>
-       ██ ██    █     ██    ██      ██       ███                  ██ ███████   ██    ██   ██     ██   ████████ <br>
-        █  ██    █     ██    ██      ██         ███                ██ ██████    ██    ██   ██     ██   ███████  <br>
-           █     █      ██   ██      ██    ████  ██                ██ ██        ██    ██   ██     ██   ██       <br>
-       ████      █      ██    █████████   █ ████ █                 ██ ██        ██    ██   ██     ██   ████    █<br>
-      █  █████           ██     ████ ███     ████     ███      █   ██ ██         █████ ██   ████████    ███████ <br>
-     █     ██                         ███             ███     ██   ██ ██          ███   ██    ███ ███    █████  <br>
-     █                         █████   ███                   ███   █  █                            ███          <br>
-      █                      ████████  ██                     ███    █                       ████   ███         <br>
-       ██                   █      ████                        ██████                      ███████  ██          <br>
-                                                               ███                       █     ████             <br>
+    ...     ..      ..                     .x+=:.              ....      ..                                        
+  x*8888x.:*8888: -"888:     ..           z`    ^%           +^""888h. ~"888h                                      
+                        X 48888X `8888H  8888       @L .<k       8X.  ?8888X  8888f                                     
+X8x.  8888X  8888X  !888>  9888i   .dL     .@8Ned8"        '888x  8888X  8888~        u          uL          .u    
+X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x:    us888u.   .ue888Nc..   ud8888.  
+'*888!X8888> X8888  xH8>     888E  888I x88:  `)8b.         `8888 8888X  X88x.  .@88 "8888" d88E`"888E` :888'8888. 
+  `?8 `8888  X888X X888>     888E  888I 8888N=*8888           `*` 8888X '88888X 9888  9888  888E  888E  d888 '88%" 
+  -^  '888"  X888  8888>     888E  888I  %8"    R88          ~`...8888X  "88888 9888  9888  888E  888E  8888.+"    
+   dx '88~x. !88~  8888>     888E  888I   @8Wou 9%     .      x8888888X.   `%8" 9888  9888  888E  888E  8888L      
+ .8888Xf.888x:!    X888X.:  x888N><888' .888888P`    .@8c    '%"*8888888h.   "  9888  9888  888& .888E  '8888c. .+ 
+:""888":~"888"     `888*"    "88"  888  `   ^"F     '%888"   ~    888888888!`   "888*""888" *888" 888&   "88888%   
+    "~'    "~        ""            88F                ^*          X888^"""       ^Y"   ^Y'   `"   "888E    "YP'    
+                                  98"                             `88f                      .dWi   `88E            
+                                ./"                                88                       4888~  J8%             
+                               ~`                                  ""                        ^"===*"`               
   </div>
 
   <script>
-    // Function to create stars in the background starting from the center of the screen
+    // Function to create stars in the background
     function createStar() {
       const star = document.createElement('div');
       star.classList.add('star');
-      // Start stars from the center of the screen
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-      star.style.left = centerX + 'px';
-      star.style.top = centerY + 'px';
+      star.style.left = Math.random() * window.innerWidth + 'px';
+      star.style.top = window.innerHeight + Math.random() * 100 + 'px';
       const size = 2 + Math.random() * 3;
       star.style.width = size + 'px';
       star.style.height = size + 'px';
@@ -152,14 +133,6 @@
       setTimeout(() => star.remove(), (speed + delay) * 1000);
     }
 
-    // Initially create some stars at the center when the page is loaded
-    setTimeout(() => {
-      for (let i = 0; i < 10; i++) {
-        createStar();
-      }
-    }, 100);
-
-    // Function to create stars over time after that
     setInterval(createStar, 150);
 
     // Cursor trail setup
