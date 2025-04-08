@@ -91,6 +91,34 @@
       text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px rgba(255, 255, 255, 0.5); /* Glowing effect */
       line-height: 1.4;
     }
+
+    /* Styling for the Buy Now button */
+    .buy-now-btn {
+      display: block;
+      margin: 40px auto;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #007bff;
+      border: 2px solid #007bff;
+      border-radius: 25px;
+      cursor: pointer;
+      text-align: center;
+      width: auto;
+      transition: all 0.3s ease;
+    }
+
+    .buy-now-btn:hover {
+      background-color: transparent;
+      color: #007bff;
+      border-color: #007bff;
+      transform: translateX(5px);
+    }
+
+    .buy-now-btn:focus {
+      outline: none;
+    }
   </style>
 </head>
 <body>
@@ -116,8 +144,8 @@ X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x: 
                                ~`                                  ""                        ^"===*"`              
   </div>
 
-  <!-- Sell Embed Button -->
-  <button
+  <!-- Buy Now Button -->
+  <button class="buy-now-btn"
     data-sell-store="59557"
     data-sell-product="290991"
     data-sell-darkmode="{ true | false }"
