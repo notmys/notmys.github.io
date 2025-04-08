@@ -127,11 +127,26 @@
       background-color: #333;
       padding: 20px;
       border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.7);
       text-align: center;
       color: white;
       max-width: 80%;
       min-width: 300px;
+      animation: floatUpDown 4s ease-in-out infinite; /* Added floating animation */
+      text-shadow: 0 0 10px white, 0 0 20px white; /* Glow effect */
+    }
+
+    /* Floating animation for the UI box */
+    @keyframes floatUpDown {
+      0% {
+        transform: translate(-50%, -50%) translateY(0);
+      }
+      50% {
+        transform: translate(-50%, -50%) translateY(-15px); /* Move slightly up */
+      }
+      100% {
+        transform: translate(-50%, -50%) translateY(0); /* Return to center */
+      }
     }
 
   </style>
@@ -143,7 +158,7 @@
   <!-- UI Box in the center -->
   <div class="ui-box">
     <h2>Welcome to Mys.fr</h2>
-    <p>This is a special UI box with a dark gray background and shadow.</p>
+    <p>This is a special UI box with a dark gray background, white glowing effect, and it floats slowly up and down.</p>
     <p>Enjoy the experience!</p>
   </div>
 
