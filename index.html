@@ -117,20 +117,44 @@
     .buy-now-btn:focus {
       outline: none;
     }
+
+    /* Styling for the UI Box */
+    .ui-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #333;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+      text-align: center;
+      color: white;
+      max-width: 80%;
+      min-width: 300px;
+    }
+
   </style>
 </head>
 <body>
   <!-- Custom cursor div that will follow the mouse -->
   <div class="custom-cursor" id="cursor"></div>
 
+  <!-- UI Box in the center -->
+  <div class="ui-box">
+    <h2>Welcome to Mys.fr</h2>
+    <p>This is a special UI box with a dark gray background and shadow.</p>
+    <p>Enjoy the experience!</p>
+  </div>
+
   <!-- ASCII Art Text will be inserted here -->
   <div class="center-text" id="asciiText">
     ...     ..      ..                     .x+=:.              ....      ..                                      
   x*8888x.:*8888: -"888:     ..           z`    ^%           +^""888h. ~"888h                                     
  X   48888X `8888H  8888    @L               .   k         8X.  ?8888X  8888f                                    
-X8x.  8888X  8888X  !888  9888i   .dL     .@8Ned8"        '888x  8888X  8888~        u          uL          .u    
-X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x:    us888u.   .ue888Nc..   ud8888.  
-'*888!X8888> X8888  xH8>     888E  888I x88:  `)8b.         `8888 8888X  X88x.  .@88 "8888" d88E`"888E` :888'8888. 
+ X8x.  8888X  8888X  !888  9888i   .dL     .@8Ned8"        '888x  8888X  8888~        u          uL          .u    
+  X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x:    us888u.   .ue888Nc..   ud8888.  
+  '*888!X8888> X8888  xH8>     888E  888I x88:  `)8b.         `8888 8888X  X88x.  .@88 "8888" d88E`"888E` :888'8888. 
   `?8 `8888  X888X X888>     888E  888I 8888N=*8888           `*` 8888X '88888X 9888  9888  888E  888E  d888 '88%" 
   -^  '888"  X888  8888>     888E  888I  %8"    R88          ~`...8888X  "88888 9888  9888  888E  888E  8888.+"    
    dx '88~x. !88~  8888>     888E  888I   @8Wou 9%     .      x8888888X.   `%8" 9888  9888  888E  888E  8888L      
