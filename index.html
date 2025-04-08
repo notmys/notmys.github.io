@@ -89,22 +89,24 @@
       line-height: 1.4;
     }
 
-    /* Styling for the Buy Now button */
-    .buy-now-btn {
-      display: block;
-      margin: 40px auto 20px auto; /* Adjusted margin to move the button down */
-      padding: 12px 25px;
-      font-size: 16px;
-      font-weight: bold;
-      color: #000;
-      background-color: #fff;
-      border: 2px solid #fff;
-      border-radius: 10px; /* Smaller rounded corners */
-      cursor: pointer;
-      text-align: center;
-      width: auto;
-      transition: all 0.3s ease;
-    }
+/* Styling for the Buy Now button */
+.buy-now-btn {
+  display: block;
+  margin-top: 40px; /* Add margin to push it below the ASCII art */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  background-color: #fff;
+  border: 2px solid #fff;
+  border-radius: 10px; /* Smaller rounded corners */
+  cursor: pointer;
+  text-align: center;
+  width: auto;
+  transition: all 0.3s ease;
+}
 
     .buy-now-btn:hover {
       background-color: transparent;
@@ -119,11 +121,9 @@
   </style>
 </head>
 <body>
-  <!-- Custom cursor div that will follow the mouse -->
   <div class="custom-cursor" id="cursor"></div>
 
-  <!-- ASCII Art Text will be inserted here -->
-  <div class="center-text" id="asciiText">
+<div class="center-text" id="asciiText">
     ...     ..      ..                     .x+=:.              ....      ..                                      
   x*8888x.:*8888: -"888:     ..           z`    ^%           +^""888h. ~"888h                                     
  X   48888X `8888H  8888    @L               .   k         8X.  ?8888X  8888f                                    
@@ -139,7 +139,12 @@ X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x: 
                                   98"                             `88f                      .dWi   `88E            
                                 ./"                                88                       4888~  J8%             
                                ~`                                  ""                        ^"===*"`              
-  </div>
+</div>
+
+<button class="buy-now-btn" data-sell-store="59557" data-sell-product="290991" data-sell-darkmode="true" data-sell-theme="true">
+  Buy Mys.Premium!
+</button>
+
 
   <button class="buy-now-btn"
     data-sell-store="59557"
