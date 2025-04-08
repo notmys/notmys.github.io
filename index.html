@@ -16,6 +16,9 @@
       cursor: none;
       color: white;
       font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* Makes sure the content is spread out */
     }
 
     .star, .trail-star {
@@ -76,10 +79,6 @@
     }
 
     .center-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       font-size: 14px;
       color: white;
       text-align: center;
@@ -87,12 +86,14 @@
       white-space: pre; /* Preserve the spaces and newlines in the ASCII art */
       text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px rgba(255, 255, 255, 0.5); /* Glowing effect */
       line-height: 1.4;
+      margin-top: 20px;
+      text-align: center;
     }
 
     /* Styling for the Buy Now button */
     .buy-now-btn {
       display: block;
-      margin: 40px auto 20px auto; /* Adjusted margin to move the button down */
+      margin: 20px auto 40px auto; /* Adjusted margin to move the button down */
       padding: 12px 25px;
       font-size: 16px;
       font-weight: bold;
