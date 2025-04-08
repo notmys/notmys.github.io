@@ -163,7 +163,8 @@
       white-space: nowrap;
       overflow: hidden;
       width: 0;
-      animation: typing 3s steps(30) 1s forwards, blink 0.75s step-end infinite, deleting 2s steps(30) 4s forwards;
+      animation: typing 3s steps(30) 1s forwards, blink 0.75s step-end infinite;
+      border-right: 2px solid white; /* Cursor */
     }
 
     /* Deleting animation */
@@ -179,15 +180,20 @@
       }
     }
 
+    .deleting {
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 100%;
+      animation: deleting 2s steps(30) forwards;
+      border-right: 2px solid white; /* Cursor */
+    }
+
     @keyframes deleting {
-      0% {
-        width: 100%;
-      }
       100% {
         width: 0;
       }
     }
-
   </style>
 </head>
 <body>
@@ -201,15 +207,15 @@
   </div>
 
   <div class="center-text" id="asciiText">
-    ...     ..      ..                     .x+=:.              ....      ..                                        
-  x*8888x.:*8888: -"888:     ..           z`    ^%           +^""888h. ~"888h                                      
-  X   48888X `8888H  8888    @L               .   k         8X.  ?8888X  8888f                                      
-X8x.  8888X  8888X  !888  9888i   .dL     .@8Ned8"        '888x  8888X  8888~        u          uL          .u    
-X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x:    us888u.   .ue888Nc..   ud8888.  
-'*888!X8888> X8888  xH8>     888E  888I x88:  `)8b.         `8888 8888X  X88x.  .@88 "8888" d88E`"888E` :888'8888. 
-  `?8 `8888  X888X X888>     888E  888I 8888N=*8888           `*` 8888X '88888X 9888  9888  888E  888E  d888 '88%" 
-  -^  '888"  X888  8888>     888E  888I   @8Wou 9%     .      x8888888X.   "  9888  9888  888E  888E  8888.+"    
-   dx '88~x. !88~  8888>     888E  888I   ^"F     '%888"   ~    888888888!`   "888*""888" *888" 888&   "88888%   
+    ...     ..      ..                     .x+=:.              ....      ..
+    x*8888x.:*8888: -"888:     ..           z`    ^%           +^""888h. ~"888h                                      
+    X   48888X `8888H  8888    @L               .   k         8X.  ?8888X  8888f                                      
+    X8x.  8888X  8888X  !888  9888i   .dL     .@8Ned8"        '888x  8888X  8888~        u          uL          .u    
+    X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x:    us888u.   .ue888Nc..   ud8888.  
+    '*888!X8888> X8888  xH8>     888E  888I x88:  `)8b.         `8888 8888X  X88x.  .@88 "8888" d88E`"888E` :888'8888. 
+    `?8 `8888  X888X X888>     888E  888I 8888N=*8888           `*` 8888X '88888X 9888  9888  888E  888E  d888 '88%" 
+    -^  '888"  X888  8888>     888E  888I   @8Wou 9%     .      x8888888X.   "  9888  9888  888E  888E  8888.+"    
+    dx '88~x. !88~  8888>     888E  888I   ^"F     '%888"   ~    888888888!`   "888*""888" *888" 888&   "88888%   
     "~'    "~        ""            88F                ^*          X888^"""       ^Y"   ^Y'   `"   "888E    "YP'    
                                   98"                             `88f                      .dWi   `88E            
                                 ./"                                88                       4888~  J8%              
@@ -238,59 +244,6 @@ X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x: 
       }
     });
 
-    function createStar() {
-      const star = document.createElement('div');
-      star.classList.add('star');
-      star.style.left = Math.random() * window.innerWidth + 'px';
-      star.style.top = window.innerHeight + Math.random() * 100 + 'px';
-      const size = 2 + Math.random() * 3;
-      star.style.width = size + 'px';
-      star.style.height = size + 'px';
-      const speed = 3 + Math.random() * 5;
-      star.style.animation = `floatUp ${speed}s linear forwards`;
-      const delay = Math.random() * 2;
-      star.style.animationDelay = `${delay}s`;
-      document.body.appendChild(star);
-      setTimeout(() => star.remove(), (speed + delay) * 1000);
-    }
-
-    setInterval(createStar, 150);
-
-    const cursor = document.getElementById('cursor');
-    let mouseX = 0, mouseY = 0;
-    let lastMoveTime = Date.now();
-    let lastTrailTime = 0;
-    const trailDelay = 80;
-
-    document.addEventListener('mousemove', e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursor.style.left = mouseX + 'px';
-      cursor.style.top = mouseY + 'px';
-      lastMoveTime = Date.now();
-    });
-
-    function createTrailStar(x, y) {
-      const star = document.createElement('div');
-      star.classList.add('trail-star');
-      star.style.left = `${x}px`;
-      star.style.top = `${y}px`;
-      star.style.width = '6px';
-      star.style.height = '6px';
-      document.body.appendChild(star);
-      setTimeout(() => star.remove(), 1500);
-    }
-
-    setInterval(() => {
-      if (Date.now() - lastMoveTime < 100) {
-        const now = Date.now();
-        if (now - lastTrailTime >= trailDelay) {
-          createTrailStar(mouseX, mouseY);
-          lastTrailTime = now;
-        }
-      }
-    }, 16);
-
     const texts = [
       'The Best Mic Up Scripter | 2025 |',
       'Premium Out Now!',
@@ -311,12 +264,8 @@ X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x: 
       }, 2000); // Time it takes to delete text
     }
 
-    // Start the initial text animation
-    setTimeout(() => {
-      typingTextElement.textContent = texts[0];
-      typingTextElement.classList.add('typing');
-    }, 500);
-
+    // Set initial text and start text cycling
+    typingTextElement.textContent = texts[textIndex];
     setInterval(changeText, 6000);  // Cycle through text every 6 seconds
   </script>
 </body>
