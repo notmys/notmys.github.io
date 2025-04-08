@@ -75,26 +75,35 @@
       }
     }
 
-    .center-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 14px;
-      color: white;
-      text-align: center;
-      font-family: 'Courier New', monospace;
-      white-space: pre; /* Preserve the spaces and newlines in the ASCII art */
-      text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px rgba(255, 255, 255, 0.5); /* Glowing effect */
-      line-height: 1.4;
-    }
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #0f0f0f;
+  overflow: hidden;
+  height: 100vh;
+  cursor: none;
+  color: white;
+  font-family: monospace;
+}
+
+.center-text {
+  position: absolute;
+  top: 20%; /* Move the ASCII text slightly down from the top */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  white-space: pre; /* Preserve the spaces and newlines in the ASCII art */
+  text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px rgba(255, 255, 255, 0.5); /* Glowing effect */
+  line-height: 1.4;
+}
 
 /* Styling for the Buy Now button */
 .buy-now-btn {
   display: block;
-  margin-top: 40px; /* Add margin to push it below the ASCII art */
-  margin-left: auto;
-  margin-right: auto;
+  margin: 20px auto 20px auto; /* Margin will space out the button */
   padding: 12px 25px;
   font-size: 16px;
   font-weight: bold;
@@ -108,22 +117,24 @@
   transition: all 0.3s ease;
 }
 
-    .buy-now-btn:hover {
-      background-color: transparent;
-      color: #fff;
-      border-color: #fff;
-      transform: translateX(5px);
-    }
+.buy-now-btn:hover {
+  background-color: transparent;
+  color: #fff;
+  border-color: #fff;
+  transform: translateX(5px);
+}
 
-    .buy-now-btn:focus {
-      outline: none;
-    }
+.buy-now-btn:focus {
+  outline: none;
+}
   </style>
 </head>
 <body>
+  <!-- Custom cursor div that will follow the mouse -->
   <div class="custom-cursor" id="cursor"></div>
 
-<div class="center-text" id="asciiText">
+  <!-- ASCII Art Text will be inserted here -->
+  <div class="center-text" id="asciiText">
     ...     ..      ..                     .x+=:.              ....      ..                                      
   x*8888x.:*8888: -"888:     ..           z`    ^%           +^""888h. ~"888h                                     
  X   48888X `8888H  8888    @L               .   k         8X.  ?8888X  8888f                                    
@@ -139,12 +150,7 @@ X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x: 
                                   98"                             `88f                      .dWi   `88E            
                                 ./"                                88                       4888~  J8%             
                                ~`                                  ""                        ^"===*"`              
-</div>
-
-<button class="buy-now-btn" data-sell-store="59557" data-sell-product="290991" data-sell-darkmode="true" data-sell-theme="true">
-  Buy Mys.Premium!
-</button>
-
+  </div>
 
   <button class="buy-now-btn"
     data-sell-store="59557"
