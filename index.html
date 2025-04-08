@@ -163,9 +163,10 @@
       white-space: nowrap;
       overflow: hidden;
       width: 0;
-      animation: typing 3s steps(30) 1s forwards, blink 0.75s step-end infinite;
+      animation: typing 3s steps(30) 1s forwards, blink 0.75s step-end infinite, deleting 2s steps(30) 4s forwards;
     }
 
+    /* Deleting animation */
     @keyframes typing {
       100% {
         width: 100%;
@@ -178,6 +179,15 @@
       }
     }
 
+    @keyframes deleting {
+      0% {
+        width: 100%;
+      }
+      100% {
+        width: 0;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -186,7 +196,7 @@
   <div class="ui-box">
     <img src="https://via.placeholder.com/150" alt="Profile Picture" />
     <h2>Welcome to Mys.fr</h2>
-    <p class="typing">The Best Mic Up Scripter | 2025 |</p>
+    <p id="typingText" class="typing"></p>
     <p>pls buy premium (im broke)</p>
   </div>
 
@@ -199,10 +209,8 @@ X8x.  8888X  8888X  !888  9888i   .dL     .@8Ned8"        '888x  8888X  8888~   
 X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x:    us888u.   .ue888Nc..   ud8888.  
 '*888!X8888> X8888  xH8>     888E  888I x88:  `)8b.         `8888 8888X  X88x.  .@88 "8888" d88E`"888E` :888'8888. 
   `?8 `8888  X888X X888>     888E  888I 8888N=*8888           `*` 8888X '88888X 9888  9888  888E  888E  d888 '88%" 
-  -^  '888"  X888  8888>     888E  888I  %8"    R88          ~`...8888X  "88888 9888  9888  888E  888E  8888.+"    
-   dx '88~x. !88~  8888>     888E  888I   @8Wou 9%     .      x8888888X.   `%8" 9888  9888  888E  888E  8888L      
- .8888Xf.888x:!    X888X.:  x888N><888' .888888P`    .@8c    '%"*8888888h.   "  9888  9888  888& .888E  '8888c. .+ 
-:""888":~"888"     `888*"    "88"  888  `   ^"F     '%888"   ~    888888888!`   "888*""888" *888" 888&   "88888%   
+  -^  '888"  X888  8888>     888E  888I   @8Wou 9%     .      x8888888X.   "  9888  9888  888E  888E  8888.+"    
+   dx '88~x. !88~  8888>     888E  888I   ^"F     '%888"   ~    888888888!`   "888*""888" *888" 888&   "88888%   
     "~'    "~        ""            88F                ^*          X888^"""       ^Y"   ^Y'   `"   "888E    "YP'    
                                   98"                             `88f                      .dWi   `88E            
                                 ./"                                88                       4888~  J8%              
@@ -283,6 +291,28 @@ X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x: 
         }
       }
     }, 16);
+
+    const texts = [
+      'The Best Mic Up Scripter | 2025 |',
+      'Premium Out Now!',
+      'Discord : .mys_fr',
+    ];
+    let textIndex = 0;
+    const typingTextElement = document.getElementById('typingText');
+    
+    function changeText() {
+      typingTextElement.classList.remove('typing');
+      typingTextElement.classList.add('deleting');
+      setTimeout(() => {
+        textIndex = (textIndex + 1) % texts.length;
+        typingTextElement.textContent = '';
+        typingTextElement.classList.remove('deleting');
+        typingTextElement.classList.add('typing');
+        typingTextElement.textContent = texts[textIndex];
+      }, 2000); // Time it takes to delete text
+    }
+
+    setInterval(changeText, 6000);  // Cycle through text every 6 seconds
   </script>
 </body>
 </html>
