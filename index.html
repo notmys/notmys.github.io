@@ -123,13 +123,13 @@
       left: 50%;
       transform: translate(-50%, -50%);
       background-color: #333;
-      padding: 20px;
+      padding: 30px;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(255, 255, 255, 0.7);
       text-align: center;
       color: white;
-      max-width: 80%;
-      min-width: 300px;
+      max-width: 90%;
+      min-width: 350px;  /* Made the box wider */
       animation: floatUpDown 4s ease-in-out infinite;
       text-shadow: 0 0 10px white, 0 0 20px white;
       display: flex;
@@ -157,6 +157,27 @@
       }
     }
 
+    /* Typing animation for text */
+    .typing {
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 3s steps(30) 1s forwards, blink 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      100% {
+        width: 100%;
+      }
+    }
+
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -165,7 +186,7 @@
   <div class="ui-box">
     <img src="https://via.placeholder.com/150" alt="Profile Picture" />
     <h2>Welcome to Mys.fr</h2>
-    <p>The Best Mic Up Scripter | 2025 |</p>
+    <p class="typing">The Best Mic Up Scripter | 2025 |</p>
     <p>pls buy premium (im broke)</p>
   </div>
 
@@ -173,7 +194,7 @@
 
     ...     ..      ..                     .x+=:.              ....      ..                                        
   x*8888x.:*8888: -"888:     ..           z`    ^%           +^""888h. ~"888h                                      
- X   48888X `8888H  8888    @L               .   k         8X.  ?8888X  8888f                                     
+ X   48888X `8888H  8888    @L               .   k         8X.  ?8888X  8888f                                      
 X8x.  8888X  8888X  !888  9888i   .dL     .@8Ned8"        '888x  8888X  8888~        u          uL          .u    
 X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x:    us888u.   .ue888Nc..   ud8888.  
 '*888!X8888> X8888  xH8>     888E  888I x88:  `)8b.         `8888 8888X  X88x.  .@88 "8888" d88E`"888E` :888'8888. 
@@ -184,8 +205,8 @@ X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x: 
 :""888":~"888"     `888*"    "88"  888  `   ^"F     '%888"   ~    888888888!`   "888*""888" *888" 888&   "88888%   
     "~'    "~        ""            88F                ^*          X888^"""       ^Y"   ^Y'   `"   "888E    "YP'    
                                   98"                             `88f                      .dWi   `88E            
-                                ./"                                88                       4888~  J8%             
-                               ~`                                  ""                        ^"===*"`              
+                                ./"                                88                       4888~  J8%              
+                               ~`                                  ""                        ^"===*"`               
   </div>
 
   <button class="buy-now-btn"
