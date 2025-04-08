@@ -117,26 +117,26 @@
       outline: none;
     }
 
-  .ui-box {
-    position: absolute;
-    top: 60%; 
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #333;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.7);
-    text-align: center;
-    color: white;
-    max-width: 90%;
-    min-width: 450px;
-    animation: floatUpDown 4s ease-in-out infinite;
-    text-shadow: 0 0 10px white, 0 0 20px white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
+    .ui-box {
+      position: absolute;
+      top: 60%; 
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #333;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.7);
+      text-align: center;
+      color: white;
+      max-width: 90%;
+      min-width: 450px;
+      animation: floatUpDown 4s ease-in-out infinite;
+      text-shadow: 0 0 10px white, 0 0 20px white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
     
     .ui-box img {
       width: 50px;
@@ -201,10 +201,9 @@
   </div>
 
   <div class="center-text" id="asciiText">
-
     ...     ..      ..                     .x+=:.              ....      ..                                        
   x*8888x.:*8888: -"888:     ..           z`    ^%           +^""888h. ~"888h                                      
- X   48888X `8888H  8888    @L               .   k         8X.  ?8888X  8888f                                      
+  X   48888X `8888H  8888    @L               .   k         8X.  ?8888X  8888f                                      
 X8x.  8888X  8888X  !888  9888i   .dL     .@8Ned8"        '888x  8888X  8888~        u          uL          .u    
 X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x:    us888u.   .ue888Nc..   ud8888.  
 '*888!X8888> X8888  xH8>     888E  888I x88:  `)8b.         `8888 8888X  X88x.  .@88 "8888" d88E`"888E` :888'8888. 
@@ -312,7 +311,13 @@ X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x: 
       }, 2000); // Time it takes to delete text
     }
 
-    setInterval(changeText, 1000);  // Cycle through text every 6 seconds
+    // Start the initial text animation
+    setTimeout(() => {
+      typingTextElement.textContent = texts[0];
+      typingTextElement.classList.add('typing');
+    }, 500);
+
+    setInterval(changeText, 6000);  // Cycle through text every 6 seconds
   </script>
 </body>
 </html>
