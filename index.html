@@ -18,7 +18,7 @@
       font-family: monospace;
       display: flex;
       flex-direction: column;
-      justify-content: space-between; /* Makes sure the content is spread out */
+      justify-content: space-between;
     }
 
     .star, .trail-star {
@@ -83,34 +83,32 @@
       color: white;
       text-align: center;
       font-family: 'Courier New', monospace;
-      white-space: pre; /* Preserve the spaces and newlines in the ASCII art */
-      text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px rgba(255, 255, 255, 0.5); /* Glowing effect */
+      white-space: pre;
+      text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px rgba(255, 255, 255, 0.5);
       line-height: 1.4;
       margin-top: 20px;
       text-align: center;
     }
 
-    /* Styling for the Buy Now button */
     .buy-now-btn {
       display: block;
-      margin: 20px auto 40px auto; /* Adjusted margin to move the button down */
       padding: 12px 25px;
       font-size: 16px;
       font-weight: bold;
-      color: #000;
-      background-color: #fff;
+      color: #fff;
+      background-color: #444; /* Darker button color */
       border: 2px solid #fff;
-      border-radius: 10px; /* Smaller rounded corners */
+      border-radius: 10px;
       cursor: pointer;
-      text-align: center;
       width: auto;
       transition: all 0.3s ease;
+      margin-left: 20px; /* Move the button to the right of the box */
+      margin-top: 20px;
     }
 
     .buy-now-btn:hover {
-      background-color: transparent;
+      background-color: #666; /* Slightly lighter when hovered */
       color: #fff;
-      border-color: #fff;
       transform: translateX(5px);
     }
 
@@ -118,7 +116,6 @@
       outline: none;
     }
 
-    /* Styling for the UI Box */
     .ui-box {
       position: absolute;
       top: 50%;
@@ -132,53 +129,69 @@
       color: white;
       max-width: 80%;
       min-width: 300px;
-      animation: floatUpDown 4s ease-in-out infinite; /* Added floating animation */
-      text-shadow: 0 0 10px white, 0 0 20px white; /* Glow effect */
+      animation: floatUpDown 4s ease-in-out infinite;
+      text-shadow: 0 0 10px white, 0 0 20px white;
+      display: flex;
+      align-items: center; /* To align the profile picture and text */
+      justify-content: center;
+      flex-direction: column;
     }
 
-    /* Floating animation for the UI box */
+    .ui-box img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
     @keyframes floatUpDown {
       0% {
         transform: translate(-50%, -50%) translateY(0);
       }
       50% {
-        transform: translate(-50%, -50%) translateY(-15px); /* Move slightly up */
+        transform: translate(-50%, -50%) translateY(-15px);
       }
       100% {
-        transform: translate(-50%, -50%) translateY(0); /* Return to center */
+        transform: translate(-50%, -50%) translateY(0); 
+      }
+    }
+
+    .typing {
+      display: inline-block;
+      font-size: 18px;
+      color: white;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 3s steps(30) forwards, blink 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      to {
+        width: 100%;
+      }
+    }
+
+    @keyframes blink {
+      50% {
+        border-color: transparent;
       }
     }
 
   </style>
 </head>
 <body>
-  <!-- Custom cursor div that will follow the mouse -->
   <div class="custom-cursor" id="cursor"></div>
 
-  <!-- UI Box in the center -->
   <div class="ui-box">
+    <img src="https://via.placeholder.com/150" alt="Profile Picture" />
     <h2>Welcome to Mys.fr</h2>
-    <p>The Best Mic Up Scripter | 2025 |</p>
-    <p>pls buy premium (im broke)</p>
-  </div>
-
-  <!-- ASCII Art Text will be inserted here -->
-  <div class="center-text" id="asciiText">
-    ...     ..      ..                     .x+=:.              ....      ..                                      
-  x*8888x.:*8888: -"888:     ..           z`    ^%           +^""888h. ~"888h                                     
- X   48888X `8888H  8888    @L               .   k         8X.  ?8888X  8888f                                    
- X8x.  8888X  8888X  !888  9888i   .dL     .@8Ned8"        '888x  8888X  8888~        u          uL          .u    
-  X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x:    us888u.   .ue888Nc..   ud8888.  
-  '*888!X8888> X8888  xH8>     888E  888I x88:  `)8b.         `8888 8888X  X88x.  .@88 "8888" d88E`"888E` :888'8888. 
-  `?8 `8888  X888X X888>     888E  888I 8888N=*8888           `*` 8888X '88888X 9888  9888  888E  888E  d888 '88%" 
-  -^  '888"  X888  8888>     888E  888I  %8"    R88          ~`...8888X  "88888 9888  9888  888E  888E  8888.+"    
-   dx '88~x. !88~  8888>     888E  888I   @8Wou 9%     .      x8888888X.   `%8" 9888  9888  888E  888E  8888L      
- .8888Xf.888x:!    X888X.:  x888N><888' .888888P`    .@8c    '%"*8888888h.   "  9888  9888  888& .888E  '8888c. .+ 
-:""888":~"888"     `888*"    "88"  888  `   ^"F     '%888"   ~    888888888!`   "888*""888" *888" 888&   "88888%   
-    "~'    "~        ""            88F                ^*          X888^"""       ^Y"   ^Y'   `"   "888E    "YP'    
-                                  98"                             `88f                      .dWi   `88E            
-                                ./"                                88                       4888~  J8%             
-                               ~`                                  ""                        ^"===*"`              
+    <div id="typingText">
+      <span class="typing">The Best Mic Up 🔊 Scripter | 2025 |</span>
+    </div>
+    <div id="additionalText" style="margin-top: 10px;">
+      <span class="typing">pls buy premium (im broke)</span>
+    </div>
   </div>
 
   <button class="buy-now-btn"
@@ -221,7 +234,6 @@
 
     setInterval(createStar, 150);
 
-    // Cursor trail setup
     const cursor = document.getElementById('cursor');
     let mouseX = 0, mouseY = 0;
     let lastMoveTime = Date.now();
@@ -247,7 +259,6 @@
       setTimeout(() => star.remove(), 1500);
     }
 
-    // Only emit trail stars at intervals while moving
     setInterval(() => {
       if (Date.now() - lastMoveTime < 100) {
         const now = Date.now();
