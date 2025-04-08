@@ -92,23 +92,24 @@
 
     .buy-now-btn {
       display: block;
+      margin: 20px auto 40px auto;
       padding: 12px 25px;
       font-size: 16px;
       font-weight: bold;
-      color: #fff;
-      background-color: #444; /* Darker button color */
+      color: #000;
+      background-color: #fff;
       border: 2px solid #fff;
       border-radius: 10px;
       cursor: pointer;
+      text-align: center;
       width: auto;
       transition: all 0.3s ease;
-      margin-left: 20px; /* Move the button to the right of the box */
-      margin-top: 20px;
     }
 
     .buy-now-btn:hover {
-      background-color: #666; /* Slightly lighter when hovered */
+      background-color: transparent;
       color: #fff;
+      border-color: #fff;
       transform: translateX(5px);
     }
 
@@ -132,7 +133,7 @@
       animation: floatUpDown 4s ease-in-out infinite;
       text-shadow: 0 0 10px white, 0 0 20px white;
       display: flex;
-      align-items: center; /* To align the profile picture and text */
+      align-items: center;
       justify-content: center;
       flex-direction: column;
     }
@@ -156,28 +157,6 @@
       }
     }
 
-    .typing {
-      display: inline-block;
-      font-size: 18px;
-      color: white;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      animation: typing 3s steps(30) forwards, blink 0.75s step-end infinite;
-    }
-
-    @keyframes typing {
-      to {
-        width: 100%;
-      }
-    }
-
-    @keyframes blink {
-      50% {
-        border-color: transparent;
-      }
-    }
-
   </style>
 </head>
 <body>
@@ -186,12 +165,22 @@
   <div class="ui-box">
     <img src="https://via.placeholder.com/150" alt="Profile Picture" />
     <h2>Welcome to Mys.fr</h2>
-    <div id="typingText">
-      <span class="typing">The Best Mic Up 🔊 Scripter | 2025 |</span>
-    </div>
-    <div id="additionalText" style="margin-top: 10px;">
-      <span class="typing">pls buy premium (im broke)</span>
-    </div>
+    <p>The Best Mic Up Scripter | 2025 |</p>
+    <p>pls buy premium (im broke)</p>
+  </div>
+
+  <div class="center-text" id="asciiText">
+    ...     ..      ..                     .x+=:.              ....      ..                                       x*8888x.:*8888: -"888:     ..           z`    ^%           +^""888h. ~"888h                                  
+    X   48888X `8888H  8888    @L               .   k         8X.  ?8888X  8888f                                    
+    X8x.  8888X  8888X  !888  9888i   .dL     .@8Ned8"        '888x  8888X  8888~        u          uL          .u    
+    X8888 X8888  88888   "*8%- `Y888k:*888.  .@^%8888"         '88888 8888X   "88x:    us888u.   .ue888Nc..   ud8888.  
+    '*888!X8888> X8888  xH8>     888E  888I x88:  `)8b.         `8888 8888X  X88x.  .@88 "8888" d88E`"888E` :888'8888. 
+    `?8 `8888  X888X X888>     888E  888I 8888N=*8888           `*` 8888X '88888X 9888  9888  888E  888E  d888 '88%" 
+    -^  '888"  X888  8888>     888E  888I  %8"    R88          ~`...8888X  "88888 9888  9888  888E  888E  8888.+"    
+    dx '88~x. !88~  8888>     888E  888I   @8Wou 9%     .      x8888888X.   "  9888  9888  888E  888E  8888L      
+    .8888Xf.888x:!    X888X.:  x888N><888' .888888P`    .@8c    '%"*8888888h.   "  9888  9888  888& .888E  '8888c. .+ 
+    :" "888":~"888"     `888*"    "88"  888  `   ^"F     '%888"   ~    888888888!`   "888*""888" *888" 888&   "88888%   
+    "~'    "~        ""            88F                ^*          X888^"""       ^Y"   ^Y'   `"   "888E    "YP'    
   </div>
 
   <button class="buy-now-btn"
