@@ -12,8 +12,9 @@
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f3f4f6;
+      font-family: 'Courier New', monospace;
+      background: #000;
+      color: #eee;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -21,39 +22,80 @@
       min-height: 100vh;
       text-align: center;
       padding: 20px;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    .ascii {
+      white-space: pre;
+      color: #0ff;
+      text-shadow: 0 0 5px #0ff, 0 0 15px #0ff;
+      animation: glow 2s infinite alternate ease-in-out;
+      margin-bottom: 30px;
     }
 
     h1 {
-      font-size: 3rem;
-      color: #111827;
+      font-size: 2rem;
+      color: #eee;
     }
 
     p {
-      margin-top: 10px;
-      font-size: 1.2rem;
-      color: #4b5563;
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-bottom: 30px;
     }
 
     a {
-      margin-top: 30px;
-      display: inline-block;
       padding: 12px 30px;
-      background: #4f46e5;
-      color: #ffffff;
+      background: #0ff;
+      color: #000;
       border-radius: 8px;
       text-decoration: none;
-      font-weight: 500;
-      transition: background 0.3s;
+      font-weight: bold;
+      transition: transform 0.3s, background 0.3s;
     }
 
     a:hover {
-      background: #4338ca;
+      background: #00cccc;
+      transform: scale(1.05);
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+      }
+      to {
+        text-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
 <body>
+  <div class="ascii">
+    <pre>
+
+ ▄▀▀▄ ▄▀▄  ▄▀▀▄ ▀▀▄  ▄▀▀▀▀▄      ▄▀▀█▄▄   ▄▀▀█▀▄    ▄▀▀▄ ▀▄ 
+█  █ ▀  █ █   ▀▄ ▄▀ █ █   ▐     ▐ ▄▀   █ █   █  █  █  █ █ █ 
+▐  █    █ ▐     █      ▀▄         █▄▄▄▀  ▐   █  ▐  ▐  █  ▀█ 
+  █    █        █   ▀▄   █        █   █      █       █   █  
+▄▀   ▄▀       ▄▀     █▀▀▀        ▄▀▄▄▄▀   ▄▀▀▀▀▀▄  ▄▀   █   
+█    █        █      ▐          █    ▐   █       █ █    ▐   
+▐    ▐        ▐                 ▐        ▐       ▐ ▐        
+    </pre>
+  </div>
+
   <h1>Welcome to My Website</h1>
-  <p>This is the home page. Click below to get started.</p>
+  <p>This is the home page. Click below to enter.</p>
   <a href="register.html">Go to Register Page</a>
 </body>
 </html>
