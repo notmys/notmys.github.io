@@ -110,19 +110,30 @@
         opacity: 0;
       }
     }
+
+    /* Online user count box */
+    #onlineCount {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      color: #f87171;
+      font-size: 1rem;
+      z-index: 2;
+    }
   </style>
 </head>
 <body>
   <canvas id="stars"></canvas>
+
   <div class="content">
     <div class="ascii">
       <pre>
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⡒⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡖⠁⣸⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣧⠈⢳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡟⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡄⠀⢹⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡿⠀⠀⢠⡗⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⢻⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⠁⠀⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠈⣯⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀⢠⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀⠹⡒⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡖⠁⣸⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀  Mys.Bin⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⣧⠈⢳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡟⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⢻⡄⠀⢹⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡿⠀⠀⢠⡗⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⢸⡇⠀⠀⢻⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⠁⠀⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⢸⡇⠀⠀⠈⣯⠀⠀⠀    ⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⡞⠀⠀⠀⠈⢻⡀⠀⠀⠀⠀⠀⣀⣤⡴⠶⠞⠛⠛⠛⠛⠛⠻⠶⢶⣤⣀⠀⠀⠀⠀⠀⠀⣿⠃⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠘⣷⡀⠀⣀⡴⢛⡉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⡛⢦⣄⠀⠀⣼⠇⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⢰⡀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠈⠳⣾⣭⢤⣄⠘⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⢀⡤⣈⣷⠞⠃⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⡄⠀⠀⠀⠀⠀⠀
@@ -148,108 +159,78 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
       </pre>
     </div>
-    <h1>Welcome to My Website</h1>
-    <p>This is the home page. Click below to enter.</p>
+
+    <h1>Welcome to MysBin!</h1>
+    <p>Your one-stop destination for all things cool and creative. Explore and enjoy the vibe!</p>
+
+    <!-- Go to Register Page Button -->
     <a href="register.html">Go to Register Page</a>
+
+    <div id="onlineCount">Users Online: 45</div>
   </div>
 
-  <!-- Online user count box -->
-  <div id="onlineCount" style="position:fixed;bottom:10px;right:10px;color:#f87171;font-size:1rem;z-index:2;">
-    Users online: ...
-  </div>
-
-  <!-- Firebase script -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-    import { getDatabase, ref, push, onDisconnect, onValue, set } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAgCwv7vvlSNgH-CzGBtZUHq3Fr2ybHsDk",
-      authDomain: "mysbin-5802b.firebaseapp.com",
-      databaseURL: "https://mysbin-5802b-default-rtdb.firebaseio.com",
-      projectId: "mysbin-5802b",
-      storageBucket: "mysbin-5802b.firebasestorage.app",
-      messagingSenderId: "544115615080",
-      appId: "1:544115615080:web:28cef832beccbe70bfe2dd",
-      measurementId: "G-VHZ5B2QRPW"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    const onlineRef = ref(db, "onlineUsers");
-    const myRef = push(onlineRef);
-    set(myRef, true);
-    onDisconnect(myRef).remove();
-
-    onValue(onlineRef, snapshot => {
-      const count = snapshot.size;
-      document.getElementById("onlineCount").innerText = `Users online: ${count}`;
-    });
-  </script>
-
-  <!-- Canvas + Particle effect -->
   <script>
-    document.addEventListener("mousemove", (e) => {
-      for (let i = 0; i < 3; i++) {
-        const particle = document.createElement("div");
-        particle.classList.add("particle");
-        document.body.appendChild(particle);
-
-        const size = Math.random() * 6 + 2;
-        particle.style.width = particle.style.height = size + "px";
-        particle.style.left = e.pageX + Math.random() * 10 - 5 + "px";
-        particle.style.top = e.pageY + Math.random() * 10 - 5 + "px";
-
-        setTimeout(() => {
-          particle.remove();
-        }, 1000);
-      }
-    });
-
+    // Particles effect
     const canvas = document.getElementById('stars');
     const ctx = canvas.getContext('2d');
-    let w, h;
-    let stars = [];
 
-    function resize() {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+    // Set canvas size to full screen
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+
+    function Particle() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 3 + 1;
+      this.speedX = Math.random() * 0.5 - 0.25;
+      this.speedY = Math.random() * 0.5 - 0.25;
     }
 
-    function createStars(count) {
-      stars = [];
-      for (let i = 0; i < count; i++) {
-        stars.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          radius: Math.random() * 1.5 + 0.5,
-          speed: Math.random() * 0.5 + 0.2,
-        });
-      }
-    }
+    Particle.prototype.update = function () {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      
+      if (this.size > 0.2) this.size -= 0.1;
+      
+      if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+      if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+    };
 
-    function animateStars() {
-      ctx.clearRect(0, 0, w, h);
+    Particle.prototype.draw = function () {
       ctx.fillStyle = '#ff4b4b';
-      stars.forEach(star => {
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fill();
-        star.y += star.speed;
-        if (star.y > h) star.y = 0;
-      });
-      requestAnimationFrame(animateStars);
+      ctx.strokeStyle = '#ff4b4b';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.fill();
+    };
+
+    function createParticles() {
+      particles.push(new Particle());
     }
 
-    window.addEventListener('resize', () => {
-      resize();
-      createStars(100);
-    });
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    resize();
-    createStars(100);
-    animateStars();
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
+
+      requestAnimationFrame(animateParticles);
+    }
+
+    setInterval(createParticles, 100);
+    animateParticles();
+
+    // Responsive Canvas resizing
+    window.addEventListener('resize', function () {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
   </script>
 </body>
 </html>
