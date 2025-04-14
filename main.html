@@ -66,22 +66,7 @@
 
   <div class="content">
     <div class="ascii">
-    ...     ..      ..                    .                         ....      ..                                        
-  x*8888x.:*8888: -"888:                 @88>                     +^""888h. ~"888h                                      
- X   48888X `8888H  8888                 %8P      u.    u.       8X.  ?8888X  8888f                                     
-X8x.  8888X  8888X  !888>        u        .     x@88k u@88c.    '888x  8888X  8888~        u          uL          .u    
-X8888 X8888  88888   "*8%-    us888u.   .@88u  ^"8888""8888"    '88888 8888X   "88x:    us888u.   .ue888Nc..   ud8888.  
-'*888!X8888> X8888  xH8>   .@88 "8888" ''888E`   8888  888R      `8888 8888X  X88x.  .@88 "8888" d88E`"888E` :888'8888. 
-  `?8 `8888  X888X X888>   9888  9888    888E    8888  888R        `*` 8888X '88888X 9888  9888  888E  888E  d888 '88%" 
-  -^  '888"  X888  8888>   9888  9888    888E    8888  888R       ~`...8888X  "88888 9888  9888  888E  888E  8888.+"    
-   dx '88~x. !88~  8888>   9888  9888    888E    8888  888R        x8888888X.   `%8" 9888  9888  888E  888E  8888L      
- .8888Xf.888x:!    X888X.: 9888  9888    888&   "*88*" 8888"      '%"*8888888h.   "  9888  9888  888& .888E  '8888c. .+ 
-:""888":~"888"     `888*"  "888*""888"   R888"    ""   'Y"        ~    888888888!`   "888*""888" *888" 888&   "88888%   
-    "~'    "~        ""     ^Y"   ^Y'     ""                           X888^"""       ^Y"   ^Y'   `"   "888E    "YP'    
-                                                                       `88f                      .dWi   `88E            
-                                                                        88                       4888~  J8%             
-                                                                        ""                        ^"===*"`              
-
+      <!-- ASCII Art Here -->
     </div>
 
     <h1>Welcome to MysBin</h1>
@@ -94,8 +79,8 @@ X8888 X8888  88888   "*8%-    us888u.   .@88u  ^"8888""8888"    '88888 8888X   "
     function createPaste() {
       // Generate a unique paste number (for demonstration, use random number)
       const pasteNumber = Math.floor(Math.random() * 10000);
-      // Redirect to the new paste page
-      window.location.href = `https://notmys.github.io/${pasteNumber}`;
+      // Redirect to the new paste page with query parameter
+      window.location.href = `paste.html?paste=${pasteNumber}`;
     }
   </script>
 </body>
