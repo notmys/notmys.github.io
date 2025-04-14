@@ -20,6 +20,17 @@
       height: 100vh;
     }
 
+    /* Video background */
+    #video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
     canvas {
       position: fixed;
       top: 0;
@@ -123,114 +134,44 @@
   </style>
 </head>
 <body>
-  <canvas id="stars"></canvas>
+  <!-- Video background (using provided video URL) -->
+  <video id="video-background" autoplay muted loop>
+    <source src="https://rr5---sn-p5qddn7k.googlevideo.com/videoplayback?expire=1744632971&ei=K6j8Z7HYFsaKkucP7e2VyQc&ip=2a13%3A55c0%3Af286%3Aad0b%3A1760%3A9694%3Afd05%3A8898&id=o-AEnhuI4aRo5KBt5Z9EkirHR1AlAvLMEFfRMZy5tQ2b51&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&rms=au%2Cau&bui=AccgBcOP2t-4yhxBGsfmtMJ8V0CPT2iULhQ7gZvcWCjNHQnyRL0P18rf54TJPFirpdszWiIFrw1CHtWa&vprv=1&svpuc=1&mime=video%2Fmp4&ns=QfvVaXZhVnOFMEG-ShTVdIgQ&rqh=1&gir=yes&clen=1676601&ratebypass=yes&dur=20.456&lmt=1731725999262429&lmw=1&c=TVHTML5&sefc=1&txp=5309224&n=GYxhheFs2yttgg&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cvprv%2Csvpuc%2Cmime%2Cns%2Crqh%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AJfQdSswRAIgZrKw79QTV-5G4ThoSg1vuATVWEnvdeHsTz7mvfb8huQCIDoZ0FTu9lV-cz86TakNL5PYqKs8TyUIt5Ko_0AvUxSQ&title=playboi-carti-evil-jordan-vfx-edit-ytshorts.savetube.me&redirect_counter=1&rm=sn-o09se7s&rrc=104&fexp=24350590,24350737,24350827,24350961,24351063,24351173,24351229,24351494,24351523,24351528,24351545,24351597,24351606,24351637&req_id=520ab78113ffa3ee&cms_redirect=yes&ipbypass=yes&met=1744611377,&mh=-H&mip=2603:6011:9c00:8811:c8ec:5a63:aef4:1cbf&mm=31&mn=sn-p5qddn7k&ms=au&mt=1744610941&mv=m&mvi=5&pl=38&lsparams=ipbypass,met,mh,mip,mm,mn,ms,mv,mvi,pl,rms&lsig=ACuhMU0wRgIhAIKfBLxmdOI-A_fxOCQLmLajdnkX0TkZ-KHGPOiSTWX3AiEAhfSwIi9uiYzFYlJD0CyLDvY1He5QH_plVEI4kJy53Sg%3D" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Audio from video -->
+  <audio id="video-audio" autoplay loop>
+    <source src="https://rr5---sn-p5qddn7k.googlevideo.com/videoplayback?expire=1744632971&ei=K6j8Z7HYFsaKkucP7e2VyQc&ip=2a13%3A55c0%3Af286%3Aad0b%3A1760%3A9694%3Afd05%3A8898&id=o-AEnhuI4aRo5KBt5Z9EkirHR1AlAvLMEFfRMZy5tQ2b51&itag=140&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&rms=au%2Cau&bui=AccgBcOP2t-4yhxBGsfmtMJ8V0CPT2iULhQ7gZvcWCjNHQnyRL0P18rf54TJPFirpdszWiIFrw1CHtWa&vprv=1&svpuc=1&mime=audio%2Fmp4&ns=QfvVaXZhVnOFMEG-ShTVdIgQ&rqh=1&gir=yes&clen=1676601&ratebypass=yes&dur=20.456&lmt=1731725999262429&lmw=1&c=TVHTML5&sefc=1&txp=5309224&n=GYxhheFs2yttgg&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cvprv%2Csvpuc%2Cmime%2Cns%2Crqh%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AJfQdSswRAIgZrKw79QTV-5G4ThoSg1vuATVWEnvdeHsTz7mvfb8huQCIDoZ0FTu9lV-cz86TakNL5PYqKs8TyUIt5Ko_0AvUxSQ&title=playboi-carti-evil-jordan-vfx-edit-ytshorts.savetube.me&redirect_counter=1&rm=sn-o09se7s&rrc=104&fexp=24350590,24350737,24350827,24350961,24351063,24351173,24351229,24351494,24351523,24351528,24351545,24351597,24351606,24351637&req_id=520ab78113ffa3ee&cms_redirect=yes&ipbypass=yes&met=1744611377,&mh=-H&mip=2603:6011:9c00:8811:c8ec:5a63:aef4:1cbf&mm=31&mn=sn-p5qddn7k&ms=au&mt=1744610941&mv=m&mvi=5&pl=38&lsparams=ipbypass,met,mh,mip,mm,mn,ms,mv,mvi,pl,rms&lsig=ACuhMU0wRgIhAIKfBLxmdOI-A_fxOCQLmLajdnkX0TkZ-KHGPOiSTWX3AiEAhfSwIi9uiYzFYlJD0CyLDvY1He5QH_plVEI4kJy53Sg%3D" type="audio/mp4">
+    Your browser does not support the audio tag.
+  </audio>
 
   <div class="content">
-    <div class="ascii">
-      <pre>
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⢠⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀ ⠹⡒⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡖⠁⣸⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀  Mys.Bin⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⣧⠈⢳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡟⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⢻⡄⠀⢹⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡿⠀⠀⢠⡗⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⢸⡇⠀⠀⢻⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    ⠀⣾⠁⠀⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    ⢸⡇⠀⠀⠈⣯⠀⠀⠀    ⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⡞⠀⠀⠀⠈⢻⡀⠀⠀⠀⠀⠀⣀⣤⡴⠶⠞⠛⠛⠛⠛⠛⠻⠶⢶⣤⣀⠀⠀⠀⠀⠀⠀⣿⠃⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠘⣷⡀⠀⣀⡴⢛⡉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⡛⢦⣄⠀⠀⣼⠇⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢰⡀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠈⠳⣾⣭⢤⣄⠘⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⢀⡤⣈⣷⠞⠃⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⡄⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢸⢷⡀⠀⠈⣿⠀⠀⠀⠀⠀⠀⠀⠀⠈⢉⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡍⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠃⠀⠀⡜⡇⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠈⣇⠱⣄⠀⠸⣧⠀⠀⠀⠀⠀⠄⣀⣀⣼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢷⣀⣀⠠⠀⠀⠀⠀⠀⣰⠇⠀⢀⠞⢰⠃⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⢿⠀⠈⢦⡀⠘⢷⣄⠀⢀⣀⡀⣀⡼⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢷⣀⣀⡀⢀⠀⣠⡼⠋⢀⡴⠁⠀⣹⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠸⡄⠑⡀⠉⠢⣀⣿⠛⠒⠛⠛⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠛⠒⠋⢻⣀⠴⠋⢀⠄⢀⡇⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⢣⠀⠈⠲⢄⣸⡇⠀⠀⠀⠠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢔⠀⠀⠀⠘⣏⣀⠔⠁⠂⡸⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠘⡄⠀⠀⠀⠉⢻⡄⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡾⠋⠀⠀⠀⢠⠇⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢶⠀⠀⠀⢀⡿⠀⠤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡠⠤⠀⢾⡀⠀⠀⠀⡴⠎⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢦⡀⣸⠇⠀⠀⠀⠈⠹⡑⠲⠤⣀⡀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⣀⡤⠖⢊⠍⠃⠀⠀⠀⠘⣧⢀⡤⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⣿⠀⠀⠀⠀⠀⠀⠈⠒⢤⠤⠙⠗⠦⠼⠀⠀⠀⠠⠴⠺⠟⠤⡤⠔⠁⠀⠀⠀⠀⠀⠀⢸⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢳⣄⠀⠀⡑⢯⡁⠀⠀⠀⠀⠀⠇⠀⠀⠀⠰⠀⠀⠀⠀⠀⢈⡩⢋⠀⠀⢠⡾⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡆⠀⠈⠀⠻⢦⠀⠀⠀⡰⠀⠀⠀⠀⠀⢇⠀⠀⠀⡠⡛⠀⠁⠀⢰⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣇⠀⠀⠀⠀⢡⠑⠤⣀⠈⢢⠀⠀⠀⡴⠃⣀⠤⠊⡄⠀⠀⠀⠀⢸⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢶⣄⠀⠀⠀⠳⠀⢀⠉⠙⢳⠀⡜⠉⠁⡀⠀⠼⠀⠀⠀⣠⡴⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣦⠀⠘⣆⠐⠐⠌⠂⠚⠀⠡⠊⠀⢠⠃⠀⣠⠞⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣧⠠⠈⠢⣄⡀⠀⠀⠀⢀⣀⠴⠃⠀⣴⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢦⡁⠐⠀⠈⠉⠁⠈⠁⠀⠒⢀⡴⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣦⠀⠀⠀⠀⠀⠀⠀⣰⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢧⣄⣀⣀⣀⣀⣼⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-      </pre>
-    </div>
+    <pre class="ascii">ASCII ART</pre>
+    <h1>Welcome to MysBin</h1>
+    <p>Stay ahead with the latest content in style.</p>
+    <a href="#">Explore More</a>
+  </div>
 
-    <h1>Welcome to Mys.Bin</h1>
-    <p>Upload, Share, Chat, Recieve, Display.</p>
-
-    <!-- Go to Register Page Button -->
-    <a href="register.html">Go to Register Page</a>
-
-    <div id="onlineCount">Users Online: ?</div>
+  <!-- Online count box -->
+  <div id="onlineCount">
+    Users Online: ?
   </div>
 
   <script>
-    // Particles effect
-    const canvas = document.getElementById('stars');
-    const ctx = canvas.getContext('2d');
-
-    // Set canvas size to full screen
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particles = [];
-
-    function Particle() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 3 + 1;
-      this.speedX = Math.random() * 0.5 - 0.25;
-      this.speedY = Math.random() * 0.5 - 0.25;
-    }
-
-    Particle.prototype.update = function () {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      
-      if (this.size > 0.2) this.size -= 0.1;
-      
-      if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
-      if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
-    };
-
-    Particle.prototype.draw = function () {
-      ctx.fillStyle = '#ff4b4b';
-      ctx.strokeStyle = '#ff4b4b';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.closePath();
-      ctx.fill();
-    };
-
-    function createParticles() {
-      particles.push(new Particle());
-    }
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
-      }
-
-      requestAnimationFrame(animateParticles);
-    }
-
-    setInterval(createParticles, 100);
-    animateParticles();
-
-    // Responsive Canvas resizing
-    window.addEventListener('resize', function () {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    // Particle effect for interactivity
+    document.body.addEventListener('mousemove', function (event) {
+      let particle = document.createElement('div');
+      particle.classList.add('particle');
+      particle.style.left = `${event.clientX}px`;
+      particle.style.top = `${event.clientY}px`;
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 1000);
     });
+
+    // Ensure audio and video are synced
+    document.getElementById('video-background').play();
+    document.getElementById('video-audio').play();
   </script>
 </body>
 </html>
