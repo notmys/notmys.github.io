@@ -5,28 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Website - Home</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      padding: 50px;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
       text-align: center;
+      padding: 20px;
     }
+
+    h1 {
+      font-size: 3rem;
+      color: #111827;
+    }
+
+    p {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: #4b5563;
+    }
+
     a {
+      margin-top: 30px;
       display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #4caf50;
-      color: white;
-      text-decoration: none;
+      padding: 12px 30px;
+      background: #4f46e5;
+      color: #ffffff;
       border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.3s;
     }
+
     a:hover {
-      background-color: #45a049;
+      background: #4338ca;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to My Website!</h1>
-  <p>This is the home page.</p>
+  <h1>Welcome to My Website</h1>
+  <p>This is the home page. Click below to get started.</p>
   <a href="register.html">Go to Register Page</a>
 </body>
 </html>
