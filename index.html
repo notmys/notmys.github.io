@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Website - Home</title>
   <style>
     * {
@@ -14,42 +14,53 @@
     body {
       font-family: 'Courier New', monospace;
       background: #000;
-      color: #eee;
-      min-height: 100vh;
-      padding: 40px 20px;
+      color: #ff4b4b;
       overflow: hidden;
       position: relative;
+      height: 100vh;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 60px 20px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      animation: fadeIn 1.5s ease-in;
     }
 
     .ascii {
       white-space: pre;
-      color: #0ff;
-      text-shadow: 0 0 5px #0ff, 0 0 15px #0ff;
+      color: #ff4b4b;
+      text-shadow: 0 0 5px #ff4b4b, 0 0 15px #ff4b4b;
       animation: glow 2s infinite alternate ease-in-out;
       margin-bottom: 20px;
-      text-align: center;
     }
 
     h1 {
       font-size: 2rem;
-      color: #eee;
-      text-align: center;
-      margin-top: 20px;
+      color: #ff4b4b;
+      margin: 20px 0;
     }
 
     p {
       font-size: 1.1rem;
-      color: #ccc;
-      text-align: center;
+      color: #f87171;
       margin-bottom: 30px;
     }
 
     a {
-      display: block;
-      width: fit-content;
-      margin: 0 auto;
       padding: 12px 30px;
-      background: #0ff;
+      background: #ff4b4b;
       color: #000;
       border-radius: 8px;
       text-decoration: none;
@@ -58,25 +69,35 @@
     }
 
     a:hover {
-      background: #00cccc;
+      background: #cc3b3b;
       transform: scale(1.05);
     }
 
     @keyframes glow {
       from {
-        text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+        text-shadow: 0 0 10px #ff4b4b;
       }
       to {
-        text-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
+        text-shadow: 0 0 20px #ff4b4b, 0 0 40px #ff4b4b;
       }
     }
 
-    /* Particle Style */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .particle {
       position: absolute;
       width: 5px;
       height: 5px;
-      background: #0ff;
+      background: #ff4b4b;
       border-radius: 50%;
       pointer-events: none;
       opacity: 0.7;
@@ -92,8 +113,10 @@
   </style>
 </head>
 <body>
-  <div class="ascii">
-    <pre>
+  <canvas id="stars"></canvas>
+  <div class="content">
+    <div class="ascii">
+      <pre>
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⡒⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡖⠁⣸⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣧⠈⢳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -123,15 +146,15 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣦⠀⠀⠀⠀⠀⠀⠀⣰⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢧⣄⣀⣀⣀⣀⣼⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-    </pre>
+      </pre>
+    </div>
+    <h1>Welcome to My Website</h1>
+    <p>This is the home page. Click below to enter.</p>
+    <a href="register.html">Go to Register Page</a>
   </div>
 
-  <h1>Welcome to My Website</h1>
-  <p>This is the home page. Click below to enter.</p>
-  <a href="register.html">Go to Register Page</a>
-
   <script>
-    // Particle trail effect
+    // Particle Trail
     document.addEventListener("mousemove", (e) => {
       for (let i = 0; i < 3; i++) {
         const particle = document.createElement("div");
@@ -148,6 +171,51 @@
         }, 1000);
       }
     });
+
+    // Floating Stars Background
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let w, h;
+    let stars = [];
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+
+    function createStars(count) {
+      stars = [];
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          radius: Math.random() * 1.5 + 0.5,
+          speed: Math.random() * 0.5 + 0.2,
+        });
+      }
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = '#ff4b4b';
+      stars.forEach(star => {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fill();
+        star.y += star.speed;
+        if (star.y > h) star.y = 0;
+      });
+      requestAnimationFrame(animateStars);
+    }
+
+    window.addEventListener('resize', () => {
+      resize();
+      createStars(100);
+    });
+
+    resize();
+    createStars(100);
+    animateStars();
   </script>
 </body>
 </html>
