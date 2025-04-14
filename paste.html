@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mys Bin - Create Paste</title>
+  <style>
+    /* Your existing styles */
+    body {
+      font-family: 'Courier New', monospace;
+      background: #000;
+      color: #ff4b4b;
+      overflow: hidden;
+      position: relative;
+      height: 100vh;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 60px 20px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #ff4b4b;
+      margin: 20px 0;
+    }
+
+    textarea {
+      padding: 15px;
+      border: 1px solid #ff4b4b;
+      border-radius: 8px;
+      background: #1a1a1a;
+      color: #ff4b4b;
+      width: 80%;
+      height: 200px;
+      font-size: 1rem;
+      outline: none;
+      resize: none;
+    }
+
+    button {
+      padding: 12px;
+      background: #ff4b4b;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    button:hover {
+      background: #cc3b3b;
+      transform: scale(1.05);
+    }
+
+    a {
+      color: #f87171;
+      text-decoration: none;
+      margin-top: 20px;
+      display: inline-block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1>Create Your Paste</h1>
+    <textarea placeholder="Enter your paste content here..."></textarea>
+    <button onclick="savePaste()">Save Paste</button>
+    <a href="/">← Back to Home</a>
+  </div>
+
+  <script>
+    // Function to save paste content (simulating saving action)
+    function savePaste() {
+      const content = document.querySelector('textarea').value;
+      if(content) {
+        alert('Your paste has been saved!');
+        // Simulate saving logic, e.g., sending to a server.
+      } else {
+        alert('Please enter some content before saving.');
+      }
+    }
+  </script>
+</body>
+</html>
