@@ -12,27 +12,31 @@
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f3f4f6;
+      font-family: 'Courier New', monospace;
+      background: #000;
+      color: #eee;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
       padding: 20px;
+      animation: fadeIn 1.5s ease-in;
     }
 
     h1 {
       font-size: 2.5rem;
       margin-bottom: 20px;
-      color: #111827;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+      animation: glow 2s infinite alternate ease-in-out;
     }
 
     form {
-      background: #ffffff;
+      background: #111;
       padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
       width: 100%;
       max-width: 400px;
       display: flex;
@@ -42,46 +46,71 @@
 
     input {
       padding: 12px;
-      border: 1px solid #d1d5db;
+      border: 1px solid #333;
       border-radius: 8px;
       font-size: 1rem;
+      background: #000;
+      color: #0ff;
+      outline: none;
+      transition: border-color 0.3s;
     }
 
     input:focus {
-      outline: none;
-      border-color: #6366f1;
-      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+      border-color: #0ff;
+      box-shadow: 0 0 10px #0ff;
     }
 
     button {
       padding: 12px;
-      background: #4f46e5;
-      color: white;
+      background: #0ff;
+      color: #000;
       border: none;
       border-radius: 8px;
       font-size: 1rem;
+      font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.3s, transform 0.3s;
     }
 
     button:hover {
-      background: #4338ca;
+      background: #00cccc;
+      transform: scale(1.05);
     }
 
     a {
       margin-top: 20px;
       text-decoration: none;
-      color: #4f46e5;
-      font-weight: 500;
+      color: #0ff;
+      font-weight: bold;
     }
 
     a:hover {
-      text-decoration: underline;
+      text-shadow: 0 0 10px #0ff;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #0ff;
+      }
+      to {
+        text-shadow: 0 0 20px #0ff, 0 0 30px #0ff;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Create an Account</h1>
+  <h1>Register</h1>
   <form>
     <input type="text" placeholder="Username" required />
     <input type="email" placeholder="Email" required />
