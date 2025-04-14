@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mys Bin - Home</title>
   <style>
-    /* General body styles */
     body {
       font-family: 'Courier New', monospace;
       background: #000;
@@ -14,8 +13,6 @@
       position: relative;
       height: 100vh;
     }
-
-    /* Create Paste Button */
     .create-paste-btn {
       position: absolute;
       top: 20px;
@@ -28,15 +25,12 @@
       border-radius: 8px;
       cursor: pointer;
       transition: transform 0.3s, background 0.3s;
-      z-index: 9999; /* Ensure it's above other elements */
+      z-index: 9999;
     }
-
     .create-paste-btn:hover {
       background: #cc3b3b;
       transform: scale(1.05);
     }
-
-    /* Content styles */
     .content {
       position: relative;
       z-index: 1;
@@ -45,43 +39,50 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      animation: fadeIn 1.5s ease-in;
     }
-
-    /* Animation styles for fade-in effect */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .paste-content {
+      padding: 20px;
+      background-color: #333;
+      border-radius: 8px;
+      color: #ff4b4b;
+      font-size: 1.2rem;
     }
   </style>
 </head>
 <body>
+
   <button class="create-paste-btn" onclick="createPaste()">Create Paste</button>
 
   <div class="content">
-    <div class="ascii">
-      <!-- ASCII Art Here -->
-    </div>
-
     <h1>Welcome to MysBin</h1>
     <p>Stay ahead with the latest content in style.</p>
+    <div class="paste-content" id="paste-content">
+      <!-- Paste content will appear here -->
+    </div>
     <a href="#">Explore More</a>
   </div>
 
   <script>
-    // Function to generate a new paste number and redirect to a new paste page
+    // Function to generate a new paste number and simulate displaying a paste
     function createPaste() {
-      // Generate a unique paste number (for demonstration, use random number)
+      // Generate a random paste number
       const pasteNumber = Math.floor(Math.random() * 10000);
-      // Redirect to the new paste page with query parameter
-      window.location.href = `paste.html?paste=${pasteNumber}`;
+      const pasteContent = `This is the content for paste number: ${pasteNumber}`;
+      
+      // Simulate a paste display by updating the content on the same page
+      document.getElementById('paste-content').innerText = pasteContent;
+
+      // Optionally, you could push this "paste" to the browser history (without reloading the page)
+      window.history.pushState({ paste: pasteNumber }, `Paste ${pasteNumber}`, `?paste=${pasteNumber}`);
+    }
+
+    // Check if a paste number is passed in the URL on page load
+    const urlParams = new URLSearchParams(window.location.search);
+    const pasteNumber = urlParams.get('paste');
+    if (pasteNumber) {
+      document.getElementById('paste-content').innerText = `This is the content for paste number: ${pasteNumber}`;
     }
   </script>
+
 </body>
 </html>
