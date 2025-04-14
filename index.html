@@ -153,6 +153,42 @@
     <a href="register.html">Go to Register Page</a>
   </div>
 
+  <!-- Online user count box -->
+  <div id="onlineCount" style="position:fixed;bottom:10px;right:10px;color:#f87171;font-size:1rem;z-index:2;">
+    Users online: ...
+  </div>
+
+  <!-- Firebase script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getDatabase, ref, push, onDisconnect, onValue, set } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAgCwv7vvlSNgH-CzGBtZUHq3Fr2ybHsDk",
+      authDomain: "mysbin-5802b.firebaseapp.com",
+      databaseURL: "https://mysbin-5802b-default-rtdb.firebaseio.com",
+      projectId: "mysbin-5802b",
+      storageBucket: "mysbin-5802b.firebasestorage.app",
+      messagingSenderId: "544115615080",
+      appId: "1:544115615080:web:28cef832beccbe70bfe2dd",
+      measurementId: "G-VHZ5B2QRPW"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const onlineRef = ref(db, "onlineUsers");
+    const myRef = push(onlineRef);
+    set(myRef, true);
+    onDisconnect(myRef).remove();
+
+    onValue(onlineRef, snapshot => {
+      const count = snapshot.size;
+      document.getElementById("onlineCount").innerText = `Users online: ${count}`;
+    });
+  </script>
+
+  <!-- Canvas + Particle effect -->
   <script>
     document.addEventListener("mousemove", (e) => {
       for (let i = 0; i < 3; i++) {
