@@ -3,103 +3,201 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Doxbin Browser</title>
-  <link rel="icon" href="data:," />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <title>Duxxers - Login</title>
   <style>
-    body, html {
+    * {
       margin: 0;
       padding: 0;
-      font-family: 'Inter', sans-serif;
-      background: black;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Courier New', monospace;
+      background: #000;
+      color: #ff4b4b;
       overflow: hidden;
+      position: relative;
       height: 100vh;
     }
 
-    body::before {
-      content: "";
+    canvas {
       position: fixed;
       top: 0;
       left: 0;
-      height: 100%;
-      width: 100%;
-      background: radial-gradient(white 1px, transparent 1px);
-      background-size: 3px 3px;
-      opacity: 0.1;
-      z-index: -1;
+      z-index: 0;
     }
 
-    header {
-      background: #111;
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
-      font-weight: 600;
-      letter-spacing: 1px;
-      border-bottom: 1px solid #333;
-    }
-
-    .browser-container {
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 60px 20px 40px;
       display: flex;
       flex-direction: column;
-      height: calc(100vh - 60px);
+      align-items: center;
+      text-align: center;
+      animation: fadeIn 1.5s ease-in;
     }
 
-    .url-bar {
-      padding: 8px;
-      background: #1e1e1e;
-      border-bottom: 1px solid #333;
-      display: flex;
-      gap: 8px;
+    h1 {
+      font-size: 2rem;
+      color: #ff4b4b;
+      margin-bottom: 20px;
     }
 
-    .url-bar input {
-      flex: 1;
-      padding: 6px 12px;
-      background: #111;
-      border: 1px solid #444;
-      color: #fff;
-    }
-
-    .url-bar button {
-      background: #333;
-      border: none;
-      color: white;
-      padding: 6px 12px;
-      cursor: pointer;
-    }
-
-    iframe {
-      flex-grow: 1;
-      border: none;
+    form {
+      background: rgba(255, 75, 75, 0.1);
+      border: 1px solid #ff4b4b;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 300px;
       width: 100%;
+      backdrop-filter: blur(4px);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      background: #111;
+      color: #fff;
+      border: 1px solid #ff4b4b;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background: #ff4b4b;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #cc3b3b;
+    }
+
+    p {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #f87171;
+    }
+
+    .toggle {
+      color: #f87171;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <header>
-    🧠 Doxbin Embedded Browser
-  </header>
+<canvas id="stars"></canvas>
 
-  <div class="browser-container">
-    <div class="url-bar">
-      <input type="text" id="urlInput" placeholder="Enter a URL like https://example.com" />
-      <button onclick="loadSite()">Go</button>
-    </div>
-    <iframe id="webFrame" src="https://example.com"></iframe>
-  </div>
+<div class="content">
+  <h1>Duxxers Login</h1>
+  <form id="authForm">
+    <input type="text" id="username" placeholder="Username" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button type="submit">Login</button>
+    <p>Don't have an account? <span class="toggle" onclick="toggleMode()">Sign up</span></p>
+  </form>
+</div>
 
-  <script>
-    function loadSite() {
-      const input = document.getElementById('urlInput');
-      let url = input.value.trim();
+<script>
+  const form = document.getElementById('authForm');
+  const btn = form.querySelector('button');
+  let isLogin = true;
 
-      if (!url.startsWith("http")) {
-        url = "https://" + url;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const user = document.getElementById('username').value;
+    const pass = document.getElementById('password').value;
+
+    if (isLogin) {
+      const savedPass = localStorage.getItem(`dux-user-${user}`);
+      if (savedPass === pass) {
+        alert("Login successful!");
+        window.location.href = 'main.html';
+      } else {
+        alert("Invalid credentials!");
       }
-
-      document.getElementById('webFrame').src = url;
+    } else {
+      localStorage.setItem(`dux-user-${user}`, pass);
+      alert("Account created! You can now log in.");
+      toggleMode();
     }
-  </script>
+  });
+
+  function toggleMode() {
+    isLogin = !isLogin;
+    btn.textContent = isLogin ? "Login" : "Sign up";
+    form.querySelector('p').innerHTML = isLogin
+      ? `Don't have an account? <span class="toggle" onclick="toggleMode()">Sign up</span>`
+      : `Already have an account? <span class="toggle" onclick="toggleMode()">Login</span>`;
+  }
+
+  // Star particles effect
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const particles = [];
+
+  function Particle() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2 + 1;
+    this.speedX = Math.random() * 0.5 - 0.25;
+    this.speedY = Math.random() * 0.5 - 0.25;
+  }
+
+  Particle.prototype.update = function () {
+    this.x += this.speedX;
+    this.y += this.speedY;
+
+    if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+    if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+  };
+
+  Particle.prototype.draw = function () {
+    ctx.fillStyle = '#ff4b4b';
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  };
+
+  function createParticles() {
+    if (particles.length < 200) particles.push(new Particle());
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animateParticles);
+  }
+
+  setInterval(createParticles, 50);
+  animateParticles();
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
 </body>
 </html>
