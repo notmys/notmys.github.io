@@ -13,8 +13,9 @@
             font-family: monospace;
             height: 100%;
             overflow: hidden;
+            cursor: url('https://64.71.152.212/cdn/cursor-image.png'), auto; /* Use your custom cursor image */
         }
-        
+
         #landing {
             position: fixed;
             top: 0;
@@ -29,7 +30,7 @@
             cursor: pointer;
             animation: fade 1.5s ease-in;
         }
-        
+
         #landing::before {
             content: '';
             position: absolute;
@@ -40,7 +41,7 @@
             background: rgba(0,0,0,0.4);
             z-index: -1;
         }
-        
+
         #landing span {
             font-size: 16px;
             background: linear-gradient(90deg, #FFF, #FFB6C1, #FFF, #FFB6C1, #FFF);
@@ -57,17 +58,17 @@
             backdrop-filter: blur(3px);
             -webkit-backdrop-filter: blur(3px);
         }
-        
+
         @keyframes grad {
             0% { background-position: 0% 50%; }
             100% { background-position: 200% 50%; }
         }
-        
+
         @keyframes fade {
             0% { opacity: 0; }
             100% { opacity: 1; }
         }
-        
+
         #content {
             display: none;
             height: 100vh;
@@ -75,45 +76,77 @@
             padding: 15px;
             box-sizing: border-box;
             animation: contentFade 1s ease-in;
+            position: relative;
         }
-        
+
         @keyframes contentFade {
             0% { opacity: 0; }
             100% { opacity: 1; }
         }
-        
+
         .metadata {
             border-bottom: 1px solid #FFB6C1;
             padding-bottom: 10px;
             margin-bottom: 15px;
             font-size: 12px;
         }
-        
+
         .title {
             margin-bottom: 5px;
             font-size: 14px;
             color: #FFB6C1;
         }
-        
+
         .info-row {
             margin-bottom: 3px;
         }
-        
+
         .paste-content {
             white-space: pre-wrap;
             line-height: 1.4;
+            text-align: center; /* Center the ASCII art */
         }
-        
+
         .paste-content a {
             color: #FFB6C1;
             text-decoration: none;
             transition: color 0.2s;
         }
-        
+
         .paste-content a:hover {
             color: #FFF;
             text-decoration: underline;
         }
+
+        /* Floating stars effect */
+        .star {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-20px) scale(1.2);
+            }
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .star:nth-child(odd) {
+            animation-duration: 4s;
+        }
+        .star:nth-child(even) {
+            animation-duration: 6s;
+        }
+
     </style>
 </head>
 <body>
@@ -131,13 +164,20 @@
         </div>
         
         <div class="paste-content">
-            ███╗   ███╗██╗   ██╗███████╗   ███╗   ██╗ ██████╗ ██╗    ██╗
-            ████╗ ████║╚██╗ ██╔╝██╔════╝   ████╗  ██║██╔═══██╗██║    ██║
-            ██╔████╔██║ ╚████╔╝ ███████╗   ██╔██╗ ██║██║   ██║██║ █╗ ██║
-            ██║╚██╔╝██║  ╚██╔╝  ╚════██║   ██║╚██╗██║██║   ██║██║███╗██║
-            ██║ ╚═╝ ██║   ██║   ███████║██╗██║ ╚████║╚██████╔╝╚███╔███╔╝
-            ╚═╝     ╚═╝   ╚═╝   ╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚══╝╚══╝ 
+            ███╗   ███╗██╗   ██╗███████╗   ███╗   ██╗ ██████╗ ██╗    ██╗<br>
+            ████╗ ████║╚██╗ ██╔╝██╔════╝   ████╗  ██║██╔═══██╗██║    ██║<br>
+            ██╔████╔██║ ╚████╔╝ ███████╗   ██╔██╗ ██║██║   ██║██║ █╗ ██║<br>
+            ██║╚██╔╝██║  ╚██╔╝  ╚════██║   ██║╚██╗██║██║   ██║██║███╗██║<br>
+            ██║ ╚═╝ ██║   ██║   ███████║██╗██║ ╚████║╚██████╔╝╚███╔███╔╝<br>
+            ╚═╝     ╚═╝   ╚═╝   ╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚══╝╚══╝<br>
         </div>
+        
+        <!-- Star animation elements -->
+        <div class="star" style="top: 20%; left: 30%; animation-duration: 4s;"></div>
+        <div class="star" style="top: 40%; left: 60%; animation-duration: 5s;"></div>
+        <div class="star" style="top: 50%; left: 80%; animation-duration: 6s;"></div>
+        <div class="star" style="top: 70%; left: 20%; animation-duration: 7s;"></div>
+        <div class="star" style="top: 80%; left: 50%; animation-duration: 6s;"></div>
     </div>
     
     <script>
