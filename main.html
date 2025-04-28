@@ -1,203 +1,195 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Duxxers - Login</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Courier New', monospace;
-      background: #000;
-      color: #ff4b4b;
-      overflow: hidden;
-      position: relative;
-      height: 100vh;
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 0;
-    }
-
-    .content {
-      position: relative;
-      z-index: 1;
-      padding: 60px 20px 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      animation: fadeIn 1.5s ease-in;
-    }
-
-    h1 {
-      font-size: 2rem;
-      color: #ff4b4b;
-      margin-bottom: 20px;
-    }
-
-    form {
-      background: rgba(255, 75, 75, 0.1);
-      border: 1px solid #ff4b4b;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 300px;
-      width: 100%;
-      backdrop-filter: blur(4px);
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: none;
-      background: #111;
-      color: #fff;
-      border: 1px solid #ff4b4b;
-      border-radius: 5px;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      background: #ff4b4b;
-      color: black;
-      font-weight: bold;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: #cc3b3b;
-    }
-
-    p {
-      margin-top: 10px;
-      font-size: 0.9rem;
-      color: #f87171;
-    }
-
-    .toggle {
-      color: #f87171;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mys.Now</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #ccc;
+            font-family: monospace;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        #landing {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000 url('https://64.71.152.212/cdn/image_2.png') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            cursor: pointer;
+            animation: fade 1.5s ease-in;
+        }
+        
+        #landing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: -1;
+        }
+        
+        #landing span {
+            font-size: 16px;
+            background: linear-gradient(90deg, #FFF, #FFB6C1, #FFF, #FFB6C1, #FFF);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: grad 4s linear infinite;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: rgba(0,0,0,0.5);
+            box-shadow: 0 0 10px rgba(255,182,193,0.5);
+            z-index: 1;
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+        }
+        
+        @keyframes grad {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        
+        @keyframes fade {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        #content {
+            display: none;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 15px;
+            box-sizing: border-box;
+            animation: contentFade 1s ease-in;
+        }
+        
+        @keyframes contentFade {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        .metadata {
+            border-bottom: 1px solid #FFB6C1;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 12px;
+        }
+        
+        .title {
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #FFB6C1;
+        }
+        
+        .info-row {
+            margin-bottom: 3px;
+        }
+        
+        .paste-content {
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        
+        .paste-content a {
+            color: #FFB6C1;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .paste-content a:hover {
+            color: #FFF;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<canvas id="stars"></canvas>
+    <div id="landing">
+        <span>[ click anywhere ]</span>
+    </div>
+    
+    <div id="content">
+        <div class="metadata">
+            <div class="title">Mys . Now</div>
+            <div class="info-row">Reason: Information compilation on extortion activities</div>
+            <div class="info-row" id="current-time">Current Time: --:--:--</div>
+            <div class="info-row" id="current-date">Current Date: --/--/----</div>
+            <div class="info-row">Date of Creation: 4/27/2025</div>
+        </div>
+        
+        <div class="paste-content">
 
-<div class="content">
-  <h1>Duxxers Login</h1>
-  <form id="authForm">
-    <input type="text" id="username" placeholder="Username" required />
-    <input type="password" id="password" placeholder="Password" required />
-    <button type="submit">Login</button>
-    <p>Don't have an account? <span class="toggle" onclick="toggleMode()">Sign up</span></p>
-  </form>
+███╗   ███╗██╗   ██╗███████╗   ███╗   ██╗ ██████╗ ██╗    ██╗
+████╗ ████║╚██╗ ██╔╝██╔════╝   ████╗  ██║██╔═══██╗██║    ██║
+██╔████╔██║ ╚████╔╝ ███████╗   ██╔██╗ ██║██║   ██║██║ █╗ ██║
+██║╚██╔╝██║  ╚██╔╝  ╚════██║   ██║╚██╗██║██║   ██║██║███╗██║
+██║ ╚═╝ ██║   ██║   ███████║██╗██║ ╚████║╚██████╔╝╚███╔███╔╝
+╚═╝     ╚═╝   ╚═╝   ╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚══╝╚══╝ 
+                                                            
 </div>
-
-<script>
-  const form = document.getElementById('authForm');
-  const btn = form.querySelector('button');
-  let isLogin = true;
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const user = document.getElementById('username').value;
-    const pass = document.getElementById('password').value;
-
-    if (isLogin) {
-      const savedPass = localStorage.getItem(`dux-user-${user}`);
-      if (savedPass === pass) {
-        alert("Login successful!");
-        window.location.href = 'main.html';
-      } else {
-        alert("Invalid credentials!");
-      }
-    } else {
-      localStorage.setItem(`dux-user-${user}`, pass);
-      alert("Account created! You can now log in.");
-      toggleMode();
-    }
-  });
-
-  function toggleMode() {
-    isLogin = !isLogin;
-    btn.textContent = isLogin ? "Login" : "Sign up";
-    form.querySelector('p').innerHTML = isLogin
-      ? `Don't have an account? <span class="toggle" onclick="toggleMode()">Sign up</span>`
-      : `Already have an account? <span class="toggle" onclick="toggleMode()">Login</span>`;
-  }
-
-  // Star particles effect
-  const canvas = document.getElementById('stars');
-  const ctx = canvas.getContext('2d');
-
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  const particles = [];
-
-  function Particle() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 2 + 1;
-    this.speedX = Math.random() * 0.5 - 0.25;
-    this.speedY = Math.random() * 0.5 - 0.25;
-  }
-
-  Particle.prototype.update = function () {
-    this.x += this.speedX;
-    this.y += this.speedY;
-
-    if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
-    if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
-  };
-
-  Particle.prototype.draw = function () {
-    ctx.fillStyle = '#ff4b4b';
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-  };
-
-  function createParticles() {
-    if (particles.length < 200) particles.push(new Particle());
-  }
-
-  function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => {
-      p.update();
-      p.draw();
-    });
-    requestAnimationFrame(animateParticles);
-  }
-
-  setInterval(createParticles, 50);
-  animateParticles();
-
-  window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  });
-</script>
+    </div>
+    
+    <script>
+        document.getElementById('landing').addEventListener('click', function() {
+            this.style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            updTime();
+            playAud();
+        });
+        
+        function playAud() {
+            try {
+                const aud = new Audio('https://64.71.152.212/cdn/sitesong.wav');
+                aud.volume = 0.7;
+                aud.loop = true;
+                aud.play().catch(e => {});
+            } catch (e) {}
+        }
+        
+        function updTime() {
+            const now = new Date();
+            
+            const h = now.getHours().toString().padStart(2, '0');
+            const m = now.getMinutes().toString().padStart(2, '0');
+            const s = now.getSeconds().toString().padStart(2, '0');
+            const ts = `${h}:${m}:${s}`;
+            
+            const mo = (now.getMonth() + 1).toString().padStart(2, '0');
+            const d = now.getDate().toString().padStart(2, '0');
+            const y = now.getFullYear();
+            const ds = `${mo}/${d}/${y}`;
+            
+            document.getElementById('current-time').textContent = `Current Time: ${ts}`;
+            document.getElementById('current-date').textContent = `Current Date: ${ds}`;
+            
+            setTimeout(updTime, 1000);
+        }
+        
+        function fixLinks() {
+            const cont = document.querySelector('.paste-content');
+            if (!cont) return;
+            
+            const regex = /(https?:\/\/[^\s]+)/g;
+            cont.innerHTML = cont.innerHTML.replace(regex, url => {
+                return '<a href="' + url + '">' + url + '</a>';
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', fixLinks);
+    </script>
 </body>
 </html>
