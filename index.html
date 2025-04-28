@@ -147,6 +147,26 @@
             animation-duration: 6s;
         }
 
+        /* Button Style */
+        .navigate-button {
+            position: absolute;
+            top: 33%; /* 1/3 of the page height */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #FFB6C1;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .navigate-button:hover {
+            background-color: #FF69B4;
+        }
+
     </style>
 </head>
 <body>
@@ -171,13 +191,16 @@
             ██║ ╚═╝ ██║   ██║   ███████║██╗██║ ╚████║╚██████╔╝╚███╔███╔╝<br>
             ╚═╝     ╚═╝   ╚═╝   ╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚══╝╚══╝<br>
         </div>
-        
-        <!-- Star animation elements -->
+
+        <!-- Floating stars elements -->
         <div class="star" style="top: 20%; left: 30%; animation-duration: 4s;"></div>
         <div class="star" style="top: 40%; left: 60%; animation-duration: 5s;"></div>
         <div class="star" style="top: 50%; left: 80%; animation-duration: 6s;"></div>
         <div class="star" style="top: 70%; left: 20%; animation-duration: 7s;"></div>
         <div class="star" style="top: 80%; left: 50%; animation-duration: 6s;"></div>
+        
+        <!-- Button to navigate to another page -->
+        <button class="navigate-button" onclick="window.location.href='anotherpage.html'">Go to Another Page</button>
     </div>
     
     <script>
