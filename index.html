@@ -121,9 +121,9 @@
         /* Floating stars effect */
         .star {
             position: absolute;
-            width: 3px;  /* Smaller stars */
-            height: 3px;
-            background-color: #fff;
+            width: 2px;  /* Smaller stars */
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.5);  /* Dimmer stars */
             border-radius: 50%;
             animation: fall 10s infinite linear;
         }
@@ -152,7 +152,7 @@
         /* Button Style */
         .navigate-button {
             position: absolute;
-            top: 50%; /* Move button down more */
+            top: 70%; /* Move button down more */
             left: 50%;
             transform: translateX(-50%);
             background-color: #FFB6C1;
@@ -204,9 +204,13 @@
         <div class="star" style="top: 30%; left: 90%; animation-duration: 14s;"></div>
         <div class="star" style="top: 60%; left: 70%; animation-duration: 15s;"></div>
         <div class="star" style="top: 90%; left: 40%; animation-duration: 16s;"></div>
-        
+        <div class="star" style="top: 15%; left: 75%; animation-duration: 10s;"></div>
+        <div class="star" style="top: 25%; left: 40%; animation-duration: 12s;"></div>
+        <div class="star" style="top: 45%; left: 85%; animation-duration: 8s;"></div>
+        <div class="star" style="top: 55%; left: 15%; animation-duration: 14s;"></div>
+
         <!-- Button to navigate to another page -->
-        <button class="navigate-button" onclick="window.location.href='anotherpage.html'">Go to Another Page</button>
+        <button class="navigate-button" onclick="window.location.href='./test'">Go to Another Page</button>
     </div>
     
     <script>
