@@ -11,13 +11,14 @@
       box-sizing: border-box;
     }
 
-    body {
+    body, html {
+      height: 100%;
       font-family: 'Courier New', monospace;
       background: #000;
       color: #ff4b4b;
       overflow: hidden;
       position: relative;
-      height: 100vh;
+      cursor: url('https://raw.githubusercontent.com/notmys/websiteimage/refs/heads/main/jee-09-512.png'), auto;
     }
 
     canvas {
@@ -27,11 +28,47 @@
       z-index: 0;
     }
 
+    #landing {
+      position: fixed;
+      inset: 0;
+      background: #000 url('https://64.71.152.212/cdn/image_2.png') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      cursor: pointer;
+      animation: fade 1.5s ease-in;
+    }
+
+    #landing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: -1;
+    }
+
+    #landing span {
+      font-size: 16px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      box-shadow: 0 0 10px rgba(255,182,193,0.5);
+      color: transparent;
+      background-image: linear-gradient(90deg, #FFF, #FFB6C1, #FFF, #FFB6C1, #FFF);
+      background-size: 200% 100%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: grad 4s linear infinite;
+    }
+
     .content {
       position: relative;
       z-index: 1;
       padding: 60px 20px 40px;
-      display: flex;
+      display: none; /* hidden initially */
       flex-direction: column;
       align-items: center;
       text-align: center;
@@ -74,25 +111,26 @@
     }
 
     @keyframes glow {
-      from {
-        text-shadow: 0 0 10px #ff4b4b;
-      }
-      to {
-        text-shadow: 0 0 20px #ff4b4b, 0 0 40px #ff4b4b;
-      }
+      from { text-shadow: 0 0 10px #ff4b4b; }
+      to { text-shadow: 0 0 20px #ff4b4b, 0 0 40px #ff4b4b; }
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes fade {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes grad {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    /* Particle */
     .particle {
       position: absolute;
       width: 5px;
@@ -111,7 +149,7 @@
       }
     }
 
-    /* Online user count box */
+    /* Online count */
     #onlineCount {
       position: fixed;
       bottom: 10px;
@@ -122,7 +160,13 @@
     }
   </style>
 </head>
+
 <body>
+
+  <div id="landing">
+    <span>[ click anywhere ]</span>
+  </div>
+
   <canvas id="stars"></canvas>
 
   <div class="content">
@@ -160,77 +204,71 @@
       </pre>
     </div>
 
-    <h1>Welcome to Duxxers</h1>
-    <p>Upload, Share, Chat, Recieve, Display.</p>
-
-    <!-- Go to Register Page Button -->
-    <a href="./test">Preview Page</a>
-
-    <div id="onlineCount">Users Online: ?</div>
+    <h1>Welcome to Mys.Now</h1>
+    <p>Enter the world of information.</p>
+    <a href="./test">Visit Preview</a>
   </div>
 
+  <div id="onlineCount">Online: 1</div>
+
   <script>
-    // Particles effect
+    const landing = document.getElementById('landing');
+    const content = document.querySelector('.content');
+
+    landing.addEventListener('click', () => {
+      landing.style.display = 'none';
+      content.style.display = 'flex';
+      playAud();
+    });
+
+    function playAud() {
+      const aud = new Audio('https://64.71.152.212/cdn/sitesong.wav');
+      aud.volume = 0.7;
+      aud.loop = true;
+      aud.play().catch(e => console.error('Audio playback failed', e));
+    }
+
     const canvas = document.getElementById('stars');
     const ctx = canvas.getContext('2d');
-
-    // Set canvas size to full screen
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particles = [];
-
-    function Particle() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 3 + 1;
-      this.speedX = Math.random() * 0.5 - 0.25;
-      this.speedY = Math.random() * 0.5 - 0.25;
+    let w, h;
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
     }
+    window.addEventListener('resize', resize);
+    resize();
 
-    Particle.prototype.update = function () {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      
-      if (this.size > 0.2) this.size -= 0.1;
-      
-      if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
-      if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
-    };
+    const stars = Array(100).fill().map(() => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 2,
+      d: Math.random() + 0.5
+    }));
 
-    Particle.prototype.draw = function () {
+    function drawStars() {
+      ctx.clearRect(0, 0, w, h);
       ctx.fillStyle = '#ff4b4b';
-      ctx.strokeStyle = '#ff4b4b';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.closePath();
-      ctx.fill();
-    };
-
-    function createParticles() {
-      particles.push(new Particle());
+      stars.forEach(star => {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      moveStars();
+      requestAnimationFrame(drawStars);
     }
 
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
-      }
-
-      requestAnimationFrame(animateParticles);
+    function moveStars() {
+      stars.forEach(star => {
+        star.y += star.d;
+        if (star.y > h) {
+          star.y = 0;
+          star.x = Math.random() * w;
+        }
+      });
     }
 
-    setInterval(createParticles, 100);
-    animateParticles();
-
-    // Responsive Canvas resizing
-    window.addEventListener('resize', function () {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
+    drawStars();
   </script>
+
 </body>
 </html>
