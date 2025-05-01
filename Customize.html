@@ -96,6 +96,21 @@
       z-index: 10;
     }
     #user-info img { width: 32px; height: 32px; border-radius: 50%; }
+
+    /* Bottom left visit page button */
+    #visit-page-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #0ff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+      backdrop-filter: blur(3px);
+    }
   </style>
 </head>
 <body>
@@ -106,29 +121,35 @@
   </div>
   <div class="content">
     <div class="ascii-title">
-                    s                                 .                                               s              
-                   :8                                @88>                       x=~                  :8       oec :  
-   x.    .        .88           u.    .d``           %8P                       88x.   .e.   .e.     .88      @88888  
- .@88k  z88u     :888ooo  ...ue888b   @8Ne.   .u      .          u            '8888X.x888:.x888    :888ooo   8"*88%  
-~"8888 ^8888   -*8888888  888R Y888r  %8888:u@88N   .@88u     us888u.          `8888  888X '888k -*8888888   8b.     
-  8888  888R     8888     888R I888>   `888I  888. ''888E` .@88 "8888"          X888  888X  888X   8888     u888888> 
-  8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888R   
-  8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888P   
-  8888 ,888B .  .8888Lu= u8888cJ888   uW888L  888'   888E  9888  9888     .    .X888  888X. 888~  .8888Lu=   *888>   
- "8888Y 8888"   ^%888*    "*888*P"   '*88888Nu88P    888&  9888  9888   .@8c   `%88%``"*888Y"     ^%888*     4888    
-  `Y"   'YP       'Y"       'Y"      ~ '88888F`      R888" "888*""888" '%888"    `~     `"          'Y"      '888    
-                                        888 ^         ""    ^Y"   ^Y'    ^*                                   88R    
-                                        *8E                                                                   88>    
-                                        '8>                                                                   48     
-                                         "                                                                    '8
+      s                                 .                                               s              
+      :8                                @88>                       x=~                  :8       oec :  
+      x.    .        .88           u.    .d``           %8P                       88x.   .e.   .e.     .88      @88888  
+      .@88k  z88u     :888ooo  ...ue888b   @8Ne.   .u      .          u            '8888X.x888:.x888    :888ooo   8"*88%  
+      ~"8888 ^8888   -*8888888  888R Y888r  %8888:u@88N   .@88u     us888u.          8888  888X '888k -*8888888   8b.     
+      8888  888R     8888     888R I888>   888I  888. ''888E .@88 "8888"          X888  888X  888X   8888     u888888> 
+      8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888R   
+      8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888P   
+      8888 ,888B .  .8888Lu= u8888cJ888   uW888L  888'   888E  9888  9888     .    .X888  888X. 888~  .8888Lu=   *888>   
+      "8888Y 8888"   ^%888*    "*888*P"   '*88888Nu88P    888&  9888  9888   .@8c   %88%"*888Y"     ^%888*     4888    
+      Y"   'YP       'Y"       'Y"      ~ '88888F      R888" "888*""888" '%888"    ~     "          'Y"      '888    
+                                          888 ^         ""    ^Y"   ^Y'    ^*                                   88R    
+                                          *8E                                                                   88>    
+                                          '8>                                                                   48     
+                                           "                                                                    '8
     </div>
     <div class="dashboard-container">
       <h2 style="color: #0ff;">Customize Your Dashboard</h2>
       <p style="color: #fff;">Here you can adjust your dashboard settings.</p>
+      <label for="bg-color">Background Color:</label>
+      <input type="color" id="bg-color" value="#000000" />
       <a href="#" class="btn">[ Save Changes ]</a>
       <a href="#" class="btn">[ Reset to Defaults ]</a>
     </div>
   </div>
+
+  <!-- Visit Page Button -->
+  <a id="visit-page-btn" href="#" target="_blank">Visit Page</a>
+
   <script>
     function generateStars(count) {
       const starsContainer = document.getElementById('stars');
@@ -170,9 +191,30 @@
       document.title = titleEl.textContent;
     }
 
+    // Change background color
+    document.getElementById('bg-color').addEventListener('input', (e) => {
+      document.body.style.backgroundColor = e.target.value;
+      // Save to localStorage
+      localStorage.setItem('bgColor', e.target.value);
+    });
+
+    // Load background color if set
     window.addEventListener('load', () => {
       generateStars(100);
       loadAnyUser();
+      const savedColor = localStorage.getItem('bgColor');
+      if (savedColor) {
+        document.body.style.backgroundColor = savedColor;
+      }
+    });
+
+    // Visit Page Button (adjust URL)
+    document.getElementById('visit-page-btn').addEventListener('click', () => {
+      const user = JSON.parse(localStorage.getItem('discordUser')) || JSON.parse(localStorage.getItem('customUser'));
+      if (user) {
+        const userPageUrl = `/user/${user.id}`; // Assuming user-specific URL pattern
+        window.open(userPageUrl, '_blank');
+      }
     });
   </script>
 </body>
