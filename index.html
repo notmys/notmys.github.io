@@ -56,6 +56,13 @@
       z-index: 100;
       cursor: pointer;
       animation: fade 1.5s ease-in;
+      opacity: 1;
+      transition: opacity 1s ease;
+    }
+
+    #landing.fade-out {
+      opacity: 0;
+      pointer-events: none;
     }
 
     #landing::before {
@@ -148,20 +155,26 @@
                                         888 ^         ""    ^Y"   ^Y'    ^*                                   88R    
                                         *8E                                                                   88>    
                                         '8>                                                                   48     
-                                         "                                                                    '8     
+                                         "                                                                    '8                                        
     </div>
 
     <!-- Button under ASCII title -->
-    <a href="./Signup" class="btn">[ Login/Signup ]/a>
+    <a href="./Signup" class="btn">[ Login/Signup ]</a>
   </div>
 
   <script>
     document.getElementById('landing').addEventListener('click', function() {
-      this.style.display = 'none';
-      document.querySelector('.content').style.display = 'flex';
+      const landing = this;
       const stars = document.getElementById('stars');
-      stars.style.display = 'block';
-      generateStars(100);
+      const content = document.querySelector('.content');
+
+      landing.classList.add('fade-out');
+      setTimeout(() => {
+        landing.style.display = 'none';
+        content.style.display = 'flex';
+        stars.style.display = 'block';
+        generateStars(100);
+      }, 1000);
     });
 
     function generateStars(count) {
