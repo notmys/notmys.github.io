@@ -56,7 +56,15 @@
     </div>
     <a href="./main" class="btn">[ Back to Home ]</a>
     <a href="./login-action" class="btn">[ Login ]</a>
-    <a href="https://discord.com/oauth2/authorize?client_id=1367598939125190656&response_type=code&redirect_uri=https%3A%2F%2Fwww.utopia.voyage%2FLogin&scope=identify+presences.read+activities.read" class="btn">[ Login with Discord ]</a>
+   <a
+  href="https://discord.com/api/oauth2/authorize?client_id=1367598939125190656
+    &redirect_uri=https%3A%2F%2Fwww.utopia.voyage%2FLogin
+    &response_type=token
+    &scope=identify"
+  class="btn"
+>
+  [ Login with Discord ]
+</a>
   </div>
 
   <script>
@@ -75,27 +83,22 @@
 
     window.addEventListener('load',()=>{
       generateStars(100);
-      const code = new URLSearchParams(location.search).get('code');
-      if (!code) return;
 
-      fetch('/exchange_code',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ code })
-      })
-      .then(r=>r.json())
-      .then(data=>{
-        if (!data.access_token) throw new Error('No access token');
-        return fetch('https://discord.com/api/v10/users/@me',{
-          headers:{ Authorization:`Bearer ${data.access_token}` }
-        });
+      // 1) grab the token from the URL hash:
+      const hash = new URLSearchParams(location.hash.slice(1));
+      const token = hash.get('access_token');
+      if (!token) return;
+
+      // 2) fetch the user's Discord profile
+      fetch('https://discord.com/api/v10/users/@me', {
+        headers: { Authorization: `Bearer ${token}` }
       })
       .then(r=>r.json())
       .then(user=>{
-        const url = user.avatar
+        const avatarUrl = user.avatar
           ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
           : 'https://cdn.discordapp.com/embed/avatars/0.png';
-        document.getElementById('user-avatar').src = url;
+        document.getElementById('user-avatar').src = avatarUrl;
         document.getElementById('username').textContent = `${user.username}#${user.discriminator}`;
         document.getElementById('user-info').style.display = 'flex';
       })
