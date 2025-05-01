@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mys.Now</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utopia.wtf</title>
   <style>
     * {
       margin: 0;
@@ -11,225 +11,88 @@
       box-sizing: border-box;
     }
 
-    body, html {
-      height: 100%;
-      font-family: 'Courier New', monospace;
+    body {
       background: #000;
-      color: #ff4b4b;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
       overflow: hidden;
       position: relative;
-      cursor: url('https://raw.githubusercontent.com/notmys/websiteimage/refs/heads/main/jee-09-512.png'), auto;
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 0;
-    }
-
-    #landing {
-      position: fixed;
-      inset: 0;
-      background: #000 url('https://64.71.152.212/cdn/image_2.png') center/cover no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 100;
-      cursor: pointer;
-      transition: opacity 1.5s ease; /* smooth fade out */
-    }
-
-    #landing.hide {
+      animation: fadeIn 2s ease-in-out forwards;
       opacity: 0;
-      pointer-events: none;
-    }
-
-    #landing::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: -1;
-    }
-
-    #landing span {
-      font-size: 16px;
-      padding: 10px 20px;
-      border-radius: 5px;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
-      box-shadow: 0 0 10px rgba(255,182,193,0.5);
-      color: transparent;
-      background-image: linear-gradient(90deg, #FFF, #FFB6C1, #FFF, #FFB6C1, #FFF);
-      background-size: 200% 100%;
-      background-clip: text;
-      -webkit-background-clip: text;
-      animation: grad 4s linear infinite;
     }
 
     .content {
       position: relative;
       z-index: 1;
-      padding: 60px 20px 40px;
-      display: none;
-      flex-direction: column;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
       align-items: center;
-      text-align: center;
-      animation: fadeIn 1.5s ease-in;
-    }
-
-    .ascii {
-      white-space: pre;
-      color: #ff4b4b;
-      text-shadow: 0 0 5px #ff4b4b, 0 0 15px #ff4b4b;
-      animation: glow 2s infinite alternate ease-in-out;
-      margin-bottom: 20px;
     }
 
     h1 {
-      font-size: 2rem;
-      color: #ff4b4b;
-      margin: 20px 0;
-    }
-
-    p {
-      font-size: 1.1rem;
-      color: #f87171;
-      margin-bottom: 30px;
-    }
-
-    a {
-      padding: 12px 30px;
-      background: #ff4b4b;
-      color: #000;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: transform 0.3s, background 0.3s;
-    }
-
-    a:hover {
-      background: #cc3b3b;
-      transform: scale(1.05);
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #ff4b4b; }
-      to { text-shadow: 0 0 20px #ff4b4b, 0 0 40px #ff4b4b; }
+      font-size: 3rem;
+      text-align: center;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      to {
+        opacity: 1;
+      }
     }
 
-    @keyframes grad {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 200% 50%; }
+    .star {
+      position: absolute;
+      bottom: -10px;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: floatUp linear infinite;
+      will-change: transform, opacity;
     }
 
-    /* Online count */
-    #onlineCount {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      color: #f87171;
-      font-size: 1rem;
-      z-index: 2;
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
     }
   </style>
 </head>
-
 <body>
-
-  <div id="landing">
-    <span>[ click anywhere ]</span>
-  </div>
-
-  <canvas id="stars"></canvas>
-
   <div class="content">
-    <div class="ascii">
-███╗   ███╗██╗   ██╗███████╗   ███╗   ██╗ ██████╗ ██╗    ██╗
-████╗ ████║╚██╗ ██╔╝██╔════╝   ████╗  ██║██╔═══██╗██║    ██║
-██╔████╔██║ ╚████╔╝ ███████╗   ██╔██╗ ██║██║   ██║██║ █╗ ██║
-██║╚██╔╝██║  ╚██╔╝  ╚════██║   ██║╚██╗██║██║   ██║██║███╗██║
-██║ ╚═╝ ██║   ██║   ███████║██╗██║ ╚████║╚██████╔╝╚███╔███╔╝
-╚═╝     ╚═╝   ╚═╝   ╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚══╝╚══╝ 
-    </div>
-
-    <h1>Welcome to Mys.Now</h1>
-    <p>Enter the world of Imagination.</p>
-    <a href="./mys.zn">Visit Preview</a>
+    <h1>utopia.wtf</h1>
   </div>
-
-  <div id="onlineCount">Online: 1</div>
 
   <script>
-    const landing = document.getElementById('landing');
-    const content = document.querySelector('.content');
+    const numStars = 75;
+    const fragment = document.createDocumentFragment();
 
-    landing.addEventListener('click', () => {
-      landing.classList.add('hide');
-      setTimeout(() => {
-        landing.style.display = 'none';
-        content.style.display = 'flex';
-        playAud();
-      }, 1500); // Wait for fade out
-    });
+    for (let i = 0; i < numStars; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const left = Math.random() * 100;
+      const delay = Math.random() * 5;
+      const duration = 4 + Math.random() * 4;
 
-    function playAud() {
-      const aud = new Audio('https://64.71.152.212/cdn/sitesong.wav');
-      aud.volume = 0.7;
-      aud.loop = true;
-      aud.play().catch(e => console.error('Audio playback failed', e));
+      star.style.left = `${left}vw`;
+      star.style.animationDuration = `${duration}s`;
+      star.style.animationDelay = `${delay}s`;
+
+      fragment.appendChild(star);
     }
 
-    // STAR BACKGROUND
-    const canvas = document.getElementById('stars');
-    const ctx = canvas.getContext('2d');
-    let w, h;
-
-    function resize() {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    const stars = Array(150).fill().map(() => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      r: Math.random() * 1.2 + 0.3, // smaller stars
-      d: Math.random() * 0.5 + 0.2  // slower falling
-    }));
-
-    function drawStars() {
-      ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = '#ff4b4b';
-      stars.forEach(star => {
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-      moveStars();
-      requestAnimationFrame(drawStars);
-    }
-
-    function moveStars() {
-      stars.forEach(star => {
-        star.y += star.d;
-        if (star.y > h) {
-          star.y = 0;
-          star.x = Math.random() * w;
-        }
-      });
-    }
-
-    drawStars();
+    document.body.appendChild(fragment);
   </script>
-
 </body>
 </html>
