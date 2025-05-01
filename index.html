@@ -26,6 +26,7 @@
       z-index: 1;
       pointer-events: none;
       overflow: hidden;
+      display: none;
     }
 
     .star {
@@ -33,7 +34,7 @@
       width: 2px;
       height: 2px;
       background: white;
-      opacity: 0;
+      opacity: 0.3;
       animation: floatUp 5s linear infinite;
     }
 
@@ -43,10 +44,10 @@
         opacity: 0;
       }
       10% {
-        opacity: 1;
+        opacity: 0.3;
       }
       90% {
-        opacity: 1;
+        opacity: 0.3;
       }
       100% {
         transform: translateY(-100vh);
@@ -143,6 +144,8 @@
     document.getElementById('landing').addEventListener('click', function() {
       this.style.display = 'none';
       document.querySelector('.content').style.display = 'block';
+      document.getElementById('stars').style.display = 'block';
+      generateStars(100);
     });
 
     function generateStars(count) {
@@ -151,13 +154,11 @@
         const star = document.createElement('div');
         star.className = 'star';
         star.style.left = Math.random() * 100 + 'vw';
-        star.style.top = Math.random() * 100 + 'vh';
+        star.style.bottom = '0';
         star.style.animationDelay = Math.random() * 5 + 's';
         starsContainer.appendChild(star);
       }
     }
-
-    generateStars(100);
   </script>
 </body>
 </html>
