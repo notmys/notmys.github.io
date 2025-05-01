@@ -67,7 +67,6 @@
       z-index: -1;
     }
 
-    /* Button style (landing and content) */
     #landing span,
     .btn {
       font-size: 16px;
@@ -96,16 +95,21 @@
     .content {
       display: none;
       height: 100vh;
+      width: 100vw;
       overflow-y: auto;
       padding: 15px;
       box-sizing: border-box;
       animation: contentFade 1s ease-in;
       text-align: center;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
     }
 
     @keyframes contentFade { 0% { opacity: 0; } 100% { opacity: 1; } }
 
-    /* ASCII title styling */
     .ascii-title {
       white-space: pre;
       font-family: monospace;
@@ -130,26 +134,31 @@
 
   <div class="content">
     <div class="ascii-title">
-                                       ▄▄                                     ▄▄▄▄
-             ██                       ██                             ██    ▄█▀ ▀▀
-             ██                                                      ██    ██▀   
-▀███  ▀███ ██████  ▄██▀██▄▀████████▄▀███  ▄█▀██▄  ▀██▀    ▄█    ▀██▀█████ █████  
-  ██    ██   ██   ██▀   ▀██ ██   ▀██  ██ ██   ██    ██   ▄███   ▄█   ██    ██    
-  ██    ██   ██   ██     ██ ██    ██  ██  ▄█████     ██ ▄█  ██ ▄█    ██    ██    
-  ██    ██   ██   ██▄   ▄██ ██   ▄██  ██ ██   ██ ▄▄   ███    ███     ██    ██    
-  ▀████▀███▄ ▀████ ▀█████▀  ██████▀ ▄████▄████▀██▄█    █      █      ▀████████▄  
-                            ██                                                   
-                          ▄████▄                                                   
+                    s                                 .                                               s              
+                   :8                                @88>                       x=~                  :8       oec :  
+   x.    .        .88           u.    .d``           %8P                       88x.   .e.   .e.     .88      @88888  
+ .@88k  z88u     :888ooo  ...ue888b   @8Ne.   .u      .          u            '8888X.x888:.x888    :888ooo   8"*88%  
+~"8888 ^8888   -*8888888  888R Y888r  %8888:u@88N   .@88u     us888u.          `8888  888X '888k -*8888888   8b.     
+  8888  888R     8888     888R I888>   `888I  888. ''888E` .@88 "8888"          X888  888X  888X   8888     u888888> 
+  8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888R   
+  8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888P   
+  8888 ,888B .  .8888Lu= u8888cJ888   uW888L  888'   888E  9888  9888     .    .X888  888X. 888~  .8888Lu=   *888>   
+ "8888Y 8888"   ^%888*    "*888*P"   '*88888Nu88P    888&  9888  9888   .@8c   `%88%``"*888Y"     ^%888*     4888    
+  `Y"   'YP       'Y"       'Y"      ~ '88888F`      R888" "888*""888" '%888"    `~     `"          'Y"      '888    
+                                        888 ^         ""    ^Y"   ^Y'    ^*                                   88R    
+                                        *8E                                                                   88>    
+                                        '8>                                                                   48     
+                                         "                                                                    '8     
     </div>
 
     <!-- Button under ASCII title -->
-    <a href="./Signup" class="btn">[ Login/Signup ]</a>
+    <a href="./Signup" class="btn">[ Login/Signup ]/a>
   </div>
 
   <script>
     document.getElementById('landing').addEventListener('click', function() {
       this.style.display = 'none';
-      document.querySelector('.content').style.display = 'block';
+      document.querySelector('.content').style.display = 'flex';
       const stars = document.getElementById('stars');
       stars.style.display = 'block';
       generateStars(100);
