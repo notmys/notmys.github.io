@@ -26,7 +26,12 @@
       background: transparent url('https://64.71.152.212/cdn/stars_overlay.png') repeat;
       z-index: 1;
       pointer-events: none;
-      animation: twinkle 4s linear infinite;
+      animation: floatStars 40s linear infinite;
+    }
+
+    @keyframes floatStars {
+      0% { background-position: 0 100%; }
+      100% { background-position: 0 0%; }
     }
 
     @keyframes twinkle {
