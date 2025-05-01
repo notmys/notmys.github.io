@@ -113,7 +113,7 @@
 <body>
   <div id="stars"></div>
 
-  <!-- Discord user info UI -->
+  <!-- User info (shown if logged in) -->
   <div id="user-info">
     <img id="user-avatar" src="" alt="Avatar" />
     <span id="username">User</span>
@@ -137,8 +137,8 @@
                                         '8>                                                                   48     
                                          "                                                                    '8
     </div>
-    <a href="./Signup" class="btn">[ Create An Account ]</a>
-    <a href="./Login" class="btn">[ Login ]</a>
+    <a href="./Signup" class="btn" id="create-btn">[ Create An Account ]</a>
+    <a href="./Login" class="btn" id="login-btn">[ Login ]</a>
     <a
       href="https://discord.com/oauth2/authorize?client_id=1367598939125190656&response_type=token&redirect_uri=https%3A%2F%2Fwww.utopia.voyage%2FLogin&scope=identify"
       class="btn" id="discord-login-btn"
@@ -161,33 +161,51 @@
       }
     }
 
-    function loadDiscordUser() {
+    function loadAnyUser() {
       const userInfo = document.getElementById('user-info');
       const avatar = document.getElementById('user-avatar');
-      const username = document.getElementById('username');
+      const usernameElem = document.getElementById('username');
       const loginBtn = document.getElementById('discord-login-btn');
+      const createBtn = document.getElementById('create-btn');
+      const loginBtnMain = document.getElementById('login-btn');
 
-      const userData = localStorage.getItem('discordUser');
-      if (!userData) return;
+      const discordData = localStorage.getItem('discordUser');
+      const customData = localStorage.getItem('customUser');
 
-      try {
-        const user = JSON.parse(userData);
-        const avatarUrl = user.avatar
-          ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
-          : 'https://cdn.discordapp.com/embed/avatars/0.png';
+      let user = null;
+      let avatarUrl = 'https://cdn.discordapp.com/embed/avatars/0.png';
 
-        avatar.src = avatarUrl;
-        username.textContent = `${user.username}#${user.discriminator}`;
-        userInfo.style.display = 'flex';
-        if (loginBtn) loginBtn.style.display = 'none';
-      } catch (e) {
-        console.error('Invalid Discord user data.');
+      if (discordData) {
+        try {
+          user = JSON.parse(discordData);
+          avatarUrl = user.avatar
+            ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
+            : avatarUrl;
+        } catch (e) {
+          console.error('Invalid Discord user data.');
+        }
+      } else if (customData) {
+        try {
+          user = JSON.parse(customData);
+          avatarUrl = user.avatar || avatarUrl;
+        } catch (e) {
+          console.error('Invalid custom user data.');
+        }
       }
+
+      if (!user) return;
+
+      if (avatar) avatar.src = avatarUrl;
+      if (usernameElem) usernameElem.textContent = `${user.username}#${user.discriminator}`;
+      if (userInfo) userInfo.style.display = 'flex';
+      if (loginBtn) loginBtn.style.display = 'none';
+      if (createBtn) createBtn.style.display = 'none';
+      if (loginBtnMain) loginBtnMain.style.display = 'none';
     }
 
     window.addEventListener('load', () => {
       generateStars(100);
-      loadDiscordUser();
+      loadAnyUser();
     });
   </script>
 </body>
