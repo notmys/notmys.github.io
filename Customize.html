@@ -142,8 +142,8 @@
       <p style="color: #fff;">Here you can adjust your dashboard settings.</p>
       <label for="bg-color">Background Color:</label>
       <input type="color" id="bg-color" value="#000000" />
-      <a href="#" class="btn">[ Save Changes ]</a>
-      <a href="#" class="btn">[ Reset to Defaults ]</a>
+      <a href="#" class="btn" id="save-btn">[ Save Changes ]</a>
+      <a href="#" class="btn" id="reset-btn">[ Reset to Defaults ]</a>
     </div>
   </div>
 
@@ -191,13 +191,6 @@
       document.title = titleEl.textContent;
     }
 
-    // Change background color
-    document.getElementById('bg-color').addEventListener('input', (e) => {
-      document.body.style.backgroundColor = e.target.value;
-      // Save to localStorage
-      localStorage.setItem('bgColor', e.target.value);
-    });
-
     // Load background color if set
     window.addEventListener('load', () => {
       generateStars(100);
@@ -208,13 +201,33 @@
       }
     });
 
-    // Visit Page Button (adjust URL)
+    // Handle background color change
+    document.getElementById('bg-color').addEventListener('input', (e) => {
+      document.body.style.backgroundColor = e.target.value;
+      localStorage.setItem('bgColor', e.target.value); // Save to localStorage
+    });
+
+    // Visit Page Button functionality
     document.getElementById('visit-page-btn').addEventListener('click', () => {
       const user = JSON.parse(localStorage.getItem('discordUser')) || JSON.parse(localStorage.getItem('customUser'));
       if (user) {
         const userPageUrl = `/user/${user.id}`; // Assuming user-specific URL pattern
         window.open(userPageUrl, '_blank');
       }
+    });
+
+    // Save changes button functionality
+    document.getElementById('save-btn').addEventListener('click', () => {
+      const bgColor = document.getElementById('bg-color').value;
+      localStorage.setItem('bgColor', bgColor);  // Save background color
+      alert("Changes saved!");
+    });
+
+    // Reset to defaults button functionality
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      document.body.style.backgroundColor = '#000000';  // Default color
+      localStorage.setItem('bgColor', '#000000');
+      alert("Settings reset to defaults.");
     });
   </script>
 </body>
