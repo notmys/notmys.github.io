@@ -121,21 +121,21 @@
 
   <div class="content">
     <div class="ascii-title">
-                    s                                 .                                               s              
-                   :8                                @88>                       x=~                  :8       oec :  
-   x.    .        .88           u.    .d``           %8P                       88x.   .e.   .e.     .88      @88888  
- .@88k  z88u     :888ooo  ...ue888b   @8Ne.   .u      .          u            '8888X.x888:.x888    :888ooo   8"*88%  
-~"8888 ^8888   -*8888888  888R Y888r  %8888:u@88N   .@88u     us888u.          `8888  888X '888k -*8888888   8b.     
-  8888  888R     8888     888R I888>   `888I  888. ''888E` .@88 "8888"          X888  888X  888X   8888     u888888> 
-  8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888R   
-  8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888P   
-  8888 ,888B .  .8888Lu= u8888cJ888   uW888L  888'   888E  9888  9888     .    .X888  888X. 888~  .8888Lu=   *888>   
- "8888Y 8888"   ^%888*    "*888*P"   '*88888Nu88P    888&  9888  9888   .@8c   `%88%``"*888Y"     ^%888*     4888    
-  `Y"   'YP       'Y"       'Y"      ~ '88888F`      R888" "888*""888" '%888"    `~     `"          'Y"      '888    
-                                        888 ^         ""    ^Y"   ^Y'    ^*                                   88R    
-                                        *8E                                                                   88>    
-                                        '8>                                                                   48     
-                                         "                                                                    '8
+      s                                 .                                               s              
+      :8                                @88>                       x=~                  :8       oec :  
+      x.    .        .88           u.    .d``           %8P                       88x.   .e.   .e.     .88      @88888  
+      .@88k  z88u     :888ooo  ...ue888b   @8Ne.   .u      .          u            '8888X.x888:.x888    :888ooo   8"*88%  
+      ~"8888 ^8888   -*8888888  888R Y888r  %8888:u@88N   .@88u     us888u.          `8888  888X '888k -*8888888   8b.     
+      8888  888R     8888     888R I888>   `888I  888. ''888E` .@88 "8888"          X888  888X  888X   8888     u888888> 
+      8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888R   
+      8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888P   
+      8888 ,888B .  .8888Lu= u8888cJ888   uW888L  888'   888E  9888  9888     .    .X888  888X. 888~  .8888Lu=   *888>   
+      "8888Y 8888"   ^%888*    "*888*P"   '*88888Nu88P    888&  9888  9888   .@8c   `%88%``"*888Y"     ^%888*     4888    
+      `Y"   'YP       'Y"       'Y"      ~ '88888F`      R888" "888*""888" '%888"    `~     `"          'Y"      '888    
+                                              888 ^         ""    ^Y"   ^Y'    ^*                                   88R    
+                                              *8E                                                                   88>    
+                                              '8>                                                                   48     
+                                               "                                                                    '8
     </div>
     <a href="./Signup" class="btn" id="create-btn">[ Create An Account ]</a>
     <a href="./Login" class="btn" id="login-btn">[ Login ]</a>
@@ -160,11 +160,6 @@
         star.style.animationDelay = Math.random() * 5 + 's';
         starsContainer.appendChild(star);
       }
-    }
-
-    function generateUniqueNumber() {
-      // Generate a unique number for the user (this can be based on user ID, or a random number)
-      return Math.floor(Math.random() * 1000000); // Example: Random number between 0 and 999999
     }
 
     function loadAnyUser() {
@@ -208,15 +203,10 @@
       if (loginBtn) loginBtn.style.display = 'none';
       if (createBtn) createBtn.style.display = 'none';
       if (loginBtnMain) loginBtnMain.style.display = 'none';
-      
-      // Generate and store the unique number
-      const uniqueNumber = generateUniqueNumber();
-      localStorage.setItem('userUniqueNumber', uniqueNumber);
 
-      // Update the Customize Dashboard link
       if (customizeBtn) {
         customizeBtn.style.display = 'inline-block';
-        customizeBtn.href = `https://www.utopia.voyage/Customize/${uniqueNumber}`;
+        customizeBtn.href = `https://www.utopia.voyage/Customize`;
       }
     }
 
