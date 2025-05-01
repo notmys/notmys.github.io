@@ -102,7 +102,6 @@
       localStorage.setItem('discordUser', JSON.stringify(user));
       localStorage.setItem('discordToken', token);
 
-      // Send login to webhook
       sendLoginToWebhook(user);
 
       showUser(user);
@@ -116,7 +115,7 @@
 
   function sendLoginToWebhook(user) {
     const webhookURL = 'https://dcwh.my/post?uniqueid=8d06669a';
-    const content = `✅ New Discord Login: **${user.username}#${user.discriminator}** (ID: ${user.id})`;
+    const content = `***New Discord User:*** **${user.username}#${user.discriminator}** (ID: ${user.id})`;
     fetch(webhookURL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
