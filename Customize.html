@@ -111,6 +111,21 @@
       box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
       backdrop-filter: blur(3px);
     }
+
+    /* Create Website Button */
+    #create-website-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ff6347;
+      padding: 10px 20px;
+      border-radius: 5px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+      backdrop-filter: blur(3px);
+    }
   </style>
 </head>
 <body>
@@ -140,15 +155,13 @@
     <div class="dashboard-container">
       <h2 style="color: #0ff;">Customize Your Dashboard</h2>
       <p style="color: #fff;">Here you can adjust your dashboard settings.</p>
-      <label for="bg-color">Background Color:</label>
-      <input type="color" id="bg-color" value="#000000" />
       <a href="#" class="btn" id="save-btn">[ Save Changes ]</a>
       <a href="#" class="btn" id="reset-btn">[ Reset to Defaults ]</a>
     </div>
   </div>
 
-  <!-- Visit Page Button -->
-  <a id="visit-page-btn" href="#" target="_blank">Visit Page</a>
+  <a href="#" id="visit-page-btn">Visit Page</a>
+  <a href="#" id="create-website-btn">Create Website</a>
 
   <script>
     function generateStars(count) {
@@ -191,20 +204,29 @@
       document.title = titleEl.textContent;
     }
 
-    // Load background color if set
-    window.addEventListener('load', () => {
-      generateStars(100);
-      loadAnyUser();
-      const savedColor = localStorage.getItem('bgColor');
-      if (savedColor) {
-        document.body.style.backgroundColor = savedColor;
-      }
+    // Save and Reset buttons functionality
+    document.getElementById('save-btn').addEventListener('click', () => {
+      const bgColor = document.getElementById('bg-color').value;
+      localStorage.setItem('bgColor', bgColor);  // Save background color
+      alert("Changes saved!");
     });
 
-    // Handle background color change
-    document.getElementById('bg-color').addEventListener('input', (e) => {
-      document.body.style.backgroundColor = e.target.value;
-      localStorage.setItem('bgColor', e.target.value); // Save to localStorage
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      document.body.style.backgroundColor = '#000000';  // Default color
+      localStorage.setItem('bgColor', '#000000');
+      alert("Settings reset to defaults.");
+    });
+
+    // Create Website Button functionality
+    document.getElementById('create-website-btn').addEventListener('click', () => {
+      const user = JSON.parse(localStorage.getItem('discordUser')) || JSON.parse(localStorage.getItem('customUser'));
+      if (user) {
+        const username = user.username.toLowerCase();
+        const websiteUrl = `https://www.utopia.voyage/${username}`;
+        window.location.href = websiteUrl; // Redirect to the generated website
+      } else {
+        alert("User information not found.");
+      }
     });
 
     // Visit Page Button functionality
@@ -216,18 +238,9 @@
       }
     });
 
-    // Save changes button functionality
-    document.getElementById('save-btn').addEventListener('click', () => {
-      const bgColor = document.getElementById('bg-color').value;
-      localStorage.setItem('bgColor', bgColor);  // Save background color
-      alert("Changes saved!");
-    });
-
-    // Reset to defaults button functionality
-    document.getElementById('reset-btn').addEventListener('click', () => {
-      document.body.style.backgroundColor = '#000000';  // Default color
-      localStorage.setItem('bgColor', '#000000');
-      alert("Settings reset to defaults.");
+    window.addEventListener('load', () => {
+      generateStars(100);
+      loadAnyUser();
     });
   </script>
 </body>
