@@ -55,14 +55,18 @@
       align-items: center;
       z-index: 100;
       cursor: pointer;
-      animation: fade 1.5s ease-in;
-      opacity: 1;
-      transition: opacity 1s ease;
+      opacity: 0;
+      animation: fadeIn 2s ease-in forwards;
     }
 
     #landing.fade-out {
       opacity: 0;
+      transition: opacity 1s ease;
       pointer-events: none;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
 
     #landing::before {
@@ -74,57 +78,34 @@
       z-index: -1;
     }
 
-    #landing span,
-    .btn {
-      font-size: 16px;
-      background: linear-gradient(90deg, #FFF, #00BFFF, #FFF, #00BFFF, #FFF);
-      background-size: 200% 100%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: grad 4s linear infinite;
-      padding: 10px 20px;
-      border-radius: 5px;
-      background-color: rgba(0,0,0,0.5);
-      box-shadow: 0 0 10px rgba(0,191,255,0.5);
-      z-index: 1;
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 20px;
-    }
-
-    @keyframes grad { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
-    @keyframes fade { 0% { opacity: 0; } 100% { opacity: 1; } }
-
     .content {
-      display: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       height: 100vh;
       width: 100vw;
       overflow-y: auto;
       padding: 15px;
       box-sizing: border-box;
-      animation: contentFade 1s ease-in;
       text-align: center;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+      opacity: 0;
+      transition: opacity 1s ease;
     }
 
-    @keyframes contentFade { 0% { opacity: 0; } 100% { opacity: 1; } }
+    .content.visible {
+      opacity: 1;
+    }
 
     .ascii-title {
       white-space: pre;
       font-family: monospace;
       color: #ffffff;
       display: inline-block;
-      transition: letter-spacing 0.5s ease;
+      transition: letter-spacing 0.5s ease, text-shadow 0.5s ease;
       letter-spacing: normal;
       text-align: center;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
     }
 
     .ascii-title:hover {
@@ -135,9 +116,7 @@
 <body>
   <div id="stars"></div>
 
-  <div id="landing">
-    <span>[ click anywhere ]</span>
-  </div>
+  <div id="landing"></div>
 
   <div class="content">
     <div class="ascii-title">
@@ -155,14 +134,26 @@
                                         888 ^         ""    ^Y"   ^Y'    ^*                                   88R    
                                         *8E                                                                   88>    
                                         '8>                                                                   48     
-                                         "                                                                    '8                                        
+                                         "                                                                    '8 
     </div>
-
-    <!-- Button under ASCII title -->
     <a href="./Signup" class="btn">[ Login/Signup ]</a>
   </div>
 
   <script>
+    window.addEventListener('load', () => {
+      const landing = document.getElementById('landing');
+      const content = document.querySelector('.content');
+      const stars = document.getElementById('stars');
+
+      // Automatically trigger the landing screen after load
+      setTimeout(() => {
+        landing.style.opacity = '1';
+        landing.style.display = 'flex';
+        content.classList.remove('visible');
+        stars.style.display = 'none';
+      }, 100);
+    });
+
     document.getElementById('landing').addEventListener('click', function() {
       const landing = this;
       const stars = document.getElementById('stars');
@@ -171,7 +162,7 @@
       landing.classList.add('fade-out');
       setTimeout(() => {
         landing.style.display = 'none';
-        content.style.display = 'flex';
+        content.classList.add('visible');
         stars.style.display = 'block';
         generateStars(100);
       }, 1000);
@@ -179,6 +170,7 @@
 
     function generateStars(count) {
       const starsContainer = document.getElementById('stars');
+      starsContainer.innerHTML = '';
       for (let i = 0; i < count; i++) {
         const star = document.createElement('div');
         star.className = 'star';
