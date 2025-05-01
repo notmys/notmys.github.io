@@ -56,10 +56,7 @@
       z-index: 100;
       cursor: pointer;
       opacity: 0;
-      pointer-events: none;
       animation: fadeIn 2s ease-in forwards;
-      animation-delay: 100ms;
-      animation-fill-mode: forwards;
     }
 
     #landing.fade-out {
@@ -69,10 +66,7 @@
     }
 
     @keyframes fadeIn {
-      to {
-        opacity: 1;
-        pointer-events: auto;
-      }
+      to { opacity: 1; }
     }
 
     #landing::before {
@@ -84,8 +78,7 @@
       z-index: -1;
     }
 
-    #landing span,
-    .btn {
+    #landing span {
       font-size: 16px;
       background: linear-gradient(90deg, #FFF, #00BFFF, #FFF, #00BFFF, #FFF);
       background-size: 200% 100%;
@@ -180,10 +173,8 @@
       const content = document.querySelector('.content');
       const stars = document.getElementById('stars');
 
-      // Delay removed to improve responsiveness
       landing.style.opacity = '1';
       landing.style.display = 'flex';
-      landing.style.pointerEvents = 'auto';
       content.classList.remove('visible');
       stars.style.display = 'none';
     });
@@ -194,12 +185,11 @@
       const content = document.querySelector('.content');
 
       landing.classList.add('fade-out');
-      content.classList.add('visible');
-      stars.style.display = 'block';
-      generateStars(100);
-
       setTimeout(() => {
         landing.style.display = 'none';
+        content.classList.add('visible');
+        stars.style.display = 'block';
+        generateStars(100);
       }, 1000);
     });
 
