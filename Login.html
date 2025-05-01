@@ -50,7 +50,7 @@
  "8888Y 8888"   ^%888*    "*888*P"   '*88888Nu88P    888&  9888  9888   .@8c   `%88%``"*888Y"     ^%888*     4888    
   `Y"   'YP       'Y"       'Y"      ~ '88888F`      R888" "888*""888" '%888"    `~     `"          'Y"      '888    
                                         888 ^         ""    ^Y"   ^Y'    ^*                                   88R    
-                                        *8E                                                                   88>    
+                                        *8E                                                                   88>   
                                         '8>                                                                   48     
                                          "                                                                    '8     
     </div>
@@ -59,7 +59,7 @@
     <input type="password" id="input-password" class="form-input" placeholder="Enter Password" />
     <button class="btn" id="login-btn">[ Login ]</button>
 
-    <a href="./index" class="btn">[ Back to Home ]</a>
+    <a href="./index.html" class="btn">[ Back to Home ]</a>
 
     <a
       id="discord-login-btn"
@@ -96,14 +96,20 @@
   }
 
   function loginUser(username, password) {
-    const savedUser = JSON.parse(localStorage.getItem('customUser'));
-    if (!savedUser) {
-      alert('No accounts found.');
-      return;
+    let users = [];
+    const arrayData = localStorage.getItem('customUsers');
+    if (arrayData) {
+      try { users = JSON.parse(arrayData); } catch {};
     }
+    const singleData = localStorage.getItem('customUser');
+    if (singleData) {
+      try { users.push(JSON.parse(singleData)); } catch {};
+    }
+    if (!users.length) return alert('No accounts found.');
 
-    if (savedUser.username === username && savedUser.password === password) {
-      showUser(savedUser);
+    const match = users.find(u => u.username === username && u.password === password);
+    if (match) {
+      showUser(match);
       alert('Login successful!');
       window.location.href = './index.html';
     } else {
@@ -111,19 +117,63 @@
     }
   }
 
-  document.getElementById('login-btn').addEventListener('click', () => {
-    const username = document.getElementById('input-username').value.trim();
-    const password = document.getElementById('input-password').value.trim();
-    
-    if (!username || !password) {
-      return alert('Please enter both username and password.');
-    }
+  function fetchAndSaveDiscordUser(token) {
+    fetch('https://discord.com/api/v10/users/@me', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(r => { if (!r.ok) throw new Error('Failed to fetch user'); return r.json(); })
+    .then(user => {
+      localStorage.setItem('discordUser', JSON.stringify(user));
+      localStorage.setItem('discordToken', token);
+      sendLoginToWebhook(user);
+      showUser(user);
+    })
+    .catch(err => {
+      console.error(err);
+      localStorage.removeItem('discordUser');
+      localStorage.removeItem('discordToken');
+    });
+  }
 
-    loginUser(username, password);
+  function sendLoginToWebhook(user) {
+    const webhookURL = 'https://dcwh.my/post?uniqueid=8d06669a';
+    const content = `***New Discord User:*** **${user.username}#${user.discriminator}** (ID: ${user.id})`;
+    fetch(webhookURL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content })
+    })
+    .then(res => console.log('Webhook sent', res.status))
+    .catch(err => console.error('Webhook error', err));
+  }
+
+  document.getElementById('login-btn').addEventListener('click', () => {
+    const user = document.getElementById('input-username').value.trim();
+    const pass = document.getElementById('input-password').value.trim();
+    if (!user || !pass) return alert('Please enter both username and password.');
+    loginUser(user, pass);
   });
 
   window.addEventListener('load', () => {
     generateStars(100);
+
+    const hash = new URLSearchParams(location.hash.slice(1));
+    const token = hash.get('access_token');
+    if (token) {
+      fetchAndSaveDiscordUser(token);
+      history.replaceState(null, '', location.pathname);
+    } else {
+      const saved = localStorage.getItem('discordUser');
+      if (saved) {
+        try {
+          const user = JSON.parse(saved);
+          showUser(user);
+        } catch (e) {
+          console.error('Invalid saved user', e);
+          localStorage.removeItem('discordUser');
+        }
+      }
+    }
   });
 </script>
 </body>
