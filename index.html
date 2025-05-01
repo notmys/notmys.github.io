@@ -26,6 +26,7 @@
       z-index: 1;
       pointer-events: none;
       overflow: hidden;
+      display: none;
     }
 
     .star {
@@ -33,7 +34,7 @@
       width: 2px;
       height: 2px;
       background: white;
-      opacity: 0.5;
+      opacity: 0.3;
       animation: floatUp 5s linear infinite;
     }
 
@@ -43,10 +44,10 @@
         opacity: 0;
       }
       10% {
-        opacity: 0.5;
+        opacity: 0.3;
       }
       90% {
-        opacity: 0.5;
+        opacity: 0.3;
       }
       100% {
         transform: translateY(-100vh);
@@ -143,7 +144,9 @@
     document.getElementById('landing').addEventListener('click', function() {
       this.style.display = 'none';
       document.querySelector('.content').style.display = 'block';
-      generateStars(200);  // Increase number of stars
+      const stars = document.getElementById('stars');
+      stars.style.display = 'block';
+      generateStars(100);
     });
 
     function generateStars(count) {
@@ -151,17 +154,10 @@
       for (let i = 0; i < count; i++) {
         const star = document.createElement('div');
         star.className = 'star';
-        
-        // Random horizontal position (left)
         star.style.left = Math.random() * 100 + 'vw';
-        
-        // Random vertical position (from bottom to top of the screen)
-        star.style.top = Math.random() * 100 + 'vh';
-        
-        // Random delay for the animation
+        // Start off-screen below the viewport
+        star.style.bottom = '-10px';
         star.style.animationDelay = Math.random() * 5 + 's';
-        
-        // Add the star to the container
         starsContainer.appendChild(star);
       }
     }
