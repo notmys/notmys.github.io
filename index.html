@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>utopia.wtf</title>
+  <title>Utopia Star Blue</title>
   <style>
     * {
       margin: 0;
@@ -13,91 +13,53 @@
 
     body, html {
       background: #000;
-      color: #fff;
-      font-family: 'Rubik', sans-serif;
-      height: 100vh;
+      color: #ccc;
+      font-family: monospace;
+      height: 100%;
       overflow: hidden;
-      position: relative;
     }
 
     #landing {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: #000 url('https://64.71.152.212/cdn/image_2.png') center/cover no-repeat;
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 10;
+      z-index: 100;
       cursor: pointer;
-      transition: opacity 1.5s ease;
-    }
-
-    #landing.hide {
-      opacity: 0;
-      pointer-events: none;
+      animation: fade 1.5s ease-in;
     }
 
     #landing::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: -1;
-    }
-
-    #landing span {
-      font-size: 20px;
-      padding: 10px 25px;
-      border-radius: 5px;
-      color: transparent;
-      background-image: linear-gradient(90deg, #00ffff, #ffffff, #00ffff);
-      background-size: 200% auto;
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: grad 4s linear infinite;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 0 20px rgba(255,255,255,0.2);
-    }
-
-    .content {
-      position: relative;
-      z-index: 1;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      animation: fadeIn 2s ease-in-out forwards;
-      opacity: 0;
-    }
-
-    h1 {
-      font-size: 3.5rem;
-      color: white;
-      position: relative;
-      overflow: hidden;
-    }
-
-    h1::after {
-      content: 'utopia.wtf';
-      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, #00e0ff, transparent);
-      background-size: 300% auto;
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shine 6s infinite;
+      background: rgba(0,0,0,0.4);
+      z-index: -1;
     }
 
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
+    #landing span {
+      font-size: 16px;
+      background: linear-gradient(90deg, #FFF, #00BFFF, #FFF, #00BFFF, #FFF);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: grad 4s linear infinite;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: rgba(0,0,0,0.5);
+      box-shadow: 0 0 10px rgba(0,191,255,0.5);
+      z-index: 1;
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
     }
 
     @keyframes grad {
@@ -105,86 +67,46 @@
       100% { background-position: 200% 50%; }
     }
 
-    @keyframes shine {
-      0%, 90%, 100% {
-        opacity: 0;
-      }
-      45%, 55% {
-        opacity: 1;
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 200% 50%;
-      }
+    @keyframes fade {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
-    .star {
-      position: absolute;
-      bottom: -10px;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.7;
-      animation: floatUp linear infinite;
-      will-change: transform, opacity;
+    .content {
+      display: none;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 15px;
+      box-sizing: border-box;
+      animation: contentFade 1s ease-in;
     }
 
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0);
-        opacity: 0;
-      }
-      20% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-110vh);
-        opacity: 0;
-      }
+    @keyframes contentFade {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #00BFFF;
+      text-align: center;
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div id="landing">
-    <span>[ click anywhere to enter ]</span>
+    <span>[ click anywhere ]</span>
   </div>
 
   <div class="content">
-    <h1>utopia.wtf</h1>
+    <h1>Welcome to Utopia</h1>
   </div>
 
   <script>
-    const landing = document.getElementById('landing');
-    const content = document.querySelector('.content');
-
-    landing.addEventListener('click', () => {
-      landing.classList.add('hide');
-      setTimeout(() => {
-        landing.style.display = 'none';
-        content.style.opacity = '1';
-      }, 1500);
+    document.getElementById('landing').addEventListener('click', function() {
+      this.style.display = 'none';
+      document.querySelector('.content').style.display = 'block';
     });
-
-    const numStars = 75;
-    const fragment = document.createDocumentFragment();
-
-    for (let i = 0; i < numStars; i++) {
-      const star = document.createElement('div');
-      star.className = 'star';
-      const left = Math.random() * 100;
-      const delay = Math.random() * 5;
-      const duration = 4 + Math.random() * 4;
-
-      star.style.left = `${left}vw`;
-      star.style.animationDuration = `${duration}s`;
-      star.style.animationDelay = `${delay}s`;
-
-      fragment.appendChild(star);
-    }
-
-    document.body.appendChild(fragment);
   </script>
 </body>
 </html>
