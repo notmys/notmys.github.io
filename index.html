@@ -55,14 +55,18 @@
       align-items: center;
       z-index: 100;
       cursor: pointer;
-      animation: fade 1.5s ease-in;
-      opacity: 1;
-      transition: opacity 1s ease;
+      opacity: 0;
+      animation: fadeIn 2s ease-in forwards;
     }
 
     #landing.fade-out {
       opacity: 0;
+      transition: opacity 1s ease;
       pointer-events: none;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
 
     #landing::before {
@@ -97,7 +101,6 @@
     }
 
     @keyframes grad { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
-    @keyframes fade { 0% { opacity: 0; } 100% { opacity: 1; } }
 
     .content {
       display: none;
@@ -106,16 +109,18 @@
       overflow-y: auto;
       padding: 15px;
       box-sizing: border-box;
-      animation: contentFade 1s ease-in;
       text-align: center;
-
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      opacity: 0;
+      transition: opacity 1s ease;
     }
 
-    @keyframes contentFade { 0% { opacity: 0; } 100% { opacity: 1; } }
+    .content.visible {
+      opacity: 1;
+    }
 
     .ascii-title {
       white-space: pre;
@@ -155,14 +160,17 @@
                                         888 ^         ""    ^Y"   ^Y'    ^*                                   88R    
                                         *8E                                                                   88>    
                                         '8>                                                                   48     
-                                         "                                                                    '8                                        
+                                         "                                                                    '8     
     </div>
 
-    <!-- Button under ASCII title -->
     <a href="./Signup" class="btn">[ Login/Signup ]</a>
   </div>
 
   <script>
+    window.addEventListener('load', () => {
+      document.getElementById('landing').style.opacity = '1';
+    });
+
     document.getElementById('landing').addEventListener('click', function() {
       const landing = this;
       const stars = document.getElementById('stars');
@@ -171,7 +179,7 @@
       landing.classList.add('fade-out');
       setTimeout(() => {
         landing.style.display = 'none';
-        content.style.display = 'flex';
+        content.classList.add('visible');
         stars.style.display = 'block';
         generateStars(100);
       }, 1000);
