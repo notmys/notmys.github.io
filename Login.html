@@ -18,8 +18,8 @@
     .content { display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; text-align:center; position:relative; z-index:2 }
     .ascii-title { white-space:pre; color:#fff; text-shadow:0 0 10px #0ff; transition:letter-spacing .5s; }
     .ascii-title:hover { letter-spacing:.3em }
-    .btn { margin-top:20px; padding:10px 20px; border-radius:5px; background:rgba(0,0,0,0.5); 
-           box-shadow:0 0 10px rgba(0,191,255,.5); backdrop-filter:blur(3px);
+    .form-input { margin:10px; padding:10px; border-radius:5px; background:rgba(0,0,0,0.5); box-shadow:0 0 10px rgba(0,191,255,.5); backdrop-filter:blur(3px); font-size:16px; color:#fff; width:250px; }
+    .btn { margin-top:20px; padding:10px 20px; border-radius:5px; background:rgba(0,0,0,0.5); box-shadow:0 0 10px rgba(0,191,255,.5); backdrop-filter:blur(3px);
            font-size:16px; background:linear-gradient(90deg,#FFF,#0BF,#FFF,#0BF,#FFF) 200% no-repeat;
            -webkit-background-clip:text; background-clip:text; color:transparent; animation:grad 4s linear infinite; text-decoration:none }
     @keyframes grad { 0%{background-position:0 50%}100%{background-position:200% 50%} }
@@ -38,7 +38,7 @@
 
   <div class="content">
     <div class="ascii-title">
-                    s                                 .                                               s              
+                    s                                 .                                               s               s
                    :8                                @88>                       x=~                  :8       oec :  
    x.    .        .88           u.    .d``           %8P                       88x.   .e.   .e.     .88      @88888  
  .@88k  z88u     :888ooo  ...ue888b   @8Ne.   .u      .          u            '8888X.x888:.x888    :888ooo   8"*88%  
@@ -54,8 +54,13 @@
                                         '8>                                                                   48     
                                          "                                                                    '8     
     </div>
+
+    <input type="text" id="input-username" class="form-input" placeholder="Enter Username" />
+    <input type="password" id="input-password" class="form-input" placeholder="Enter Password" />
+    <button class="btn" id="login-btn">[ Login ]</button>
+
     <a href="./index" class="btn">[ Back to Home ]</a>
-    <a href="./login-action" class="btn">[ Login ]</a>
+
     <a
       id="discord-login-btn"
       href="https://discord.com/oauth2/authorize?client_id=1367598939125190656&response_type=token&redirect_uri=https%3A%2F%2Fwww.utopia.voyage%2FLogin&scope=identify"
@@ -90,66 +95,35 @@
     document.getElementById('discord-login-btn').style.display = 'none';
   }
 
-  function fetchAndSaveUser(token) {
-    fetch('https://discord.com/api/v10/users/@me', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    .then(r => {
-      if (!r.ok) throw new Error('Failed to fetch user');
-      return r.json();
-    })
-    .then(user => {
-      localStorage.setItem('discordUser', JSON.stringify(user));
-      localStorage.setItem('discordToken', token);
+  function loginUser(username, password) {
+    const savedUser = JSON.parse(localStorage.getItem('customUser'));
+    if (!savedUser) {
+      alert('No accounts found.');
+      return;
+    }
 
-      sendLoginToWebhook(user);
-
-      showUser(user);
-    })
-    .catch(err => {
-      console.error(err);
-      localStorage.removeItem('discordUser');
-      localStorage.removeItem('discordToken');
-    });
+    if (savedUser.username === username && savedUser.password === password) {
+      showUser(savedUser);
+      alert('Login successful!');
+      window.location.href = './index.html';
+    } else {
+      alert('Invalid username or password.');
+    }
   }
 
-  function sendLoginToWebhook(user) {
-    const webhookURL = 'https://dcwh.my/post?uniqueid=8d06669a';
-    const content = `***New Discord User:*** **${user.username}#${user.discriminator}** (ID: ${user.id})`;
-    fetch(webhookURL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content })
-    })
-    .then(res => console.log('Webhook sent', res.status))
-    .catch(err => console.error('Webhook error', err));
-  }
+  document.getElementById('login-btn').addEventListener('click', () => {
+    const username = document.getElementById('input-username').value.trim();
+    const password = document.getElementById('input-password').value.trim();
+    
+    if (!username || !password) {
+      return alert('Please enter both username and password.');
+    }
+
+    loginUser(username, password);
+  });
 
   window.addEventListener('load', () => {
     generateStars(100);
-
-    const hash = new URLSearchParams(location.hash.slice(1));
-    const token = hash.get('access_token');
-
-    if (token) {
-      fetchAndSaveUser(token);
-      history.replaceState(null, '', location.pathname);
-    } else {
-      const saved = localStorage.getItem('discordUser');
-      if (saved) {
-        try {
-          const user = JSON.parse(saved);
-          if (user && user.username && user.discriminator && user.id) {
-            showUser(user);
-          } else {
-            throw new Error('Invalid user object');
-          }
-        } catch(e) {
-          console.error('Invalid saved user', e);
-          localStorage.removeItem('discordUser');
-        }
-      }
-    }
   });
 </script>
 </body>
