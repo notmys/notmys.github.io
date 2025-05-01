@@ -1,1 +1,88 @@
-#Login Page
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Account - utopia.wtf</title>
+  <style>
+    /* ... (your existing styles remain unchanged) ... */
+  </style>
+</head>
+<body>
+  <div id="stars"></div>
+
+  <div id="user-info">
+    <img id="user-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" />
+    <span id="username">User</span>
+  </div>
+
+  <div class="content" id="form-content">
+    <div class="ascii-title">
+      <!-- ASCII art -->
+    </div>
+
+    <input type="text" placeholder="Enter Username" id="input-username" class="form-input" />
+    <input type="password" placeholder="Enter Password" id="input-password" class="form-input" />
+    <button class="form-button" id="create-btn">[ Create Account ]</button>
+  </div>
+
+  <script>
+    function generateStars(count) {
+      const starsContainer = document.getElementById('stars');
+      starsContainer.innerHTML = '';
+      for (let i = 0; i < count; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.bottom = '-10px';
+        star.style.animationDelay = Math.random() * 5 + 's';
+        starsContainer.appendChild(star);
+      }
+    }
+
+    function saveAccount(username, password) {
+      const fakeUser = {
+        username: username,
+        password: password,
+        discriminator: Math.floor(Math.random() * 9000 + 1000),
+        avatar: 'https://cdn.discordapp.com/embed/avatars/0.png',
+        id: crypto.randomUUID()
+      };
+      localStorage.setItem('customUser', JSON.stringify(fakeUser));
+    }
+
+    function loadCustomUser() {
+      const userInfo = document.getElementById('user-info');
+      const avatar = document.getElementById('user-avatar');
+      const usernameElem = document.getElementById('username');
+      const formContent = document.getElementById('form-content');
+
+      const userData = localStorage.getItem('customUser');
+      if (!userData) return;
+
+      try {
+        const user = JSON.parse(userData);
+        avatar.src = user.avatar || 'https://cdn.discordapp.com/embed/avatars/0.png';
+        usernameElem.textContent = `${user.username}#${user.discriminator}`;
+        userInfo.style.display = 'flex';
+        formContent.style.display = 'none';
+      } catch (e) {
+        console.error('Invalid custom user data.');
+      }
+    }
+
+    document.getElementById('create-btn').addEventListener('click', () => {
+      const username = document.getElementById('input-username').value.trim();
+      const password = document.getElementById('input-password').value.trim();
+      if (!username || !password) return alert('Please enter username and password.');
+      saveAccount(username, password);
+      window.location.href = './index.html';
+    });
+
+    window.addEventListener('load', () => {
+      generateStars(100);
+      loadCustomUser();
+    });
+  </script>
+</body>
+</html>
