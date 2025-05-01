@@ -127,9 +127,10 @@
       font-family: monospace;
       color: #ffffff;
       display: inline-block;
-      transition: letter-spacing 0.5s ease;
+      transition: letter-spacing 0.5s ease, text-shadow 0.5s ease;
       letter-spacing: normal;
       text-align: center;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
     }
 
     .ascii-title:hover {
@@ -163,12 +164,20 @@
                                          "                                                                    '8     
     </div>
 
+    <!-- Button under ASCII title -->
     <a href="./Signup" class="btn">[ Login/Signup ]</a>
   </div>
 
   <script>
     window.addEventListener('load', () => {
-      document.getElementById('landing').style.opacity = '1';
+      const landing = document.getElementById('landing');
+      const content = document.querySelector('.content');
+      const stars = document.getElementById('stars');
+
+      landing.style.opacity = '1';
+      landing.style.display = 'flex';
+      content.classList.remove('visible');
+      stars.style.display = 'none';
     });
 
     document.getElementById('landing').addEventListener('click', function() {
@@ -187,6 +196,7 @@
 
     function generateStars(count) {
       const starsContainer = document.getElementById('stars');
+      starsContainer.innerHTML = '';
       for (let i = 0; i < count; i++) {
         const star = document.createElement('div');
         star.className = 'star';
