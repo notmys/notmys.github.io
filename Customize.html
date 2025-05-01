@@ -96,36 +96,6 @@
       z-index: 10;
     }
     #user-info img { width: 32px; height: 32px; border-radius: 50%; }
-
-    /* Bottom left visit page button */
-    #visit-page-btn {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background-color: #0ff;
-      padding: 10px 20px;
-      border-radius: 5px;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-      box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
-      backdrop-filter: blur(3px);
-    }
-
-    /* Create Website Button */
-    #create-website-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #ff6347;
-      padding: 10px 20px;
-      border-radius: 5px;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-      box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
-      backdrop-filter: blur(3px);
-    }
   </style>
 </head>
 <body>
@@ -160,8 +130,9 @@
     </div>
   </div>
 
-  <a href="#" id="visit-page-btn">Visit Page</a>
-  <a href="#" id="create-website-btn">Create Website</a>
+  <!-- Updated buttons with the same style -->
+  <a href="#" class="btn" id="visit-page-btn">Visit Page</a>
+  <a href="#" class="btn" id="create-website-btn">Create Website</a>
 
   <script>
     function generateStars(count) {
