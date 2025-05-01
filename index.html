@@ -113,7 +113,6 @@
 <body>
   <div id="stars"></div>
 
-  <!-- User info (shown if logged in) -->
   <div id="user-info">
     <img id="user-avatar" src="" alt="Avatar" />
     <span id="username">User</span>
@@ -145,6 +144,7 @@
     >
       [ Login with Discord ]
     </a>
+    <a href="./Customize" class="btn" id="customize-dashboard-btn" style="display: none;">[ Customize Dashboard ]</a>
   </div>
 
   <script>
@@ -168,6 +168,7 @@
       const loginBtn = document.getElementById('discord-login-btn');
       const createBtn = document.getElementById('create-btn');
       const loginBtnMain = document.getElementById('login-btn');
+      const customizeBtn = document.getElementById('customize-dashboard-btn');
 
       const discordData = localStorage.getItem('discordUser');
       const customData = localStorage.getItem('customUser');
@@ -201,6 +202,7 @@
       if (loginBtn) loginBtn.style.display = 'none';
       if (createBtn) createBtn.style.display = 'none';
       if (loginBtnMain) loginBtnMain.style.display = 'none';
+      if (customizeBtn) customizeBtn.style.display = 'inline-block';
     }
 
     window.addEventListener('load', () => {
