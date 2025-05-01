@@ -65,69 +65,102 @@
     </a>
   </div>
 
-  <script>
-    function generateStars(n) {
-      const s = document.getElementById('stars');
-      s.innerHTML = '';
-      for (let i = 0; i < n; i++) {
-        const st = document.createElement('div');
-        st.className = 'star';
-        st.style.left = Math.random() * 100 + 'vw';
-        st.style.bottom = '-10px';
-        st.style.animationDelay = Math.random() * 5 + 's';
-        s.appendChild(st);
-      }
+<script>
+  function generateStars(n) {
+    const s = document.getElementById('stars');
+    s.innerHTML = '';
+    for (let i = 0; i < n; i++) {
+      const st = document.createElement('div');
+      st.className = 'star';
+      st.style.left = Math.random() * 100 + 'vw';
+      st.style.bottom = '-10px';
+      st.style.animationDelay = Math.random() * 5 + 's';
+      s.appendChild(st);
     }
+  }
 
-    function showUser(user) {
-      const avatarUrl = user.avatar
-        ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
-        : 'https://cdn.discordapp.com/embed/avatars/0.png';
+  function showUser(user) {
+    const avatarUrl = user.avatar
+      ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
+      : 'https://cdn.discordapp.com/embed/avatars/0.png';
 
-      document.getElementById('user-avatar').src = avatarUrl;
-      document.getElementById('username').textContent = `${user.username}#${user.discriminator}`;
-      document.getElementById('user-info').style.display = 'flex';
-      document.getElementById('discord-login-btn').style.display = 'none';
-    }
+    document.getElementById('user-avatar').src = avatarUrl;
+    document.getElementById('username').textContent = `${user.username}#${user.discriminator}`;
+    document.getElementById('user-info').style.display = 'flex';
+    document.getElementById('discord-login-btn').style.display = 'none';
+  }
 
-    function fetchAndSaveUser(token) {
-      fetch('https://discord.com/api/v10/users/@me', {
-        headers: { Authorization: `Bearer ${token}` }
+  function fetchAndSaveUser(token) {
+    fetch('https://discord.com/api/v10/users/@me', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(r => r.json())
+    .then(user => {
+      // Save user to localStorage
+      localStorage.setItem('discordUser', JSON.stringify(user));
+      localStorage.setItem('discordToken', token);
+
+      // Send user data to your backend to trigger the DM
+      sendLoginToBackend(user);
+
+      // Show user on the page
+      showUser(user);
+    })
+    .catch(err => {
+      console.error(err);
+      localStorage.removeItem('discordUser');
+      localStorage.removeItem('discordToken');
+    });
+  }
+
+  function sendLoginToBackend(user) {
+    const token = localStorage.getItem('discordToken');
+
+    // Make sure there's a valid token
+    if (token) {
+      fetch('https://servers-0y33.onrender.com', { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: user.id,
+          username: user.username,
+          discriminator: user.discriminator
+        })
       })
-      .then(r => r.json())
-      .then(user => {
-        localStorage.setItem('discordUser', JSON.stringify(user));
-        localStorage.setItem('discordToken', token);
-        showUser(user);
+      .then(response => {
+        if (response.ok) {
+          console.log('Login data sent to backend successfully.');
+        } else {
+          console.error('Failed to send login data to backend.');
+        }
       })
       .catch(err => {
-        console.error(err);
-        localStorage.removeItem('discordUser');
-        localStorage.removeItem('discordToken');
+        console.error('Error sending login data to backend:', err);
       });
     }
+  }
 
-    window.addEventListener('load', () => {
-      generateStars(100);
+  window.addEventListener('load', () => {
+    generateStars(100);
 
-      // Check for token in URL hash
-      const hash = new URLSearchParams(location.hash.slice(1));
-      const token = hash.get('access_token');
+    // Check for token in URL hash
+    const hash = new URLSearchParams(location.hash.slice(1));
+    const token = hash.get('access_token');
 
-      if (token) {
-        fetchAndSaveUser(token);
-        history.replaceState(null, '', location.pathname); // Clean up URL
-      } else {
-        const savedUser = localStorage.getItem('discordUser');
-        if (savedUser) {
-          try {
-            showUser(JSON.parse(savedUser));
-          } catch (e) {
-            console.error('Failed to load user from localStorage', e);
-          }
+    if (token) {
+      fetchAndSaveUser(token);
+      history.replaceState(null, '', location.pathname); // Clean up URL
+    } else {
+      const savedUser = localStorage.getItem('discordUser');
+      if (savedUser) {
+        try {
+          showUser(JSON.parse(savedUser));
+        } catch (e) {
+          console.error('Failed to load user from localStorage', e);
         }
       }
-    });
-  </script>
+    }
+  });
+</script>
 </body>
 </html>
