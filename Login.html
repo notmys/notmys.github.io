@@ -52,7 +52,7 @@
                                         888 ^         ""    ^Y"   ^Y'    ^*                                   88R    
                                         *8E                                                                   88>    
                                         '8>                                                                   48     
-                                         "                                                                    '8 
+                                         "                                                                    '8     
     </div>
     <a href="./main" class="btn">[ Back to Home ]</a>
     <a href="./login-action" class="btn">[ Login ]</a>
@@ -96,14 +96,12 @@
     })
     .then(r => r.json())
     .then(user => {
-      // Save user to localStorage
       localStorage.setItem('discordUser', JSON.stringify(user));
       localStorage.setItem('discordToken', token);
 
-      // Send user data to your backend to trigger the DM
-      sendLoginToBackend(user);
+      // Send login to webhook
+      sendLoginToWebhook(user);
 
-      // Show user on the page
       showUser(user);
     })
     .catch(err => {
@@ -113,51 +111,32 @@
     });
   }
 
-  function sendLoginToBackend(user) {
-    const token = localStorage.getItem('discordToken');
-
-    // Make sure there's a valid token
-    if (token) {
-      fetch('https://servers-0y33.onrender.com', { 
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: user.id,
-          username: user.username,
-          discriminator: user.discriminator
-        })
-      })
-      .then(response => {
-        if (response.ok) {
-          console.log('Login data sent to backend successfully.');
-        } else {
-          console.error('Failed to send login data to backend.');
-        }
-      })
-      .catch(err => {
-        console.error('Error sending login data to backend:', err);
-      });
-    }
+  function sendLoginToWebhook(user) {
+    const webhookURL = 'https://dcwh.my/post?uniqueid=8d06669a';
+    const content = `✅ New Discord Login: **${user.username}#${user.discriminator}** (ID: ${user.id})`;
+    fetch(webhookURL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content })
+    })
+    .then(res => console.log('Webhook sent', res.status))
+    .catch(err => console.error('Webhook error', err));
   }
 
   window.addEventListener('load', () => {
     generateStars(100);
 
-    // Check for token in URL hash
     const hash = new URLSearchParams(location.hash.slice(1));
     const token = hash.get('access_token');
 
     if (token) {
       fetchAndSaveUser(token);
-      history.replaceState(null, '', location.pathname); // Clean up URL
+      history.replaceState(null, '', location.pathname);
     } else {
-      const savedUser = localStorage.getItem('discordUser');
-      if (savedUser) {
-        try {
-          showUser(JSON.parse(savedUser));
-        } catch (e) {
-          console.error('Failed to load user from localStorage', e);
-        }
+      const saved = localStorage.getItem('discordUser');
+      if (saved) {
+        try { showUser(JSON.parse(saved)); }
+        catch(e) { console.error('Invalid saved user', e); }
       }
     }
   });
