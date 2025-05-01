@@ -5,11 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>utopia.wtf</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body, html {
       background: #000;
@@ -26,7 +22,6 @@
       z-index: 1;
       pointer-events: none;
       overflow: hidden;
-      display: block;
     }
 
     .star {
@@ -54,28 +49,20 @@
       width: 100vw;
       overflow-y: auto;
       padding: 15px;
-      box-sizing: border-box;
       text-align: center;
-      opacity: 1;
-      transition: opacity 1s ease;
-      z-index: 2;
       position: relative;
+      z-index: 2;
     }
 
     .ascii-title {
       white-space: pre;
       font-family: monospace;
-      color: #ffffff;
-      display: inline-block;
-      transition: letter-spacing 0.5s ease, text-shadow 0.5s ease;
-      letter-spacing: normal;
-      text-align: center;
-      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+      color: #fff;
+      text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+      transition: letter-spacing 0.5s ease;
     }
 
-    .ascii-title:hover {
-      letter-spacing: 0.3em;
-    }
+    .ascii-title:hover { letter-spacing: 0.3em; }
 
     .btn {
       font-size: 16px;
@@ -87,11 +74,9 @@
       animation: grad 4s linear infinite;
       padding: 10px 20px;
       border-radius: 5px;
-      background-color: rgba(0,0,0,0.5);
-      box-shadow: 0 0 10px rgba(0,191,255,0.5);
+      background-color: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
       backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
-      cursor: pointer;
       text-decoration: none;
       display: inline-block;
       margin-top: 20px;
@@ -101,10 +86,38 @@
       0% { background-position: 0% 50%; }
       100% { background-position: 200% 50%; }
     }
+
+    #user-info {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 8px 12px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+      backdrop-filter: blur(5px);
+      color: #fff;
+      z-index: 10;
+    }
+
+    #user-info img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
   </style>
 </head>
 <body>
   <div id="stars"></div>
+
+  <!-- Discord user info UI -->
+  <div id="user-info">
+    <img id="user-avatar" src="" alt="Avatar" />
+    <span id="username">User</span>
+  </div>
 
   <div class="content">
     <div class="ascii-title">
@@ -126,14 +139,15 @@
     </div>
     <a href="./Signup" class="btn">[ Create An Account ]</a>
     <a href="./Login" class="btn">[ Login ]</a>
+    <a
+      href="https://discord.com/oauth2/authorize?client_id=1367598939125190656&response_type=token&redirect_uri=https%3A%2F%2Fwww.utopia.voyage%2FLogin&scope=identify"
+      class="btn" id="discord-login-btn"
+    >
+      [ Login with Discord ]
+    </a>
   </div>
 
   <script>
-    window.addEventListener('load', () => {
-      const stars = document.getElementById('stars');
-      generateStars(100);
-    });
-
     function generateStars(count) {
       const starsContainer = document.getElementById('stars');
       starsContainer.innerHTML = '';
@@ -146,6 +160,35 @@
         starsContainer.appendChild(star);
       }
     }
+
+    function loadDiscordUser() {
+      const userInfo = document.getElementById('user-info');
+      const avatar = document.getElementById('user-avatar');
+      const username = document.getElementById('username');
+      const loginBtn = document.getElementById('discord-login-btn');
+
+      const userData = localStorage.getItem('discordUser');
+      if (!userData) return;
+
+      try {
+        const user = JSON.parse(userData);
+        const avatarUrl = user.avatar
+          ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
+          : 'https://cdn.discordapp.com/embed/avatars/0.png';
+
+        avatar.src = avatarUrl;
+        username.textContent = `${user.username}#${user.discriminator}`;
+        userInfo.style.display = 'flex';
+        if (loginBtn) loginBtn.style.display = 'none';
+      } catch (e) {
+        console.error('Invalid Discord user data.');
+      }
+    }
+
+    window.addEventListener('load', () => {
+      generateStars(100);
+      loadDiscordUser();
+    });
   </script>
 </body>
 </html>
