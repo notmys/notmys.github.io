@@ -94,7 +94,10 @@
     fetch('https://discord.com/api/v10/users/@me', {
       headers: { Authorization: `Bearer ${token}` }
     })
-    .then(r => r.json())
+    .then(r => {
+      if (!r.ok) throw new Error('Failed to fetch user');
+      return r.json();
+    })
     .then(user => {
       localStorage.setItem('discordUser', JSON.stringify(user));
       localStorage.setItem('discordToken', token);
@@ -135,8 +138,17 @@
     } else {
       const saved = localStorage.getItem('discordUser');
       if (saved) {
-        try { showUser(JSON.parse(saved)); }
-        catch(e) { console.error('Invalid saved user', e); }
+        try {
+          const user = JSON.parse(saved);
+          if (user && user.username && user.discriminator && user.id) {
+            showUser(user);
+          } else {
+            throw new Error('Invalid user object');
+          }
+        } catch(e) {
+          console.error('Invalid saved user', e);
+          localStorage.removeItem('discordUser');
+        }
       }
     }
   });
