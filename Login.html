@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - utopia.wtf</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      background: #000;
+      color: #ccc;
+      font-family: monospace;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+      display: block;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      opacity: 0.3;
+      animation: floatUp 5s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 0; }
+      10% { opacity: 0.3; }
+      90% { opacity: 0.3; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      width: 100vw;
+      overflow-y: auto;
+      padding: 15px;
+      box-sizing: border-box;
+      text-align: center;
+      opacity: 1;
+      transition: opacity 1s ease;
+      z-index: 2;
+      position: relative;
+    }
+
+    .ascii-title {
+      white-space: pre;
+      font-family: monospace;
+      color: #ffffff;
+      display: inline-block;
+      transition: letter-spacing 0.5s ease, text-shadow 0.5s ease;
+      letter-spacing: normal;
+      text-align: center;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+    }
+
+    .ascii-title:hover {
+      letter-spacing: 0.3em;
+    }
+
+    .btn {
+      font-size: 16px;
+      background: linear-gradient(90deg, #FFF, #00BFFF, #FFF, #00BFFF, #FFF);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: grad 4s linear infinite;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: rgba(0,0,0,0.5);
+      box-shadow: 0 0 10px rgba(0,191,255,0.5);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    @keyframes grad {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+  </style>
+</head>
+<body>
+  <div id="stars"></div>
+
+  <div class="content">
+    <div class="ascii-title">
+                    s                                 .                                               s              
+                   :8                                @88>                       x=~                  :8       oec :  
+   x.    .        .88           u.    .d``           %8P                       88x.   .e.   .e.     .88      @88888  
+ .@88k  z88u     :888ooo  ...ue888b   @8Ne.   .u      .          u            '8888X.x888:.x888    :888ooo   8"*88%  
+~"8888 ^8888   -*8888888  888R Y888r  %8888:u@88N   .@88u     us888u.          `8888  888X '888k -*8888888   8b.     
+  8888  888R     8888     888R I888>   `888I  888. ''888E` .@88 "8888"          X888  888X  888X   8888     u888888> 
+  8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888R   
+  8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888P   
+  8888 ,888B .  .8888Lu= u8888cJ888   uW888L  888'   888E  9888  9888     .    .X888  888X. 888~  .8888Lu=   *888>   
+ "8888Y 8888"   ^%888*    "*888*P"   '*88888Nu88P    888&  9888  9888   .@8c   `%88%``"*888Y"     ^%888*     4888    
+  `Y"   'YP       'Y"       'Y"      ~ '88888F`      R888" "888*""888" '%888"    `~     `"          'Y"      '888    
+                                        888 ^         ""    ^Y"   ^Y'    ^*                                   88R    
+                                        *8E                                                                   88>    
+                                        '8>                                                                   48     
+                                         "                                                                    '8     
+    </div>
+    <a href="./index" class="btn">[ Back to Home ]</a>
+    <a href="./login-action" class="btn">[ Login ]</a>
+    <a href="https://discord.com/oauth2/authorize?client_id=1367598939125190656&response_type=code&redirect_uri=https%3A%2F%2Fwww.utopia.voyage%2F&scope=activities.read+presences.read" class="btn">Login with Discord</a>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      const stars = document.getElementById('stars');
+      generateStars(100);
+    });
+
+    function generateStars(count) {
+      const starsContainer = document.getElementById('stars');
+      starsContainer.innerHTML = '';
+      for (let i = 0; i < count; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.bottom = '-10px';
+        star.style.animationDelay = Math.random() * 5 + 's';
+        starsContainer.appendChild(star);
+      }
+    }
+  </script>
+</body>
+</html>
