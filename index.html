@@ -81,7 +81,9 @@
       z-index: -1;
     }
 
-    #landing span {
+    /* Landing button style */
+    #landing span,
+    .btn {
       font-size: 16px;
       background: linear-gradient(90deg, #FFF, #00BFFF, #FFF, #00BFFF, #FFF);
       background-size: 200% 100%;
@@ -96,6 +98,10 @@
       z-index: 1;
       backdrop-filter: blur(3px);
       -webkit-backdrop-filter: blur(3px);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
     }
 
     @keyframes grad {
@@ -115,6 +121,7 @@
       padding: 15px;
       box-sizing: border-box;
       animation: contentFade 1s ease-in;
+      text-align: center;
     }
 
     @keyframes contentFade {
@@ -138,6 +145,8 @@
 
   <div class="content">
     <h1>welcome to utopia.wtf</h1>
+    <!-- New button under title -->
+    <a href="./LS" class="btn">[ Login / Sign Up ]</a>
   </div>
 
   <script>
@@ -155,7 +164,6 @@
         const star = document.createElement('div');
         star.className = 'star';
         star.style.left = Math.random() * 100 + 'vw';
-        // Start off-screen below the viewport
         star.style.bottom = '-10px';
         star.style.animationDelay = Math.random() * 5 + 's';
         starsContainer.appendChild(star);
