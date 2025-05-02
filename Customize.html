@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title id="page-title">Dashboard - utopia.wtf</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,7 +21,14 @@
       pointer-events: none;
       overflow: hidden;
     }
-    .star { position: absolute; width: 2px; height: 2px; background: white; opacity: 0.3; animation: floatUp 5s linear infinite; }
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      opacity: 0.3;
+      animation: floatUp 5s linear infinite;
+    }
     @keyframes floatUp {
       0% { transform: translateY(0); opacity: 0; }
       10% { opacity: 0.3; }
@@ -58,7 +65,9 @@
       text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
       transition: letter-spacing 0.5s ease;
     }
-    .ascii-title:hover { letter-spacing: 0.3em; }
+    .ascii-title:hover {
+      letter-spacing: 0.3em;
+    }
     .btn {
       font-size: 16px;
       background: linear-gradient(90deg, #FFF, #00BFFF, #FFF, #00BFFF, #FFF);
@@ -75,7 +84,8 @@
       text-decoration: none;
       display: inline-block;
       margin-top: 20px;
-      cursor: pointer; /* Ensures it behaves like a button */
+      cursor: pointer;
+      border: none;
     }
     @keyframes grad {
       0% { background-position: 0% 50%; }
@@ -96,54 +106,45 @@
       color: #fff;
       z-index: 10;
     }
-    #user-info img { width: 32px; height: 32px; border-radius: 50%; }
-
-    /* Position buttons at the bottom left and space them out horizontally */
+    #user-info img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
     #buttons-container {
       position: fixed;
       bottom: 20px;
       left: 20px;
       display: flex;
-      gap: 10px; /* Space between the buttons */
+      gap: 10px;
+      z-index: 5;
     }
   </style>
 </head>
 <body>
   <div id="stars"></div>
+
   <div id="user-info">
-    <img id="user-avatar" src="" alt="Avatar" />
+    <img id="user-avatar" src="" alt="Avatar"/>
     <span id="username">User</span>
   </div>
+
   <div class="content">
     <div class="ascii-title">
-      s                                 .                                               s              
-      :8                                @88>                       x=~                  :8       oec :  
-      x.    .        .88           u.    .d``           %8P                       88x.   .e.   .e.     .88      @88888  
-      .@88k  z88u     :888ooo  ...ue888b   @8Ne.   .u      .          u            '8888X.x888:.x888    :888ooo   8"*88%  
-      ~"8888 ^8888   -*8888888  888R Y888r  %8888:u@88N   .@88u     us888u.          8888  888X '888k -*8888888   8b.     
-      8888  888R     8888     888R I888>   888I  888. ''888E .@88 "8888"          X888  888X  888X   8888     u888888> 
-      8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888R   
-      8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888P   
-      8888 ,888B .  .8888Lu= u8888cJ888   uW888L  888'   888E  9888  9888     .    .X888  888X. 888~  .8888Lu=   *888>   
-      "8888Y 8888"   ^%888*    "*888*P"   '*88888Nu88P    888&  9888  9888   .@8c   %88%"*888Y"     ^%888*     4888    
-      Y"   'YP       'Y"       'Y"      ~ '88888F      R888" "888*""888" '%888"    ~     "          'Y"      '888    
-                                          888 ^         ""    ^Y"   ^Y'    ^*                                   88R    
-                                          *8E                                                                   88>    
-                                          '8>                                                                   48     
-                                           "                                                                    '8
+        <!-- ASCII ART OMITTED FOR SPACE -->
+        UTOPIA DASHBOARD
     </div>
+
     <div class="dashboard-container">
       <h2 style="color: #0ff;">Customize Your Dashboard</h2>
       <p style="color: #fff;">Here you can adjust your dashboard settings.</p>
-      <a href="#" class="btn" id="save-btn">[ Save Changes ]</a>
-      <a href="#" class="btn" id="reset-btn">[ Reset to Defaults ]</a>
+      <button class="btn">[ Save Changes ]</button>
     </div>
   </div>
 
-  <!-- Buttons container to place them next to each other -->
   <div id="buttons-container">
-    <a href="#" class="btn" id="visit-page-btn">Visit Page</a>
-    <a href="#" class="btn" id="create-website-btn">Create Website</a>
+    <button class="btn" id="visit-page-btn">[ Visit Page ]</button>
+    <button class="btn" id="create-website-btn">[ Create Website ]</button>
   </div>
 
   <script>
@@ -174,35 +175,33 @@
       if (d) user = JSON.parse(d);
       else if (c) user = JSON.parse(c);
       if (!user) return;
-      if (user.avatar) avatarUrl = user.avatar.startsWith('https')
-        ? user.avatar
-        : `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+
+      if (user.avatar)
+        avatarUrl = user.avatar.startsWith('https')
+          ? user.avatar
+          : `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
 
       avatar.src = avatarUrl;
       userEl.textContent = `${user.username}#${user.discriminator}`;
       info.style.display = 'flex';
-
-      // dynamic title
       titleEl.textContent = `${user.username}#${user.discriminator} - Dashboard - utopia.wtf`;
       document.title = titleEl.textContent;
     }
 
-    // Create Website button functionality
     document.getElementById('create-website-btn').addEventListener('click', () => {
       const user = JSON.parse(localStorage.getItem('discordUser')) || JSON.parse(localStorage.getItem('customUser'));
       if (user) {
         const websiteUrl = `https://www.utopia.voyage/${user.username}`;
-        window.open(websiteUrl, '_blank'); // Open the website in a new tab
+        window.open(websiteUrl, '_blank');
       } else {
         alert("User information not found.");
       }
     });
 
-    // Visit Page button functionality
     document.getElementById('visit-page-btn').addEventListener('click', () => {
       const user = JSON.parse(localStorage.getItem('discordUser')) || JSON.parse(localStorage.getItem('customUser'));
       if (user) {
-        const userPageUrl = `https://www.utopia.voyage/${user.username}`; // Assuming user-specific URL pattern
+        const userPageUrl = `https://www.utopia.voyage/${user.username}`;
         window.open(userPageUrl, '_blank');
       }
     });
