@@ -97,16 +97,13 @@
     }
     #user-info img { width: 32px; height: 32px; border-radius: 50%; }
 
-    /* Position buttons at the bottom left */
-    #visit-page-btn, #create-website-btn {
+    /* Position buttons at the bottom left and space them out horizontally */
+    #buttons-container {
       position: fixed;
       bottom: 20px;
       left: 20px;
-      margin-bottom: 10px; /* Add some space between the buttons */
-    }
-
-    #create-website-btn {
-      margin-bottom: 10px;
+      display: flex;
+      gap: 10px; /* Space between the buttons */
     }
   </style>
 </head>
@@ -142,9 +139,11 @@
     </div>
   </div>
 
-  <!-- Updated buttons with the same style -->
-  <a href="#" class="btn" id="visit-page-btn">Visit Page</a>
-  <a href="#" class="btn" id="create-website-btn">Create Website</a>
+  <!-- Buttons container to place them next to each other -->
+  <div id="buttons-container">
+    <a href="#" class="btn" id="visit-page-btn">Visit Page</a>
+    <a href="#" class="btn" id="create-website-btn">Create Website</a>
+  </div>
 
   <script>
     function generateStars(count) {
@@ -189,34 +188,32 @@
 
     // Save and Reset buttons functionality
     document.getElementById('save-btn').addEventListener('click', () => {
-      const bgColor = document.getElementById('bg-color').value;
-      localStorage.setItem('bgColor', bgColor);  // Save background color
-      alert("Changes saved!");
+      const bgColor = document.getElementById('bg-color-input').value;
+      localStorage.setItem('userSettings', JSON.stringify({ bgColor }));
+      alert("Settings saved!");
     });
 
     document.getElementById('reset-btn').addEventListener('click', () => {
-      document.body.style.backgroundColor = '#000000';  // Default color
-      localStorage.setItem('bgColor', '#000000');
-      alert("Settings reset to defaults.");
+      localStorage.removeItem('userSettings');
+      alert("Settings reset to defaults!");
     });
 
-    // Create Website Button functionality
+    // Create Website button functionality
     document.getElementById('create-website-btn').addEventListener('click', () => {
       const user = JSON.parse(localStorage.getItem('discordUser')) || JSON.parse(localStorage.getItem('customUser'));
       if (user) {
-        const username = user.username.toLowerCase();
-        const websiteUrl = `https://www.utopia.voyage/${username}`;
-        window.location.href = websiteUrl; // Redirect to the generated website
+        const websiteUrl = `https://www.utopia.voyage/${user.username}`;
+        window.open(websiteUrl, '_blank'); // Open the website in a new tab
       } else {
         alert("User information not found.");
       }
     });
 
-    // Visit Page Button functionality
+    // Visit Page button functionality
     document.getElementById('visit-page-btn').addEventListener('click', () => {
       const user = JSON.parse(localStorage.getItem('discordUser')) || JSON.parse(localStorage.getItem('customUser'));
       if (user) {
-        const userPageUrl = `/user/${user.id}`; // Assuming user-specific URL pattern
+        const userPageUrl = `https://www.utopia.voyage/${user.username}`; // Assuming user-specific URL pattern
         window.open(userPageUrl, '_blank');
       }
     });
