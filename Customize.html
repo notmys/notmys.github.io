@@ -75,6 +75,7 @@
       text-decoration: none;
       display: inline-block;
       margin-top: 20px;
+      cursor: pointer; /* Ensures it behaves like a button */
     }
     @keyframes grad {
       0% { background-position: 0% 50%; }
@@ -185,18 +186,6 @@
       titleEl.textContent = `${user.username}#${user.discriminator} - Dashboard - utopia.wtf`;
       document.title = titleEl.textContent;
     }
-
-    // Save and Reset buttons functionality
-    document.getElementById('save-btn').addEventListener('click', () => {
-      const bgColor = document.getElementById('bg-color-input').value;
-      localStorage.setItem('userSettings', JSON.stringify({ bgColor }));
-      alert("Settings saved!");
-    });
-
-    document.getElementById('reset-btn').addEventListener('click', () => {
-      localStorage.removeItem('userSettings');
-      alert("Settings reset to defaults!");
-    });
 
     // Create Website button functionality
     document.getElementById('create-website-btn').addEventListener('click', () => {
