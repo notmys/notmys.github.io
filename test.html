@@ -1,0 +1,1005 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+    <title>
+        Luarmor | Dashboard
+    </title>
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <!-- Nucleo Icons -->
+    <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="./faslib.js" crossorigin="anonymous"></script>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <!-- CSS Files -->
+    <link id="pagestyle" href="./assets/css/material-dashboard.css?v=3.0.2" rel="stylesheet" />
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<script>
+    if (!localStorage.getItem("api_key")) {
+        window.location.href = "./login.html";
+    }
+</script>
+
+<body class="g-sidenav-show bg-gray-200 dark-version">
+    <aside
+        class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
+        id="sidenav-main">
+        <div class="sidenav-header">
+            <a class="navbar-brand m-0" href=" https://luarmor.net/ " target="_blank">
+                <span class="ms-1 font-weight-bold text-white"
+                    style="font-size: x-large; margin-top: -2%; position: absolute"><img src="./assets/img/logo.png"
+                        class="navbar-brand-img h-100" alt="main_logo"
+                        style="filter:saturate(0.6) ;height:fit-content; max-height: fit-content; margin-left:-7%; margin-top:-2%">
+                </span>
+            </a>
+        </div>
+        <hr class="horizontal light mt-0 mb-2">
+        <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-white active " href="./dashboard.html">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">dashboard</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white " href="./projects.html">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">description</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Projects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white " href="./users.html">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">people</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Users</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white position-relative" href="./rewards.html">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">redeem</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Rewards</span>
+                        <!--span
+                            class="badge-new position-absolute top-5 start-8 translate-middle badge rounded-pill bg-danger">
+                            NEW!
+                        </span-->
+                    </a>
+                </li>
+
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account</h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white " href="./profile.html">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">person</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Profile</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="./logout.html">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">login</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Log out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </aside>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+            navbar-scroll="true">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark">Luarmor</a></li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+                    </ol>
+                    <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+                </nav>
+                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+
+                    </div>
+                    <ul class="navbar-nav  justify-content-end">
+                        <li class="nav-item d-flex align-items-center">
+                            <a class="nav-link text-body font-weight-bold px-0">
+                                <i class="fa fa-user me-sm-1"></i>
+                                <span class="d-sm-inline d-none" id="usernameBox"> </span>
+                                <span id="badgebox" class="badge badge-sm bg-gradient-info mx-1" hidden>?</span>
+                            </a>
+                        </li>
+                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                                <div class="sidenav-toggler-inner">
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item px-3 d-flex align-items-center">
+                            <a class="nav-link text-body p-0" onclick="window.location='./profile.html'">
+                                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                            <a class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fa fa-bell cursor-pointer"></i>
+                            </a>
+                            <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
+                                aria-labelledby="dropdownMenuButton">
+
+                                <li>
+                                    <a class="dropdown-item border-radius-md" href="https://luarmor.net/">
+                                        <div class="d-flex py-1">
+
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">
+                                                    New dashboard has been released! Check it out
+                                                </h6>
+                                                <p class="text-xs text-secondary mb-0">
+                                                    <i class="fa fa-clock me-1"></i> 14/4/2022
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+        <!-- Loader -->
+        <div class="loader-wrapper" id="spinner">
+            <div class="loader">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <div class="alert alert-danger alert-dismissible text-white" role="alert" style="width: 96%; margin-left:2%"
+            hidden id="alertbanner">
+            <span class="text-sm">Your API key has expired! Go to your <a href="./profile.html"
+                    class="alert-link text-white">profile</a> and extend your membership. Otherwise your scripts and
+                users will be deleted</span>
+
+        </div>
+        <div class="alert alert-warning alert-dismissible text-white" role="alert" style="width: 96%; margin-left:2%"
+            hidden id="warningbanner">
+            <span class="text-sm">Your API key will expire soon! Go to your <a href="./profile.html"
+                    class="alert-link text-white">profile</a> and extend your membership.</span>
+
+        </div>
+        <div class="alert alert-warning alert-dismissible text-white" role="alert" style="width: 96%; margin-left:2%"
+            hidden id="warningbanner2">
+            <span class="text-sm" id="wb2text"></span>
+
+        </div>
+        <div class="container-fluid py-3" id="maincontainer" hidden>
+
+            <div class="row">
+
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div
+                                class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-icons opacity-10">trending_up</i>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">Total Executions</p>
+                                <h4 class="mb-0" id="totalexecutions">0</h4>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3">
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder"
+                                    id="totalexecutionsp">0</span> executions this month</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div
+                                class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-icons opacity-10">people</i>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">Total Users</p>
+                                <h4 class="mb-0" id="totalusers">0</h4>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3 pt-2">
+                            <div class="progress-wrapper w-75 mx-auto">
+                                <div class="progress-info">
+                                    <div class="progress-percentage">
+                                        <span class="text-xs font-weight-bold" id="totalusersp">0/1000</span>
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                    <div id="totalusersprog" class="progress-bar bg-gradient-info w-60"
+                                        style="width:0%!important" role="progressbar" aria-valuenow="0"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div
+                                class="icon icon-lg icon-shape bg-gradient-purple shadow-purple text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-icons opacity-10">lock</i>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">Monthly Obfuscations</p>
+                                <h4 class="mb-0" id="monthlyobfuscations">0</h4>
+                                <p id="resetsin" class="text-xs mb-n3"
+                                    style="color: rgba(179, 180, 187, 0.85) !important;"></p>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3 pt-2">
+                            <div class="progress-wrapper w-75 mx-auto">
+                                <div class="progress-info">
+                                    <div class="progress-percentage">
+                                        <span class="text-xs font-weight-bold" id="monthlyobfuscationsp">0/20</span>
+                                    </div>
+                                </div>
+                                <div class="progress-purple">
+                                    <div id="monthlyobfuscationsprog" class="progress-bar bg-gradient-purple w-60"
+                                        style="width:0%!important" role="progressbar" aria-valuenow="0"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div
+                                class="icon icon-lg icon-shape bg-gradient-danger shadow-danger text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-icons opacity-10">security</i>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">Threats Blocked</p>
+                                <h4 class="mb-0" id="threatsblocked">144</h4>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3">
+                            <p class="mb-0">There are <span class="text-danger text-sm font-weight-bolder"
+                                    id="blacklistedips">144</span> blacklisted IPs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+
+                <div class="col-lg-12 mt-4 mb-3">
+                    <div class="card z-index-2 ">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                            <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
+                                <div class="chart">
+                                    <canvas id="chart-line-tasks" class="chart-canvas" height="300" width="292"
+                                        style="display: block; box-sizing: border-box; height: 300px; width: 292.7px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="mb-0 ">Executions</h6>
+                            <p class="text-sm ">The number of total executions in last month. You can enable / disable
+                                certain projects or individual scripts to compare them.</p>
+                            <hr class="dark horizontal">
+                            <div class="d-flex ">
+                                <i class="material-icons text-sm my-auto me-1">schedule</i>
+                                <p class="mb-0 text-sm">updated 1 minute ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-12 mt-4 mb-3">
+                    <div class="card">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
+                                <div class="row">
+                                    <div class="col-12 align-items-center">
+                                        <h6 class="text-white text-capitalize ps-3">Server Status</h6>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-body px-4 pb-2">
+                            <div id="statsdiv" class="row mt-4">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--div class="row mb-4" hidden>
+                <div class="col-lg-12 mt-4 mb-3">
+                    <div class="card">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
+                                <h6 class="text-white text-capitalize ps-3">Scripts</h6>
+                                <p class="text-sm ps-3">
+                                    You can edit your scripts on<a class="font-weight-bold ms-1" href="./scripts.html">Scripts</a> page
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive">
+                                <table class="table align-items-center mb-0" id="scriptstable">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Script Name</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Version</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Script ID</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        < <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div>
+                                                        <img src="./assets/img/roblox.svg" class="avatar avatar-sm me-3" alt="xd">
+                                                    </div>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">Testicle Head</h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <span class="badge badge-sm bg-gradient-success">Active</span>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <span class="text-xs font-weight-bold">v0.0.0.1</span>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <span class="text-xs">9bc70987ab0c9b609d0a6bc906be00a09bc6e6876a</span>
+                                            </td>
+                                        </tr>>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div-->
+            <div class="position-fixed bottom-1 end-1 z-index-2">
+                <div class="toast fade p-2 bg-white hide" role="alert" aria-live="assertive" id="successToast"
+                    aria-atomic="true">
+                    <div class="toast-header border-0">
+                        <i class="material-icons text-success me-2">
+                            check
+                        </i>
+                        <span class="me-auto font-weight-bold">Luarmor</span>
+                        <small class="text-body">Just now</small>
+                        <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"
+                            aria-hidden="true"></i>
+                    </div>
+                    <hr class="horizontal dark m-0">
+                    <div class="toast-body" id="toastBody">
+                        API is up and operational!
+                    </div>
+                </div>
+
+            </div>
+            <footer class="footer py-4  ">
+                <div class="container-fluid">
+                    <div class="row align-items-center justify-content-lg-between">
+                        <div class="col-lg-6 mb-lg-0 mb-4">
+                            <div class="copyright text-center text-sm text-muted text-lg-start">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script> Luarmor
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                                <li class="nav-item">
+                                    <a href="./faq.html" class="nav-link text-white" target="_blank">FAQ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="./tos.html" class="nav-link text-white" target="_blank">Terms of
+                                        Service</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="https://discord.gg/yHKAsA4ztv" class="nav-link text-white"
+                                        target="_blank">Discord</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <!--   Core JS Files   -->
+    <script src="./assets/js/core/popper.min.js"></script>
+    <script src="./assets/js/core/bootstrap.min.js"></script>
+    <script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="./assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="./assets/js/plugins/chartjs.min.js"></script>
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+
+    <script>
+        let catChart = null;
+        var tagsToReplace = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '\'': '&#39;',
+            '"': '&quot;',
+            "'": '&apos;'
+        };
+
+        function rtag(tag) {
+            return tagsToReplace[tag] || tag;
+        }
+
+        function EscapeTags(str) {
+            return str.replace(/[&<>"'\\]/g, rtag);
+        }
+
+        const time = () => Math.floor(new Date().getTime() / 1000);
+        var apiStatus = {};
+        var userDetails = localStorage.getItem('userDetails');
+        //console.log(userDetails);
+        if (userDetails) {
+            userDetails = JSON.parse(userDetails)
+        }
+        const baseUrl = "https://luarmor.net";
+        const Http = {
+            auth: localStorage.getItem("api_key"),
+            get: function (url, callback) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", url, callback != undefined);
+                xhr.setRequestHeader("Authorization", this.auth);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                if (callback != undefined) {
+                    xhr.onload = function () {
+                        callback(xhr.responseText);
+                    }
+                }
+                xhr.send();
+                if (!callback) {
+                    return xhr.responseText;
+                }
+            }
+        }
+        if (Http.auth == null || Http.auth == undefined) {
+            window.location.href = "./login.html";
+
+        }
+        function getColorFromKey(key) {
+            // Simple hash function
+            let hash = 0;
+            for (let i = 0; i < key.length; i++) {
+                hash = key.charCodeAt(i) + ((hash << 5) - hash);
+            }
+
+            // Use the hash to generate consistent RGB
+            const r = (hash >> 16) & 0xFF;
+            const g = (hash >> 8) & 0xFF;
+            const b = hash & 0xFF;
+
+            return `rgba(${r}, ${g}, ${b}, 0.8)`;
+        }
+
+
+
+
+
+
+        $(document).ready(function () {
+            Http.get(`${baseUrl}/status`, function (a) {
+                try {
+                    apiStatus = JSON.parse(a);
+                } catch (e) {
+                    console.log(e);
+                    console.log('SERVER DOWN')
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: "Server is currently down!"
+                    }).then((result) => {
+                        window.location = "../"
+                    });
+                    return;
+                }
+                if (apiStatus.active) {
+                    console.log("API up");
+                    $("#toastBody").html(apiStatus.message);
+                    $("#successToast").removeClass("hide");
+                    $("#successToast").fadeIn(100);
+                    $("#successToast").addClass("show");
+                    setTimeout(function () {
+                        $("#successToast").fadeOut(300);
+                    }, 1500);
+
+                } else {
+                    console.log('API DOWN')
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: apiStatus.message
+                    }).then((result) => {
+                        window.location = "../"
+                    });
+                }
+            });
+            // get request
+            Http.get(`${baseUrl}/v3/keys/${Http.auth}/details`, function (data) {
+                data = JSON.parse(data);
+                if (data.success) {
+                    // trim until first space
+                    var email = data.email;
+                    $("#usernameBox").html(EscapeTags(email));
+                    let bgcolor = "secondary";
+                    let bgname = "trial"
+                    if (data.plan == "r") {
+                        bgcolor = "purple";
+                        bgname = "pro"
+                    } else if (data.plan == "p") {
+                        bgcolor = "warning";
+                        bgname = "premium"
+                    } else if (data.plan == "b") {
+                        bgcolor = "info"
+                        bgname = "basic"
+                    } else if (data.plan == "o") {
+                        bgcolor = "danger"
+                        bgname = "owner"
+                    } else if (data.plan == "a") {
+                        bgcolor = "rich"
+                        bgname = "rich"
+                    } else if (data.plan == "d") {
+                        bgcolor = "advertiser"
+                        bgname = "advertiser"
+                    }
+
+                    $("#badgebox").attr("class", "badge badge-sm bg-gradient-" + bgcolor + " mx-1");
+                    $("#badgebox").html(bgname);
+                    $("#badgebox").removeAttr("hidden");
+                    if (Number(data.expires_at) < time()) {
+                        $("#alertbanner").removeAttr("hidden")
+                    } else if (Number(data.expires_at - (86400 * 3)) < time()) {
+                        $("#warningbanner").removeAttr("hidden")
+                    }
+                } else {
+                    localStorage.removeItem("api_key")
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.message
+                    }).then((result) => {
+                        window.location = "./login.html"
+                    });
+                    return;
+                }
+                let stats = Http.get(`${baseUrl}/v3/keys/${Http.auth}/stats?withAllGraphs=true`);
+                stats = JSON.parse(stats);
+                let seconds_left_util_reset = (stats.stats.reset_at + (86400 * 30)) - time();
+                let stats_exec_data = stats.execution_data
+                let days_left = Math.floor(seconds_left_util_reset / 86400);
+                let hours_left = Math.floor((seconds_left_util_reset % 86400) / 3600);
+
+                let leftText = "* Resets in ";
+                if (days_left > 7) {
+                    leftText += days_left + " days";
+                } else {
+                    if (days_left > 0) {
+                        leftText += days_left + "d " + hours_left + "h";
+                    } else {
+                        leftText += hours_left + " hours";
+                    }
+                }
+                $("#resetsin").text(leftText);
+                let labels = [];
+                let values = [];
+                for (let i = 0; i < 30; i++) {
+                    let date = stats.stats.reset_at;
+                    date += stats.execution_data.frequency * i;
+                    let month = new Date(date * 1000).getMonth() + 1;
+                    let day = new Date(date * 1000).getDate();
+                    labels.push(`${month}/${day}`);
+                    if (i < stats.execution_data.executions.length) {
+                        values.push(stats.execution_data.executions[i]);
+                    }
+                }
+                let ttlexec = values.reduce((a, b) => a + b, 0)
+                const formatter = new Intl.NumberFormat('en-US');
+                // if u have too many executions, format it nice and clean. 
+                // credits to [redacted] for this insane suggestion
+                let kms = function (num) {
+                    if (num < 1000) {
+                        return num.toString();
+                    } else if (num < 10000) {
+                        return (num / 1000).toFixed(2) + "K+";
+                    } else if (num < 100000) {
+                        return (num / 1000).toFixed(1) + "K+";
+                    } else if (num < 1000000) {
+                        return Math.floor(num / 1000) + "K+";
+                    } else if (num < 1000000000) {
+                        return (num / 1000000).toFixed(1) + "M+";
+                    } else if (num < 1000000000000) {
+                        return Math.floor(num / 1000000000) + "B+";
+                    } else {
+                        return Math.floor(num / 1000000000000) + "T+";
+                    }
+                }
+                stats = stats.stats;
+                $("#threatsblocked").html(stats.attacks_blocked);
+                $("#blacklistedips").html(stats.attacks_blocked);
+                $("#totalusers").html(stats.users);
+                $("#totalusersp").html(stats.users + "/" + stats.default.users);
+                $("#totalusersprog").attr("style", `width: ${stats.users / stats.default.users * 100}%!important`);
+                $("#totalexecutions").html(kms(ttlexec));
+                $("#totalexecutionsp").html(formatter.format(ttlexec));
+                $("#monthlyobfuscations").html(stats.obfuscations);
+                $("#monthlyobfuscationsp").html(stats.obfuscations + "/" + stats.default.obfuscations);
+                $("#monthlyobfuscationsprog").attr("style", `width: ${stats.obfuscations / stats.default.obfuscations * 100}%!important`);
+
+                if (apiStatus.warning) {
+                    $("#warningbanner2").removeAttr("hidden")
+                    $('#wb2text').html(apiStatus.warning_message);
+                }
+
+                // fixme later?
+                /* for (let i = 0; i < data.projects.length; i++) {
+    let project = data.projects[i];
+    let badgeColor = "success";
+    let badgeValue = "Active"
+    if (script.disabled) {
+        badgeColor = "danger";
+        badgeValue = "Disabled"
+    } else {
+        if (script.ffa) {
+            badgeColor = "secondary";
+            badgeValue = "Free"
+        }
+    }
+    let row = `<tr>
+                            <td>
+                                <div class="d-flex px-2 py-1">
+                                    <div>
+                                        <img src="./assets/img/${script.platform}.svg" class="avatar avatar-sm me-3" alt="xd">
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm">${EscapeTags(script.script_name)}</h6>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle text-center text-sm">
+                                <span class="badge badge-sm bg-gradient-${badgeColor}">${badgeValue}</span>
+                            </td>
+                            <td class="align-middle text-center text-sm">
+                                <span class="text-xs font-weight-bold">v${script.script_version.match(/./g).join('.')}</span>
+                            </td>
+                            <td class="align-middle text-center text-sm">
+                                <span class="text-xs">${script.script_id}</span>
+                            </td>
+                        </tr>`;
+    $("#scriptstable").append(row);
+}
+*/
+
+                $('#spinner').hide();
+                $('#maincontainer').removeAttr("hidden");
+                var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
+                let datasetsAll = [{
+                    label: "Executions",
+                    tension: 0,
+                    pointRadius: 5,
+                    pointBackgroundColor: "rgba(255, 255, 255, .8)",
+                    pointBorderColor: "transparent",
+                    borderColor: "rgba(255, 255, 255, .8)",
+                    borderWidth: 4,
+                    backgroundColor: "transparent",
+                    fill: true,
+                    data: values,
+                    maxBarThickness: 6
+
+                }];
+                let edata = stats_exec_data;
+                if (edata.project_executions) {
+                    let keys = Object.keys(edata.project_executions);
+                    for (let i = 0; i < keys.length; i++) {
+                        let key = keys[i];
+                        let values = edata.project_executions[key];
+                        let labelValue = "Unknown Project - " + key;
+                        let pdata = data.projects.find(x => x.id === key);
+                        if (pdata) {
+                            labelValue = "Project: " + pdata.name + " (ID: " + key.substring(0, 6) + "...)";
+                        }
+                        datasetsAll.push({
+                            label: labelValue,
+                            tension: 0,
+                            borderWidth: 3,
+                            pointRadius: 4,
+                            pointBackgroundColor: getColorFromKey(key),
+                            pointBorderColor: "transparent",
+                            borderColor: getColorFromKey(key),
+                            pointHoverBackgroundColor: getColorFromKey(key),
+                            backgroundColor: "transparent",
+                            fill: true,
+                            data: values,
+                            maxBarThickness: 5,
+                            hidden: true
+                        });
+                    }
+                }
+
+                if (edata.script_executions) {
+                    let keys = Object.keys(edata.script_executions);
+                    for (let i = 0; i < keys.length; i++) {
+                        let key = keys[i];
+                        let values = edata.script_executions[key];
+                        let labelValue = "Unknown Script - " + key;
+                        let sdata;
+                        for (let x = 0; x < data.projects.length; x++) {
+                            let project = data.projects[x];
+                            sdata = project.scripts.find(x => x.script_id === key);
+                            if (sdata) {
+                                break;
+                            }
+                        }
+                        if (sdata) {
+                            labelValue = "Script: " + sdata.script_name + " (ID: " + key.substring(0, 6) + "...)";
+                        }
+                        datasetsAll.push({
+                            label: labelValue,
+                            tension: 0,
+                            borderWidth: 2,
+                            pointRadius: 3,
+                            pointBackgroundColor: getColorFromKey(key),
+                            pointBorderColor: "transparent",
+                            borderColor: getColorFromKey(key), // I'll explain below
+                            pointHoverBackgroundColor: getColorFromKey(key),
+                            backgroundColor: "transparent",
+                            fill: true,
+                            data: values,
+                            maxBarThickness: 4,
+                            hidden: true
+                        });
+                    }
+                }
+
+
+
+                catChart = new Chart(ctx3, {
+                    type: "line",
+                    data: {
+
+                        labels: labels,
+                        datasets: datasetsAll,
+                    },
+                    options: {
+                        
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: "#bbb",
+                                    generateLabels: function (chart) {
+                                        const datasets = chart.data.datasets;
+                                        return datasets.map((dataset, i) => ({
+
+                                            text: i === 0 ? "All Executions" : dataset.label,
+                                            fillStyle: dataset.borderColor, // Legend color = dataset borderColor
+                                            strokeStyle: dataset.borderColor,
+                                            hidden: !chart.isDatasetVisible(i),//dataset === datasetsAll[0] ? false : true, //!chart.isDatasetVisible(i),
+                                            datasetIndex: i
+                                        }));
+                                    }
+                                }
+                            }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index',
+                        },
+                        scales: {
+                            y: {
+                                grid: {
+                                    drawBorder: false,
+                                    display: true,
+                                    drawOnChartArea: true,
+                                    drawTicks: false,
+                                    borderDash: [5, 5],
+                                    color: 'rgba(255, 255, 255, .2)'
+                                },
+                                ticks: {
+                                    display: true,
+                                    padding: 10,
+                                    color: '#f8f9fa',
+                                    font: {
+                                        size: 14,
+                                        weight: 300,
+                                        family: "Roboto",
+                                        style: 'normal',
+                                        lineHeight: 2
+                                    },
+                                    callback: function (value) {
+                                        const rounded = Number.isInteger(value) ? value : Math.round(value);
+                                        return rounded.toLocaleString();
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    drawBorder: false,
+                                    display: false,
+                                    drawOnChartArea: false,
+                                    drawTicks: false,
+                                    borderDash: [5, 5]
+                                },
+                                ticks: {
+                                    display: true,
+                                    color: '#f8f9fa',
+                                    padding: 10,
+                                    font: {
+                                        size: 14,
+                                        weight: 300,
+                                        family: "Roboto",
+                                        style: 'normal',
+                                        lineHeight: 2
+                                    },
+                                }
+                            },
+                        },
+                    },
+                });
+
+                Http.get(`${baseUrl}/serverloads`, function (a) {
+                    try {
+                        apiStatus = JSON.parse(a);
+                    } catch (e) {
+                        console.log(e);
+                        alert('Server is unreachable (or you are using Firefox)!')
+
+                        return;
+                    }
+                    if (apiStatus.success !== true) {
+                        alert('Server is unreachable (or you are using Firefox)!');
+                        return;
+                    }
+                    let merged = [];
+                    for (let w = 0; w < apiStatus.names.length; w++) {
+                        let cfg = apiStatus[apiStatus.names[w]];
+                        if (merged.find(x => x.name == cfg.name)) {
+                            // append
+                            let thing = merged.find(x => x.name == cfg.name);
+                            thing.hearts += cfg.hearts;
+                            thing.rps += cfg.rps;
+                        } else {
+                            merged.push(cfg);
+                        }
+                    }
+                    for (let x = 0; x < merged.length; x++) {
+                        let cfg = merged[x];
+                        let rate = cfg.hearts / 150000; // each server can handle up to 50k conc. ws conns at a time (realistically, maybe slightly less. IO operations at that scale would suck ngl)
+                        rate = rate * 100 // percent
+                        let badgecolor = "success";
+                        let badgetext = "UP";
+                        let barcolor = "success";
+
+                        if (rate > 50) {
+                            barcolor = "warning";
+
+                        }
+                        if (rate > 80) {
+                            badgecolor = "danger"
+                            barcolor = "danger"
+                            badgetext = "OVERLOAD";
+                        }
+
+                        if (cfg.active !== true) {
+                            badgecolor = "warning";
+                            badgetext = "OUTAGE"
+                        }
+                        let row = `
+            <div class="col-lg-12 mt-4 mb-3">
+                <div class="card mx-2">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 mx-n2">
+                        <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
+                            <div class="row">
+                                <div class="col-3 d-flex mt-n1" style="padding-left: 30px;">
+                                    <div>
+                                        <!--img src="./assets/img/${1}.svg" class="avatar avatar-sm me-3" alt="xd"-->
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm">${EscapeTags(cfg.name)}</h6>
+                                    </div>
+                                </div>
+                                <div class="col-3 mt-n2">                                     
+                                    <span class="badge badge-sm bg-gradient-${badgecolor}">${badgetext}</span>                                    
+                                </div>   
+                                
+                                <div class="col-6 text-end px-5 mt-n1"> 
+                                    <h6 class="mb-0 text-sm">${`load: ${Math.round(rate)}%,  req/s: ${Math.round(cfg.rps)},  active: ${cfg.hearts}`}</h6>
+                                    <div class="progress-${"success"}">
+                                        <div id="totalscriptsprog" class="progress-bar bg-gradient-${barcolor} w-60" style="width: ${rate}%!important;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        
+                                    </div>
+                                </div>                                                               
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>`;
+
+                        $("#statsdiv").append(row);
+                    }
+                });
+
+            });
+            // hide spinner
+
+        });
+    </script>
+    <script async defer src="./assets/js/buttons.js"></script>
+    <script async defer src="./assets/js/plugins/sweetalert2.all.min.js"></script>
+    <script src="./assets/js/material-dashboard.min.js?v=3.0.2"></script>
+</body>
+
+</html>
