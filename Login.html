@@ -3,29 +3,71 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login - utopia.wtf</title>
+  <title>Login | utopia.wtf</title>
   <style>
     * { margin:0; padding:0; box-sizing:border-box }
-    body,html { background:#000; color:#ccc; font-family:monospace; height:100%; overflow:hidden }
-    #stars { position:fixed; width:100%; height:100%; z-index:1; pointer-events:none; overflow:hidden }
-    .star { position:absolute; width:2px; height:2px; background:white; opacity:0.3; animation:floatUp 5s linear infinite }
-    @keyframes floatUp {
-      0% { transform:translateY(0); opacity:0 }
-      10% { opacity:0.3 }
-      90% { opacity:0.3 }
-      100% { transform:translateY(-100vh); opacity:0 }
+    body,html {
+      background:#000; color:#ccc;
+      font-family:monospace; height:100%; overflow:hidden;
     }
-    .content { display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; text-align:center; position:relative; z-index:2 }
-    .ascii-title { white-space:pre; color:#fff; text-shadow:0 0 10px #0ff; transition:letter-spacing .5s; }
+    #stars {
+      position:fixed; width:100%; height:100%;
+      z-index:1; pointer-events:none; overflow:hidden;
+    }
+    .star {
+      position:absolute; width:2px; height:2px;
+      background:white; opacity:0.3;
+      animation:floatUp 5s linear infinite;
+    }
+    @keyframes floatUp {
+      0%{transform:translateY(0);opacity:0}
+      10%,90%{opacity:0.3}
+      100%{transform:translateY(-100vh);opacity:0}
+    }
+    .content {
+      display:flex; flex-direction:column;
+      justify-content:center; align-items:center;
+      height:100vh; text-align:center;
+      position:relative; z-index:2;
+    }
+    .ascii-title {
+      white-space:pre; color:#fff;
+      text-shadow:0 0 10px #0ff;
+      transition:letter-spacing .5s;
+      margin-bottom:20px;
+    }
     .ascii-title:hover { letter-spacing:.3em }
-    .form-input { margin:10px; padding:10px; border-radius:5px; background:rgba(0,0,0,0.5); box-shadow:0 0 10px rgba(0,191,255,.5); backdrop-filter:blur(3px); font-size:16px; color:#fff; width:250px; }
-    .btn { margin-top:20px; padding:10px 20px; border-radius:5px; background:rgba(0,0,0,0.5); box-shadow:0 0 10px rgba(0,191,255,.5); backdrop-filter:blur(3px);
-           font-size:16px; background:linear-gradient(90deg,#FFF,#0BF,#FFF,#0BF,#FFF) 200% no-repeat;
-           -webkit-background-clip:text; background-clip:text; color:transparent; animation:grad 4s linear infinite; text-decoration:none }
+    .form-input {
+      margin:10px; padding:10px;
+      border-radius:5px;
+      background:rgba(0,0,0,0.5);
+      box-shadow:0 0 10px rgba(0,191,255,.5);
+      backdrop-filter:blur(3px);
+      font-size:16px; color:#fff;
+      width:250px;
+      border:none; outline:none;
+    }
+    .btn {
+      margin-top:20px; padding:10px 20px;
+      border-radius:5px;
+      background:rgba(0,0,0,0.5);
+      box-shadow:0 0 10px rgba(0,191,255,.5);
+      backdrop-filter:blur(3px);
+      font-size:16px;
+      background:linear-gradient(90deg,#FFF,#0BF,#FFF) 200% no-repeat;
+      -webkit-background-clip:text; background-clip:text;
+      color:transparent; animation:grad 4s linear infinite;
+      text-decoration:none; cursor:pointer;
+    }
     @keyframes grad { 0%{background-position:0 50%}100%{background-position:200% 50%} }
-    #user-info { position:absolute; top:20px; right:20px; display:none; align-items:center; gap:8px;
-                 background:rgba(0,0,0,0.5); padding:8px 12px; border-radius:8px;
-                 box-shadow:0 0 10px rgba(0,191,255,.5); backdrop-filter:blur(5px); color:#fff }
+    #user-info {
+      position:absolute; top:20px; right:20px;
+      display:none; align-items:center; gap:8px;
+      background:rgba(0,0,0,0.5); padding:8px 12px;
+      border-radius:8px;
+      box-shadow:0 0 10px rgba(0,191,255,.5);
+      backdrop-filter:blur(5px); color:#fff;
+    }
     #user-info img { width:32px; height:32px; border-radius:50% }
   </style>
 </head>
@@ -38,143 +80,85 @@
 
   <div class="content">
     <div class="ascii-title">
-                    s                                 .                                               s               s
-                   :8                                @88>                       x=~                  :8       oec :  
-   x.    .        .88           u.    .d``           %8P                       88x.   .e.   .e.     .88      @88888  
- .@88k  z88u     :888ooo  ...ue888b   @8Ne.   .u      .          u            '8888X.x888:.x888    :888ooo   8"*88%  
-~"8888 ^8888   -*8888888  888R Y888r  %8888:u@88N   .@88u     us888u.          `8888  888X '888k -*8888888   8b.     
-  8888  888R     8888     888R I888>   `888I  888. ''888E` .@88 "8888"          X888  888X  888X   8888     u888888> 
+                    S                                 .                                               S              
+                   :8                                @88>                       X=~                  :8       OEC :  
+   X.    .        .88           U.    .D``           %8P                       88X.   .E.   .E.     .88      @88888  
+ .@88K  Z88U     :888OOO  ...UE888B   @8NE.   .U      .          U            '8888X.X888:.X888    :888OOO   8"*88%  
+~"8888 ^8888   -*8888888  888R Y888R  %8888:U@88N   .@88U     US888U.          `8888  888X '888K -*8888888   8B.     
+  8888  888R     8888     888R I888>   `888I  888. ''888E` .@88 "8888"          X888  888X  888X   8888     U888888> 
   8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888R   
   8888  888R     8888     888R I888>    888I  888I   888E  9888  9888           X888  888X  888X   8888      8888P   
-  8888 ,888B .  .8888Lu= u8888cJ888   uW888L  888'   888E  9888  9888     .    .X888  888X. 888~  .8888Lu=   *888>   
- "8888Y 8888"   ^%888*    "*888*P"   '*88888Nu88P    888&  9888  9888   .@8c   `%88%``"*888Y"     ^%888*     4888    
+  8888 ,888B .  .8888LU= U8888CJ888   UW888L  888'   888E  9888  9888     .    .X888  888X. 888~  .8888LU=   *888>   
+ "8888Y 8888"   ^%888*    "*888*P"   '*88888NU88P    888&  9888  9888   .@8C   `%88%``*"888Y"     ^%888*     4888    
   `Y"   'YP       'Y"       'Y"      ~ '88888F`      R888" "888*""888" '%888"    `~     `"          'Y"      '888    
                                         888 ^         ""    ^Y"   ^Y'    ^*                                   88R    
-                                        *8E                                                                   88>   
+                                        *8E                                                                   88>    
                                         '8>                                                                   48     
-                                         "                                                                    '8     
+                                         "                                                                    '8
     </div>
 
-    <input type="text" id="input-username" class="form-input" placeholder="Enter Username" />
-    <input type="password" id="input-password" class="form-input" placeholder="Enter Password" />
-    <button class="btn" id="login-btn">[ Login ]</button>
-
-    <a href="./index.html" class="btn">[ Back to Home ]</a>
-
-    <a
-      id="discord-login-btn"
-      href="https://discord.com/oauth2/authorize?client_id=1367598939125190656&response_type=token&redirect_uri=https%3A%2F%2Fwww.utopia.voyage%2FLogin&scope=identify"
-      class="btn"
-    >
-      [ Login with Discord ]
-    </a>
+    <!-- Only API Key field -->
+    <input type="text" id="input-api-key" class="form-input" placeholder="Enter API Key" />
+    <button id="login-btn" class="btn">[ Login ]</button>
   </div>
 
-<script>
-  function generateStars(n) {
-    const s = document.getElementById('stars');
-    s.innerHTML = '';
-    for (let i = 0; i < n; i++) {
-      const st = document.createElement('div');
-      st.className = 'star';
-      st.style.left = Math.random() * 100 + 'vw';
-      st.style.bottom = '-10px';
-      st.style.animationDelay = Math.random() * 5 + 's';
-      s.appendChild(st);
-    }
-  }
-
-  function showUser(user) {
-    const avatarUrl = user.avatar
-      ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
-      : 'https://cdn.discordapp.com/embed/avatars/0.png';
-
-    document.getElementById('user-avatar').src = avatarUrl;
-    document.getElementById('username').textContent = `${user.username}#${user.discriminator}`;
-    document.getElementById('user-info').style.display = 'flex';
-    document.getElementById('discord-login-btn').style.display = 'none';
-  }
-
-  function loginUser(username, password) {
-    let users = [];
-    const arrayData = localStorage.getItem('customUsers');
-    if (arrayData) {
-      try { users = JSON.parse(arrayData); } catch {};
-    }
-    const singleData = localStorage.getItem('customUser');
-    if (singleData) {
-      try { users.push(JSON.parse(singleData)); } catch {};
-    }
-    if (!users.length) return alert('No accounts found.');
-
-    const match = users.find(u => u.username === username && u.password === password);
-    if (match) {
-      showUser(match);
-      alert('Login successful!');
-      window.location.href = './index.html';
-    } else {
-      alert('Invalid username or password.');
-    }
-  }
-
-  function fetchAndSaveDiscordUser(token) {
-    fetch('https://discord.com/api/v10/users/@me', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    .then(r => { if (!r.ok) throw new Error('Failed to fetch user'); return r.json(); })
-    .then(user => {
-      localStorage.setItem('discordUser', JSON.stringify(user));
-      localStorage.setItem('discordToken', token);
-      sendLoginToWebhook(user);
-      showUser(user);
-    })
-    .catch(err => {
-      console.error(err);
-      localStorage.removeItem('discordUser');
-      localStorage.removeItem('discordToken');
-    });
-  }
-
-  function sendLoginToWebhook(user) {
-    const webhookURL = 'https://dcwh.my/post?uniqueid=8d06669a';
-    const content = `***New Discord User:*** **${user.username}#${user.discriminator}** (ID: ${user.id})`;
-    fetch(webhookURL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content })
-    })
-    .then(res => console.log('Webhook sent', res.status))
-    .catch(err => console.error('Webhook error', err));
-  }
-
-  document.getElementById('login-btn').addEventListener('click', () => {
-    const user = document.getElementById('input-username').value.trim();
-    const pass = document.getElementById('input-password').value.trim();
-    if (!user || !pass) return alert('Please enter both username and password.');
-    loginUser(user, pass);
-  });
-
-  window.addEventListener('load', () => {
-    generateStars(100);
-
-    const hash = new URLSearchParams(location.hash.slice(1));
-    const token = hash.get('access_token');
-    if (token) {
-      fetchAndSaveDiscordUser(token);
-      history.replaceState(null, '', location.pathname);
-    } else {
-      const saved = localStorage.getItem('discordUser');
-      if (saved) {
-        try {
-          const user = JSON.parse(saved);
-          showUser(user);
-        } catch (e) {
-          console.error('Invalid saved user', e);
-          localStorage.removeItem('discordUser');
-        }
+  <script>
+    // Stars background
+    function generateStars(n) {
+      const container = document.getElementById('stars');
+      container.innerHTML = '';
+      for (let i = 0; i < n; i++) {
+        const s = document.createElement('div');
+        s.className = 'star';
+        s.style.left = Math.random()*100 + 'vw';
+        s.style.bottom = '-10px';
+        s.style.animationDelay = Math.random()*5 + 's';
+        container.appendChild(s);
       }
     }
-  });
-</script>
+
+    // Show logged‑in user info
+    function showUser(user) {
+      const avatar = user.avatar
+        ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
+        : 'https://cdn.discordapp.com/embed/avatars/0.png';
+      document.getElementById('user-avatar').src = avatar;
+      document.getElementById('username').textContent = `${user.username}#${user.discriminator}`;
+      document.getElementById('user-info').style.display = 'flex';
+    }
+
+    // Validate and log in by API key only
+    function loginByApiKey(key) {
+      // Here, you could validate against a back‑end.
+      // For demo, we'll consider any non-empty key as “valid”:
+      if (key.length < 10) { // e.g. simple length check
+        return alert('Invalid API key.');
+      }
+      // Simulate fetching user data for that key:
+      const fakeUser = {
+        id: '1234567890',
+        username: 'DemoUser',
+        discriminator: '0001',
+        avatar: null
+      };
+      localStorage.setItem('apiKey', key);
+      showUser(fakeUser);
+      // then redirect or initialize dashboard:
+      setTimeout(() => window.location.href = './dashboard.html', 500);
+    }
+
+    document.getElementById('login-btn').addEventListener('click', () => {
+      const key = document.getElementById('input-api-key').value.trim();
+      if (!key) return alert('API key required.');
+      loginByApiKey(key);
+    });
+
+    window.addEventListener('load', () => {
+      generateStars(100);
+      // If already have a stored key, auto‑login:
+      const saved = localStorage.getItem('apiKey');
+      if (saved) loginByApiKey(saved);
+    });
+  </script>
 </body>
 </html>
