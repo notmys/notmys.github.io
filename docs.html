@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Utopia.voyage | #1 UI Library</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #0f0f0f;
+      color: #e5e5e5;
+    }
+    header {
+      background-color: #161616;
+      padding: 20px 40px;
+      border-bottom: 1px solid #333;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    nav {
+      width: 260px;
+      position: fixed;
+      top: 80px;
+      left: 0;
+      bottom: 0;
+      padding: 20px;
+      background-color: #141414;
+      border-right: 1px solid #333;
+      overflow-y: auto;
+    }
+    nav h2 {
+      font-size: 14px;
+      color: #888;
+      text-transform: uppercase;
+      margin-top: 30px;
+    }
+    nav a {
+      display: block;
+      margin: 10px 0;
+      color: #e5e5e5;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    nav a:hover {
+      color: #fff;
+    }
+    main {
+      margin-left: 280px;
+      padding: 40px;
+      max-width: 900px;
+    }
+    main h2 {
+      margin-top: 40px;
+      font-size: 28px;
+    }
+    code {
+      background-color: #1e1e1e;
+      padding: 4px 8px;
+      border-radius: 4px;
+      color: #00e0ff;
+      font-family: monospace;
+    }
+    pre {
+      background-color: #1e1e1e;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Utopia.Voyage UI Docs</h1>
+  </header>
+  <nav>
+    <h2>Introduction</h2>
+    <a href="#getting-started">Getting Started</a>
+    <h2>Core</h2>
+    <a href="#create-window">Create Window</a>
+    <a href="#create-tab">Create Tab</a>
+    <a href="#create-button">Create Button</a>
+  </nav>
+  <main>
+    <section id="getting-started">
+      <h2>Getting Started</h2>
+      <p>This documentation covers the Utopia.Voyage UI library. To use it, simply require the module and create a window:</p>
+      <pre><code>local Window = require(path.to.window)
+local myWindow = Window.new(Vector2.new(600, 400))</code></pre>
+    </section>
+
+    <section id="create-window">
+      <h2>Create Window</h2>
+      <p>Creates a draggable UI window with glow and tabs.</p>
+      <pre><code>local myWindow = Window.new(Vector2.new(600, 400))</code></pre>
+    </section>
+
+    <section id="create-tab">
+      <h2>Create Tab</h2>
+      <p>Add a new tab using the <code>Creation</code> method.</p>
+      <pre><code>local tab1 = myWindow:Creation("TAB NAME HERE")</code></pre>
+    </section>
+
+    <section id="create-button">
+      <h2>Create Button</h2>
+      <p>Create a button inside a tab with optional font customization:</p>
+      <pre><code>tab1:CreateButton({
+    Name = "utopia.voyage On Top!",
+    Font = "GothamBold", -- must be a valid Enum.Font name as a string
+    Callback = function()
+    	print("Use Utopia.Voyage, The Best Ui Library")
+    end,
+})
+})</code></pre>
+    </section>
+  </main>
+</body>
+</html>
