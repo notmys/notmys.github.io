@@ -33,7 +33,7 @@
       resources for every necessity.
     </p>
     <div class="buttons">
-      <button class="primary">Join The Discord</button>
+      <button class="primary" onclick="goToDiscord()">Join The Discord</button>
       <button class="ghost">Purchase →</button>
     </div>
 
@@ -61,6 +61,10 @@
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'u') e.preventDefault();
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') e.preventDefault();
     });
+
+  function goToDiscord() {
+    window.location.href = "https://discord.gg/djMQRCNAAZ";
+  }
   </script>
 
   <script src="script.js"></script>
