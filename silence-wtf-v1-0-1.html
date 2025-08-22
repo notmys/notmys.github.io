@@ -5,17 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Script Locker</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-    h1 { color: #333; }
+    body { margin: 0; overflow: hidden; }
+    iframe {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
   </style>
 </head>
 <body>
-  <h1>Access Denied</h1>
-  <p>This page is for Roblox executors only. Use the correct URL in your executor.</p>
-  <script>
-    if (!navigator.userAgent.includes('Roblox')) {
-      console.log('Unauthorized access. Use in Roblox executor.');
-    }
-  </script>
+  <iframe srcdoc="
+    <html>
+    <head>
+      <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f0f0f0; }
+        h1 { color: #333; }
+      </style>
+    </head>
+    <body>
+      <h1>Access Denied</h1>
+      <p>This page is for Roblox executors only. Use the correct URL in your executor.</p>
+    </body>
+    </html>
+  "></iframe>
 </body>
 </html>
