@@ -1,7 +1,9 @@
 -- verifiedusers.lua
 local verifiedPlayers = {
     [9247735263] = true,
-    [87654321] = true,
+    [7646924628] = true,
+    [5204467582] = true,
+    [8432632970] = true,
 }
 return function(player, _)
     if verifiedPlayers[player.UserId] then
